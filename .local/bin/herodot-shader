@@ -1,0 +1,187 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot-shader get status|mode
+        herodot-shader set status on|off|toggle [save] 
+        herodot-shader set mode back|next [save]
+        herodot-shader set mode {shader} [save]
+        herodot-shader set restore
+EOF
+    exit 1
+}
+
+SHADERS_PATH="$HOME/.config/hypr/shaders"
+SHADERS=($(ls "$SHADERS_PATH" | grep -v "current" | sort))
+
+check_shader_exists() {
+    local shader="$1"
+    if [ ! -f "$SHADERS_PATH/$shader" ]; then
+        echo "Paper '$shader' not found."
+        exit 1
+    fi
+}
+
+is_enabled() {
+    hyprctl getoption "decoration:screen_shader" | grep -q "set: true" && return 1 || return 0
+}
+
+restore() {
+    local status="$(load_status)"
+    local shader="$(load_mode)"
+
+    [ "$status" = "false" ] && {
+        off;
+        exit 0;
+    }
+
+    set_mode "$shader"
+}
+
+load_status() {
+    herodot-settings read "shader.isEnabled"
+}
+
+load_mode() {
+    herodot-settings read "shader.mode"
+}
+
+save_status() {
+    local status="$1"
+    herodot-settings assign "shader.isEnabled" "$status"
+}
+
+save_mode() {
+    local shader="$1"
+    herodot-settings assign "shader.mode" "$shader"
+}
+
+get_status() {
+    is_enabled
+    [ $? -eq 1 ] && echo "true" || echo "false"
+}
+
+get_mode() {
+    local path=$(hyprctl getoption "decoration:screen_shader" | grep "str: " | awk -F':' '{print $2}' | xargs)
+    echo "$(basename "$path")"
+}
+
+set_mode() {
+    local shader="$1"
+
+    check_shader_exists "$shader"
+
+    waynot send "Shader" "$shader"
+    hyprctl keyword "decoration:screen_shader" "$SHADERS_PATH/$shader"
+
+    [ "$SAVE" -eq 1 ] && {
+        save_status "true"
+        save_mode "$shader";
+    }
+}
+
+on() {
+    set_mode "$(load_mode)"
+}
+
+off() {
+    waynot send "Shader is off"
+    hyprctl reload
+
+    [ "$SAVE" -eq 1 ] && {
+        save_status "false"
+    }
+}
+
+toggle() {
+    is_enabled
+    [ $? -eq 1 ]  && off || on
+}
+
+navigate() {
+    local offset=$1
+
+    if [ ${#SHADERS[@]} -eq 0 ]; then
+        echo "No shaders available."
+        exit 1
+    fi
+
+    for i in "${!SHADERS[@]}"; do
+        if [ "${SHADERS[$i]}" = "$(get_mode)" ]; then
+            local new_index=$(( (i + offset + ${#SHADERS[@]}) % ${#SHADERS[@]} ))
+            set_mode "${SHADERS[$new_index]}"
+            return
+        fi
+    done
+}
+
+back() {
+    is_enabled
+    [ $? -eq 1 ] && navigate "-1"
+}
+
+next() {
+    is_enabled
+    [ $? -eq 1 ] && navigate "+1"
+}
+
+SAVE=0
+[ "$4" = "save" ] && SAVE=1
+
+case "$1" in
+    "get")
+        case "$2" in
+            "status")
+                get_status
+                ;;
+            "mode")
+                get_mode
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "status")
+                case "$3" in
+                    "on")
+                        on
+                        ;;
+                    "off")
+                        off
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)      
+                        usage
+                        ;;
+                esac
+                ;;
+            "mode")
+                case "$3" in
+                    "back")
+                        back
+                        ;;
+                    "next")
+                        next
+                        ;;
+                    *)
+                        set_mode "$3"
+                        ;;
+                esac
+                ;;
+            "restore")
+                restore
+                ;;
+            *)      
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac
