@@ -55,8 +55,8 @@ Notifications are displayed within Waybar using the Waynot daemon.
 | SHIFT, XF86MonBrightnessUp     | Increase screen brightness to 100%                           |
 | SHIFT, XF86MonBrightnessDown   | Increase screen brightness to 0%                             |
 | SUPER SHIFT, C                 | Launch clipboard manager                                     |
-| CTRL, TAB                      | Show or hide the Waybar panel                                |
-| SUPER, TAB                     | Show or hide the application launcher                        |
+| SUPER, CTRL                    | Show or hide the Waybar panel                                |
+| SUPER                          | Show or hide the application launcher                        |
 | XF86AudioMicMute               | Toggle the microphone on/off                                 |
 | SUPER, Mouse Left              | Initiate window movement with drag                           |
 | SUPER, Mouse Right             | Initiate window resizing with drag                           |
