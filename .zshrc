@@ -16,7 +16,7 @@ export PROMPT='
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
-export RPROMPT='%{$FG[007]%}${vcs_info_msg_0_}%{$reset_color%}'
+export RPROMPT='%{$FG[007]%}${vcs_info_msg_0_}%{$reset_color%} '
 
 zstyle ':vcs_info:git:*' formats 'git:%b'
 
