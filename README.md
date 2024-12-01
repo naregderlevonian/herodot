@@ -20,13 +20,13 @@ Notifications are displayed within Waybar using the Waynot daemon.
 
 | ![Image 1](assets/herodot-van-1.png) | ![Image 1](assets/herodot-van-2.png) | ![Image 1](assets/herodot-van-3.png)  |
 |:--:|:--:|:--:|
-| Image 1 | Image 2 | Image 3 |
+| Common | GTK | Waybar Notification |
 
 ## Scheme: Yerevan
 
 | ![Image 1](assets/herodot-yerevan-1.png) | ![Image 1](assets/herodot-yerevan-2.png) | ![Image 1](assets/herodot-yerevan-3.png)  |
 |:--:|:--:|:--:|
-| Image 4 | Image 5 | Image 6 |
+| Common | GTK | Waybar Notification |
 
 # Hotkeys
 
