@@ -22,10 +22,12 @@ set_state() {
 
 off() {
     set_state "$DISABLED_CONFIG_LINE" "false"
+    herodot waybar set view join
 }
 
 on() {
     set_state "$ENABLED_CONFIG_LINE" "true"
+    herodot waybar set view split
 }
 
 toggle() {

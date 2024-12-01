@@ -34,8 +34,8 @@ replace_scheme() {
 }
 
 set_mode() {
-    herodot settings assign "interface.scheme" "$1"
     replace_scheme "$(get_mode)" "$1"
+    herodot settings assign "interface.scheme" "$1"
     waynot send "Scheme" "set to $1"
 }
 

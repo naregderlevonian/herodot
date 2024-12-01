@@ -7,9 +7,8 @@ EOF
     exit 1
 }
 
-move_window() {
-    local direction="$1"
-    local output="$(hyprctl dispatch movewindow "$direction" 2>&1)"
+movewindow() {
+    local output="$(hyprctl dispatch movewindow "$1" 2>&1)"
 
     if echo "$output" | grep -q "Nowhere to move"; then
         return 1
@@ -22,18 +21,18 @@ case "$1" in
     "set")
         case "$2" in
             "left")
-                move_window "l"
+                movewindow "l"
                 [ $? -ne 0 ] && herodot movetoworkspace set back
                 ;;
             "right")
-                move_window "r"
+                movewindow "r"
                 [ $? -ne 0 ] && herodot movetoworkspace set next
                 ;;
             "up")
-                move_window "u"
+                movewindow "u"
                 ;;
             "down")
-                move_window "d"
+                movewindow "d"
                 ;;
             *)
                 usage

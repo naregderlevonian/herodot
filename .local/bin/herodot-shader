@@ -96,8 +96,7 @@ navigate() {
 
     for i in "${!SHADERS[@]}"; do
         if [ "${SHADERS[$i]}" = "$(get_mode)" ]; then
-            local new_index=$(( (i + offset + ${#SHADERS[@]}) % ${#SHADERS[@]} ))
-            set_mode "${SHADERS[$new_index]}"
+            set_mode "${SHADERS[$(( (i + offset + ${#SHADERS[@]}) % ${#SHADERS[@]} ))]}"
             return
         fi
     done

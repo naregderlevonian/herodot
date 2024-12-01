@@ -12,6 +12,10 @@ get_mode() {
     [ "$(lspci | grep "GeForce")" ] && echo "hybrid" || echo "intel"
 }
 
+get_temperature() {
+    echo "$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)"
+}
+
 set_mode() {
     local mode="$1"
     if zenity --question \
@@ -33,6 +37,9 @@ case "$1" in
         case "$2" in
             "mode")
                 get_mode
+                ;;
+            "temperature")
+                get_temperature
                 ;;
             *)
                 usage

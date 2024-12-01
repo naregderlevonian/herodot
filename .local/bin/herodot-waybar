@@ -1,6 +1,17 @@
 #!/bin/sh
 
+usage() {
+    cat << EOF
+Usage:  herodot waybar get weather|dice|gpu|idle|fan|performance|microphone|speaker|bluetooth|wifi
+        herodot waybar set view join|split
+EOF
+}
+
 MESSAGE_PATH="/tmp/alert"
+WAYBAR_CONFIG="$HOME/.config/waybar/config"
+
+SCREEN="eDP-1"
+SCREENPAD="DP-1"
 
 jsonify() {
     printf "{\"class\":\"%s\",\"alt\":\"%s\",\"text\":\"%s\",\"tooltip\":\"%s\"}" "$1" "$2" "$3" "$4"
@@ -38,7 +49,7 @@ classify_temperature() {
     echo "$class"
 }
 
-weather() {
+get_weather() {
     local class
     local text
     local tooltip
@@ -60,21 +71,12 @@ weather() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-moon() {
-    local class
-    local text
-    local tooltip
-
-    local index=$(herodot moon get index)
-    local percent=$(herodot moon get percent)
-}
-
-dice() {
+get_dice() {
     local index="$(herodot dice get random)"
     jsonify "$index" "$index" "$index" "$index"
 }
 
-gpu() {
+get_gpu() {
     local class
     local text
     local tooltip
@@ -100,7 +102,7 @@ gpu() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-idle() {
+get_idle() {
     local class
     local text
     local tooltip
@@ -123,7 +125,7 @@ idle() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-fan() {
+get_fan() {
     local class
     local text
     local tooltip
@@ -149,7 +151,7 @@ fan() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-performance() {
+get_performance() {
     local class
     local text
     local tooltip
@@ -181,7 +183,7 @@ performance() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-microphone() {
+get_microphone() {
     local class
     local text
     local tooltip
@@ -240,7 +242,7 @@ microphone() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-speaker() {
+get_speaker() {
     local class
     local text
     local tooltip
@@ -299,7 +301,7 @@ speaker() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-bluetooth() {
+get_bluetooth() {
     local class
     local alt
     local text
@@ -334,7 +336,7 @@ bluetooth() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-wifi() {
+get_wifi() {
     local class
     local alt
     local text
@@ -392,41 +394,73 @@ wifi() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
+set_view_join() {
+    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREEN" '.[1].output[0] = $monitor')"
+    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
+    killall waybar
+    waybar
+}
+
+set_view_split() {
+    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREENPAD" '.[1].output[0] = $monitor')"
+    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
+    killall waybar
+    waybar
+}
+
 case "$1" in
     "get")
         case "$2" in
             "weather")
-                weather
+                get_weather
                 ;;
             "dice")
-                dice
+                get_dice
                 ;;
             "gpu")
-                gpu
+                get_gpu
                 ;;
             "idle")
-                idle
+                iget_dle
                 ;;
             "fan")
-                fan
+                get_fan
                 ;;
             "performance")
-                performance
+                get_performance
                 ;;
             "microphone")
-                microphone
+                get_microphone
                 ;;
             "speaker")
-                speaker
+                get_speaker
                 ;;
             "bluetooth")
-                bluetooth
+                get_bluetooth
                 ;;
             "wifi")
-                wifi
+                get_wifi
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "view")
+                case "$3" in
+                    "join")
+                        set_view_join
+                        ;;
+                    "split")
+                        set_view_split
+                        ;;
+                esac
+                ;;
+            *)
+                usage
                 ;;
         esac
         ;;
     *)
+        usage
         ;;
 esac

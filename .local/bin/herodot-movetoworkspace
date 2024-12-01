@@ -18,25 +18,27 @@ LAST_WORKSPACE=$(echo "$WORKSPACES" | jq --arg monitorID "$CLIENT_MONITOR" 'map(
 
 CLIENT_COUNT=$(echo "$WORKSPACES" | jq --argjson monitorID "$CLIENT_MONITOR" --argjson id "$CLIENT_WORKSPACE" '.[] | select(.monitorID == $monitorID and .id == $id) | .windows')
 
-move_to_workspace() {
-    hyprctl dispatch "movetoworkspace$( [ "$3" = "silent" ] && echo "silent" )" $1
+SILENT=$([ "$3" = "silent" ] && echo "silent")
+
+movetoworkspace() {
+    hyprctl dispatch "movetoworkspace$SILENT" "$1"
 }
 
 case "$1" in
     "set")
         case "$2" in
             "back")
-                move_to_workspace $([ "$CLIENT_WORKSPACE" = "$HOME_WORKSPACE" ] && echo "r-1" || echo "m-1")
+                movetoworkspace $([ "$CLIENT_WORKSPACE" = "$HOME_WORKSPACE" ] && echo "r-1" || echo "m-1")
                 ;;
             "next")
                 [ "$CLIENT_COUNT" -eq 1 ] && exit 1
-                move_to_workspace $([ "$CLIENT_WORKSPACE" = "$LAST_WORKSPACE" ] && echo "r+1" || echo "m+1")
+                movetoworkspace $([ "$CLIENT_WORKSPACE" = "$LAST_WORKSPACE" ] && echo "r+1" || echo "m+1")
                 ;;
             "home")
-                move_to_workspace "r~1"
+                movetoworkspace "r~1"
                 ;;
             "last")
-                [ "$CLIENT_WORKSPACE" -ne "$LAST_WORKSPACE" ] && move_to_workspace "r~$LAST_WORKSPACE"
+                [ "$CLIENT_WORKSPACE" -ne "$LAST_WORKSPACE" ] && movetoworkspace "r~$LAST_WORKSPACE"
                 ;;
             *)
                 usage
