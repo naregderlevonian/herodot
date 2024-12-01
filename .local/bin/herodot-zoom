@@ -1,0 +1,40 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot zoom set double|reset
+EOF
+    exit 1
+}
+
+SCREENPAD_SCALED_SETUP=$(herodot settings read "screenpad.enabledSetup.scaled")
+SCREEN_SCALED_SETUP=$(herodot settings read "screen.enabledSetup.scaled")
+
+setup() {
+    hyprctl keyword monitor "$1"
+}
+
+reset() {
+    hyprctl reload
+}
+
+scale() {
+    setup "$SCREEN_SCALED_SETUP"
+    setup "$SCREENPAD_SCALED_SETUP"
+}
+
+case "$1" in
+    "set")
+        case "$2" in
+            "double")
+                scale
+                ;;
+            "reset")
+                reset
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

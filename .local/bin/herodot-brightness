@@ -1,0 +1,145 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot brightness all|default|{device} get level 
+        herodot brightness all|default|{device} set level increase|decrease|up|down|max|min [save]
+        herodot brightness all|default|{device} set level resume
+EOF
+    exit 1
+}
+
+readarray -t EXTRA_DEVICES <<< $(brightnessctl --list | grep "Device" | awk -F "'" "{print \$2}")
+
+DEVICE=""
+DEVICES=(
+intel_backlight
+asus_screenpad
+asus::kbd_backlight
+)
+
+SAVE=0
+
+get_brightness() {
+    if [ -z "$DEVICE" ]; then
+        for current in "${DEVICES[@]}"; do
+            herodot settings read "brightness.$current"
+        done
+    else
+        herodot settings read "brightness.$DEVICE"
+    fi
+}
+
+set_brightness() {
+    [ $SAVE -eq 1 ] && save_brightness "$DEVICE"
+
+    if [ -z "$DEVICE" ]; then
+        for current in "${DEVICES[@]}"; do
+            brightnessctl --device="$current" set "$1"
+        done
+    else
+        brightnessctl --device="$DEVICE" set "$1"
+    fi
+}
+
+save_brightness() {
+    if [ -z "$DEVICE" ]; then
+        for current in "${DEVICES[@]}"; do
+            herodot settings assign "brightness.$current" $(brightnessctl --device="$current" get)
+        done
+    else
+        herodot settings assign "brightness.$DEVICE" $(brightnessctl --device="$DEVICE" get)
+    fi
+}
+
+load_brightness() {
+    if [ -z "$DEVICE" ]; then
+        for current in "${DEVICES[@]}"; do
+            brightnessctl --device="$current" set $(herodot settings read "brightness.$current")
+        done
+    else
+        brightnessctl --device="$DEVICE" set $(herodot settings read "brightness.$DEVICE")
+    fi
+}
+
+request_device() {
+    local device_found=0
+
+    for current in "${EXTRA_DEVICES[@]}"; do
+        [ "$current" = "$1" ] && device_found=1
+    done
+
+    [ "$device_found" -eq 0 ] && {
+        echo "Device not exist in list";
+        usage;
+        exit 1;
+    } 
+}
+
+case "$1" in
+    "all")
+        ;;
+    "default")
+        DEVICE=${DEVICES[0]}
+        ;;
+    *)
+        request_device "$1"
+        DEVICE="$1"
+esac
+
+[ "$5" = "save" ] && SAVE=1
+
+case "$2" in
+    "get")
+        case "$3" in
+            "level")
+                get_brightness
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$3" in
+            "level")
+                case "$4" in
+                    "increase")
+                        set_brightness "+5%"  
+                        ;;
+                    "decrease")
+                        set_brightness "5%-"  
+                        ;;
+                    "up")
+                        set_brightness "+1%"  
+                        ;;
+                    "down")
+                        set_brightness "1%-"  
+                        ;;
+                    "max")
+                        set_brightness "100%" 
+                        ;;
+                    "min")
+                        set_brightness "5%"   
+                        ;;
+                    "off")
+                        set_brightness "0%"   
+                        ;;
+                    "resume")
+                        load_brightness
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac
+

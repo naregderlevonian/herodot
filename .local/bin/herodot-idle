@@ -1,0 +1,72 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot idle get state
+        herodot idle set state off|on|toggle
+EOF
+    exit 1
+}
+
+PROCESS="hypridle"
+
+is_process_running() {
+    pgrep "$1" > /dev/null 2>&1
+    return $?
+}
+
+get_state() {
+    is_process_running "$PROCESS" && echo 1 || echo 0
+}
+
+off() {
+    killall "$PROCESS"
+    waynot send "Idle mode" "is deactivated now"
+}
+
+on() {
+    "$PROCESS" &
+    waynot send "Idle mode" "is activated now"
+}
+
+toggle() {
+    is_process_running "$PROCESS" && off || on
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "state")
+                get_state
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "state")
+                case "$3" in
+                    "off")
+                        off
+                        ;;
+                    "on")
+                        on
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            *)
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

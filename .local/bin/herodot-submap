@@ -1,0 +1,32 @@
+#!/bin/bash
+
+usage() {
+    cat << EOF
+Usage:  herodot submap timeout {timeout} [{command}]
+        herodot submap cleanup
+EOF
+    exit 1 
+}
+
+PID="/tmp/pid"
+
+reset() {
+    hyprctl dispatch submap reset
+}
+
+TIME="$2"
+COMMAND="${@:3}"
+
+case "$1" in
+    "timeout")
+        [ -f "$PID" ] && kill $(cat "$PID") 2> /dev/null
+        (sleep "$TIME"; reset; $COMMAND; rm -f $PID ) &
+        echo "$!" > "$PID"
+        ;;
+    "cleanup")
+        [ -f "$PID" ] && kill $(cat "$PID") 2> /dev/null
+        ;;
+    *)
+        usage
+        ;;
+esac
