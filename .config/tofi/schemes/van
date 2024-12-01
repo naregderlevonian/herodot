@@ -13,17 +13,17 @@ height = 100%
 
 horizontal = true
 anchor = top
-exclusive-zone = 16
+exclusive-zone = 24
 
-padding-top = 4
-padding-bottom = 4
+padding-top = 12
+padding-bottom = 12
 padding-left = 16
 padding-right = 16
 
 margin-top = 0
 margin-bottom = 0
-margin-left = 16
-margin-right = 16
+margin-left = 24
+margin-right = 24
 
 prompt-padding = 8
 result-spacing = 12

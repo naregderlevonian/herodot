@@ -128,9 +128,9 @@ tooltip label {
 }
 
 #custom-waynot {
-    margin: 16px;
+    margin: 24px;
     margin-top: 0px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: #ededed;
     animation-name: blink;
     animation-duration: 1000ms;

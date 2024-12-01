@@ -1,13 +1,15 @@
 [
     {
-        "output": ["eDP-1"],
+        "output": [
+            "eDP-1"
+        ],
         "layer": "top",
         "position": "top",
         "spacing": 12,
-        "margin-top": 8,
+        "margin-top": 12,
         "margin-bottom": 0,
-        "margin-left": 16,
-        "margin-right": 16,
+        "margin-left": 24,
+        "margin-right": 24,
         "modules-left": [
             "battery",
             "clock",
@@ -32,23 +34,23 @@
             "interval": 1,
             "states": {
                 "warning": 20,
-                "critical": 10,
+                "critical": 10
             },
             "tootip": true,
-            "tooltip-format": "{capacity}%\n{time} left\n{power} W",
+            "tooltip-format": "{capacity}%\n{time} left\n{power} W"
         },
         "clock": {
             "format": "{:%H:%M:%S}",
             "interval": 1,
             "tooltip": true,
-            "tooltip-format": "{:%d %b %Y %a %T}",
+            "tooltip-format": "{:%d %b %Y %a %T}"
         },
         "custom/weather": {
             "exec": "herodot waybar get weather",
             "format": "{}",
             "interval": 30,
             "on-click": "herodot weather set update",
-            "return-type": "json",
+            "return-type": "json"
         },
         "custom/dice": {
             "exec": "herodot waybar get dice",
@@ -59,11 +61,11 @@
                 "3": "",
                 "4": "",
                 "5": "",
-                "6": "",
+                "6": ""
             },
             "on-click": "hyprdot waybar get dice",
             "return-type": "json",
-            "signal": 6,
+            "signal": 6
         },
         "hyprland/workspaces": {
             "all-outputs": false,
@@ -75,64 +77,50 @@
             },
             "on-scroll-up": "herodot workspace set back",
             "on-scroll-down": "herodot workspace set next",
-            "smooth-scrolling-threshold": 3,
+            "smooth-scrolling-threshold": 3
         },
         "custom/lock": {
-            "format": "", 
+            "format": "",
             "on-click": "herodot shutdown lock",
-            "tooltip-format": "Lock",
+            "tooltip-format": "Lock"
         },
         "custom/exit": {
-            "format": "", 
+            "format": "",
             "on-click": "herodot shutdown exit",
-            "tooltip-format": "Exit",
+            "tooltip-format": "Exit"
         },
         "custom/suspend": {
-            "format": "", 
+            "format": "",
             "on-click": "herodot shutdown suspend",
-            "tooltip-format": "Suspend",
+            "tooltip-format": "Suspend"
         },
         "custom/reboot": {
-            "format": "", 
+            "format": "",
             "on-click": "herodot shutdown reboot",
-            "tooltip-format": "Reboot",
+            "tooltip-format": "Reboot"
         },
         "custom/poweroff": {
-            "format": "", 
+            "format": "",
             "on-click": "herodot shutdown poweroff",
-            "tooltip-format": "Power Off",
-        },
+            "tooltip-format": "Power Off"
+        }
     },
     {
-        "output": ["eDP-1"],
-        "layer": "top",
-        "position": "bottom",
-        "spacing": 0,
-        "margin": 0,
-        "modules-left": [
-            "custom/waynot",
+        "output": [
+            "DP-1"
         ],
-        "custom/waynot": {
-            "exec": "waynot post",
-            "format": "{}",
-            "return-type": "json",
-            "signal": 7,
-        },
-    },
-    {
-        "output": ["DP-1"],
         "layer": "top",
         "position": "bottom",
         "spacing": 12,
         "margin-top": 0,
-        "margin-bottom": 8,
-        "margin-left": 16,
-        "margin-right": 16,
+        "margin-bottom": 12,
+        "margin-left": 24,
+        "margin-right": 24,
         "modules-left": [
             "memory",
             "cpu",
             "temperature",
-            "custom/gputemperature",
+            "custom/gputemperature"
         ],
         "modules-center": [
             "hyprland/workspaces"
@@ -154,7 +142,7 @@
                 "warning": 72,
                 "critical": 88
             },
-            "tooltip": true,
+            "tooltip": true
         },
         "cpu": {
             "format": "",
@@ -163,7 +151,7 @@
                 "warning": 72,
                 "critical": 88
             },
-            "tooltip": true,
+            "tooltip": true
         },
         "temperature": {
             "critical-threshold": 80,
@@ -175,7 +163,7 @@
         "custom/gputemperature": {
             "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
             "format": "",
-            "interval": 1,  
+            "interval": 1,
             "tooltip": true,
             "tooltip-format": "Nvidia GPU {}°C"
         },
@@ -189,46 +177,46 @@
             },
             "on-scroll-up": "herodot workspace set back",
             "on-scroll-down": "herodot workspace set next",
-            "smooth-scrolling-threshold": 3,
+            "smooth-scrolling-threshold": 3
         },
         "custom/gpu": {
             "exec": "herodot waybar get gpu",
             "format": "{icon}",
             "format-icons": {
                 "hybrid": "",
-                "intel": "",
+                "intel": ""
             },
             "interval": 1,
             "on-click": "herodot gpu set mode toggle",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
         },
         "custom/idle": {
             "exec": "herodot waybar get idle",
             "format": "{icon}",
             "format-icons": {
                 "on": "",
-                "off": "",
+                "off": ""
             },
             "interval": 1,
             "on-click": "herodot idle set state toggle",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
         },
         "custom/fan": {
             "exec": "herodot waybar get fan",
             "format": "{icon}",
             "format-icons": {
                 "auto": "",
-                "maximum": "",
+                "maximum": ""
             },
             "interval": 1,
             "on-click": "herodot fan set state toggle",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
         },
         "custom/performance": {
             "exec": "herodot waybar get performance",
@@ -237,14 +225,14 @@
                 "performance": "`",
                 "balance-performance": "",
                 "balance-power": "",
-                "power": "",
+                "power": ""
             },
             "interval": 1,
             "on-click": "herodot performance set mode next",
             "on-click-right": "herodot performance set mode back",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
         },
         "custom/microphone": {
             "exec": "herodot waybar get microphone",
@@ -255,7 +243,7 @@
                 "low": "",
                 "medium": "",
                 "high": "",
-                "critical": "",
+                "critical": ""
             },
             "interval": 1,
             "on-click": "herodot audio microphone set state toggle",
@@ -263,8 +251,7 @@
             "on-scroll-up": "herodot audio microphone set level down",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
-
+            "tooltip-format": "{}"
         },
         "custom/speaker": {
             "exec": "herodot waybar get speaker",
@@ -275,7 +262,7 @@
                 "low": "",
                 "medium": "",
                 "high": "",
-                "critical": "",
+                "critical": ""
             },
             "interval": 1,
             "on-click": "herodot audio speaker set state toggle",
@@ -283,8 +270,7 @@
             "on-scroll-up": "herodot audio speaker set level down",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
-
+            "tooltip-format": "{}"
         },
         "custom/bluetooth": {
             "exec": "herodot waybar get bluetooth",
@@ -298,13 +284,13 @@
                 "on-discoverable-paired": "",
                 "on-scan": "",
                 "on-scan-paired": "",
-                "on-paired": "",
+                "on-paired": ""
             },
             "interval": 1,
             "on-click": "herodot bluetooth set state toggle",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
         },
         "custom/wifi": {
             "exec": "herodot waybar get wifi",
@@ -316,13 +302,31 @@
                 "on-connected-good": "",
                 "on-connected-fair": "",
                 "on-connected-poor": "",
-                "on-connected-unknown": "",
+                "on-connected-unknown": ""
             },
             "interval": 1,
             "on-click": "herodot wifi set state toggle",
             "return-type": "json",
             "tooltip": true,
-            "tooltip-format": "{}",
+            "tooltip-format": "{}"
+        }
+    },
+    {
+        "output": [
+            "eDP-1"
+        ],
+        "layer": "top",
+        "position": "bottom",
+        "spacing": 0,
+        "margin": 0,
+        "modules-left": [
+            "custom/waynot"
+        ],
+        "custom/waynot": {
+            "exec": "waynot post",
+            "format": "{}",
+            "return-type": "json",
+            "signal": 7
         }
     }
 ]
