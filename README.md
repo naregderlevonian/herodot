@@ -3,6 +3,22 @@ It also includes custom scripts for interacting with various settings and device
 
 > **Please note** These configurations have been exclusively tested on the ASUS Zenbook 14 Duo OLED (UX8402). Adjustments may be necessary for compatibility with other devices.
 
+# Examples
+
+## Scheme: Van (Default)
+
+| ![Image 1](assets/herodot-van-1.png) | ![Image 1](assets/herodot-van-2.png) | ![Image 1](assets/herodot-van-3.png)  |
+|:--:|:--:|:--:|
+| Image 1 | Image 2 | Image 3 |
+
+## Scheme: Yerevan
+
+| ![Image 1](assets/herodot-yerevan-1.png) | ![Image 1](assets/herodot-yerevan-2.png) | ![Image 1](assets/herodot-yerevan-3.png)  |
+|:--:|:--:|:--:|
+| Image 4 | Image 5 | Image 6 |
+
+
+
 # Hotkeys
 
 | Hotkey                         | Description                                                  |
