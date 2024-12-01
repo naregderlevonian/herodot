@@ -16,17 +16,9 @@ Notifications are displayed within Waybar using the Waynot daemon.
 
 # Demo
 
-## Scheme: Van (Default)
-
-| ![Image 1](assets/herodot-van-1.png) | ![Image 1](assets/herodot-van-2.png) | ![Image 1](assets/herodot-van-3.png)  |
-|:--:|:--:|:--:|
-| Common | GTK | Waybar Notification |
-
-## Scheme: Yerevan
-
-| ![Image 1](assets/herodot-yerevan-1.png) | ![Image 1](assets/herodot-yerevan-2.png) | ![Image 1](assets/herodot-yerevan-3.png)  |
-|:--:|:--:|:--:|
-| Common | GTK | Waybar Notification |
+| ![Image 1](assets/van-1.png) | ![Image 1](assets/van-2.png) | ![Image 1](assets/van-3.png)  | ![Image 1](assets/yerevan-1.png)  |
+|:--:|:--:|:--:|:--:|
+| Common | Launcher | Notification | Yerevan Scheme |
 
 # Hotkeys
 
