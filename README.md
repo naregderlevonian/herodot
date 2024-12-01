@@ -1,9 +1,20 @@
-This repository contains my personal configuration files for Hyprland, as well as other settings for applications like Neovim, Waybar, Mako, and more.
-It also includes custom scripts for interacting with various settings and devices using the Herodot script.
+These Hyprland configuration files are based on Herodot scripts and include two interchangeable color schemes: Van and Yerevan.
+
+Supported Features:
+
+- GTK3/4: Overlays on the main theme (recommended: install adw-gtk3 for optimal performance).
+- Neovim: Fully compatible syntax highlighting schemes utilizing TreeSitter.
+- Midnight Commander: Minimalist design for aesthetic simplicity.
+
+Herodot scripts integrate with Waybar for easy customization of the environment, device interactions, and settings management.
+
+The configuration offers several key features, including access to system information such as status, weather, and network details. Users can toggle shaders, such as blue light filters and inversion effects, and adjust screen and keyboard brightness. It also provides controls for volume and microphone settings, allows for adjustments between power saving and performance modes, and enables automatic shutdown of the screen, disk, and computer. Additionally, it includes options to activate the fan, toggle Wifi and Bluetooth, and adjust the UI zoom for better accessibility.
+
+Notifications are displayed within Waybar using the Waynot daemon.
 
 > **Please note** These configurations have been exclusively tested on the ASUS Zenbook 14 Duo OLED (UX8402). Adjustments may be necessary for compatibility with other devices.
 
-# Examples
+# Demo
 
 ## Scheme: Van (Default)
 
@@ -16,8 +27,6 @@ It also includes custom scripts for interacting with various settings and device
 | ![Image 1](assets/herodot-yerevan-1.png) | ![Image 1](assets/herodot-yerevan-2.png) | ![Image 1](assets/herodot-yerevan-3.png)  |
 |:--:|:--:|:--:|
 | Image 4 | Image 5 | Image 6 |
-
-
 
 # Hotkeys
 
@@ -119,3 +128,167 @@ It also includes custom scripts for interacting with various settings and device
 | SUPER CTRL, end                | Move to the last workspace                                   |
 | CTRL ALT, 2                    | Zoom the interface to 200%                                   |
 | CTRL ALT, 1                    | Reset the interface zoom level                               |
+
+# Structure
+
+```
+├── .config
+│   ├── gtk-3.0
+│   │   ├── gtk.css
+│   │   └── schemes
+│   │       ├── van.css
+│   │       └── yerevan.css
+│   ├── gtk-4.0 -> gtk-3.0
+│   ├── herodot
+│   │   ├── session.conf
+│   │   └── session.conf.bak
+│   ├── hypr
+│   │   ├── hypridle.conf
+│   │   ├── hyprland
+│   │   │   ├── bind
+│   │   │   │   ├── actions.conf
+│   │   │   │   ├── applications.conf
+│   │   │   │   ├── brightness.conf
+│   │   │   │   ├── clipboard.conf
+│   │   │   │   ├── environment.conf
+│   │   │   │   ├── microphone.conf
+│   │   │   │   ├── mouse.conf
+│   │   │   │   ├── movefocus.conf
+│   │   │   │   ├── movegroup.conf
+│   │   │   │   ├── movetoworkspace.conf
+│   │   │   │   ├── movewindow.conf
+│   │   │   │   ├── paper.conf
+│   │   │   │   ├── process.conf
+│   │   │   │   ├── resize.conf
+│   │   │   │   ├── scratchpad.conf
+│   │   │   │   ├── screenpad.conf
+│   │   │   │   ├── screenshot.conf
+│   │   │   │   ├── shader.conf
+│   │   │   │   ├── shutdown.conf
+│   │   │   │   ├── speaker.conf
+│   │   │   │   ├── swapwindow.conf
+│   │   │   │   ├── touchpad.conf
+│   │   │   │   ├── window.conf
+│   │   │   │   ├── workspace.conf
+│   │   │   │   └── zoom.conf
+│   │   │   ├── bind.conf
+│   │   │   ├── environment.conf
+│   │   │   ├── exec-once.conf
+│   │   │   ├── input
+│   │   │   │   ├── gestures.conf
+│   │   │   │   ├── input.conf
+│   │   │   │   ├── mouse.conf
+│   │   │   │   ├── stylus.conf
+│   │   │   │   ├── touchpad.conf
+│   │   │   │   └── touchscreen.conf
+│   │   │   ├── input.conf
+│   │   │   ├── layout
+│   │   │   │   ├── animation.conf
+│   │   │   │   ├── decoration.conf
+│   │   │   │   ├── dwindle.conf
+│   │   │   │   ├── general.conf
+│   │   │   │   ├── master.conf
+│   │   │   │   └── misc.conf
+│   │   │   ├── layout.conf
+│   │   │   ├── monitors.conf
+│   │   │   ├── nvidia.conf
+│   │   │   ├── other.conf
+│   │   │   ├── scheme
+│   │   │   │   ├── van.conf
+│   │   │   │   └── yerevan.conf
+│   │   │   ├── scheme.conf
+│   │   │   └── windowrules.conf
+│   │   ├── hyprland.conf
+│   │   ├── hyprlock.conf
+│   │   ├── hyprpaper.conf
+│   │   ├── locks
+│   │   │   ├── van.conf
+│   │   │   └── yerevan.conf
+│   │   ├── papers
+│   │   │   ├── Pinky
+│   │   │   │   ├── screenpad.png
+│   │   │   │   └── screen.png
+│   │   │   └── Sky
+│   │   │       ├── screenpad.png
+│   │   │       └── screen.png
+│   │   └── shaders
+│   │       ├── abyss
+│   │       ├── caramel-bach
+│   │       ├── caramel-beethoven
+│   │       ├── caramel-mozart
+│   │       ├── caramel-schubert
+│   │       ├── matrix
+│   │       ├── negative
+│   │       ├── vhs
+│   │       └── vibrance
+│   ├── kitty
+│   │   ├── kitty.conf
+│   │   ├── van.conf
+│   │   └── yerevan.conf
+│   ├── nvim
+│   │   ├── colors
+│   │   │   ├── van.lua
+│   │   │   └── yerevan.lua
+│   │   ├── init.lua
+│   │   ├── lazy-lock.json
+│   │   └── lua
+│   │       ├── config
+│   │       │   ├── lazy.lua
+│   │       │   └── set.lua
+│   │       ├── plugins.lua
+│   │       └── schemes
+│   │           ├── van
+│   │           │   ├── core.lua
+│   │           │   ├── init.lua
+│   │           │   ├── palette.lua
+│   │           │   └── ts.lua
+│   │           └── yerevan
+│   │               ├── core.lua
+│   │               ├── init.lua
+│   │               ├── palette.lua
+│   │               └── ts.lua
+│   ├── tofi
+│   │   ├── config
+│   │   └── schemes
+│   │       ├── van
+│   │       └── yerevan
+│   └── waybar
+│       ├── config
+│       └── style.css
+├── .local
+│   ├── bin
+│   │   ├── herodot
+│   │   ├── herodot-audio
+│   │   ├── herodot-battery
+│   │   ├── herodot-bluetooth
+│   │   ├── herodot-brightness
+│   │   ├── herodot-dice
+│   │   ├── herodot-fan
+│   │   ├── herodot-gpu
+│   │   ├── herodot-idle
+│   │   ├── herodot-movetoworkspace
+│   │   ├── herodot-movewindow
+│   │   ├── herodot-paper
+│   │   ├── herodot-performance
+│   │   ├── herodot-scheme
+│   │   ├── herodot-screenpad
+│   │   ├── herodot-screenshot
+│   │   ├── herodot-settings
+│   │   ├── herodot-shader
+│   │   ├── herodot-shutdown
+│   │   ├── herodot-submap
+│   │   ├── herodot-touchpad
+│   │   ├── herodot-waybar
+│   │   ├── herodot-weather
+│   │   ├── herodot-wifi
+│   │   ├── herodot-workspace
+│   │   ├── herodot-zoom
+│   │   ├── waynot
+│   │   └── waynot-daemon
+│   └── share
+│       └── mc
+│           └── skins
+│               ├── van.ini
+│               └── yerevan.ini
+└── .zshrc
+```
