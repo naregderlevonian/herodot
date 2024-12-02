@@ -10,16 +10,17 @@ EOF
 
 WEATHER_PATH="/tmp/weather"
 
-if [ -e "$WEATHER_PATH" ]; then
-    INFO=$(cat "$WEATHER_PATH")
-else
-    update
-fi
-
 update() {
     CITY=$(wget -qO- ipinfo.io | jq -r ".city")
     INFO=$(weather-Cli get -r $CITY)
     echo "$INFO" > "$WEATHER_PATH"
+}
+
+pending() {
+    while ! ping -c 1 google.com &> /dev/null; do
+        echo "Waiting for internet connection..."
+        sleep 5
+    done
 }
 
 extract_weather() {
@@ -66,6 +67,13 @@ get_humidity() {
     local humidity_unit=$(extract_weather "hourly_units.relativehumidity_2m")
     echo "$humidity$humidity_unit"
 }
+
+if [ -e "$WEATHER_PATH" ]; then
+    INFO=$(cat "$WEATHER_PATH")
+else
+    pending
+    update
+fi
 
 case "$1" in
     "get")

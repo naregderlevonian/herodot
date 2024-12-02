@@ -14,6 +14,7 @@
             "battery",
             "clock",
             "custom/weather",
+            "custom/keyboard",
             "custom/dice"
         ],
         "modules-center": [
@@ -48,8 +49,21 @@
         "custom/weather": {
             "exec": "herodot waybar get weather",
             "format": "{}",
-            "interval": 30,
+            "interval": 1,
             "on-click": "herodot weather set update",
+            "return-type": "json",
+            "tooltip": true
+        },
+        "custom/keyboard": {
+            "exec": "herodot waybar get keyboard",
+            "format": "{icon}",
+            "format-icons": {
+                "en": "En",
+                "ru": "Ru",
+                "unknown": "??"
+            },
+            "interval": 1,
+            "on-click": "herodot keyboard set next",
             "return-type": "json"
         },
         "custom/dice": {

@@ -2,7 +2,7 @@
 
 usage() {
     cat << EOF
-Usage: herodot wifi get powered|connected|tx|rx|ip4
+Usage: herodot wifi get state|connected|tx|rx|ip4
        herodot wifi set state off|on|toggle
 EOF
     exit 1
@@ -10,7 +10,7 @@ EOF
 
 DEVICE="wlan0"
 
-get_powered() {
+get_state() {
     local state=$(iwctl device "$DEVICE" show | grep "Powered" | awk "{print \$4}")
     [ "$state" = "on" ] && echo 1 || echo 0
 }
@@ -48,7 +48,7 @@ get_ip4() {
 assign() {
     local state="$1"
     iwctl device "$DEVICE" set-property Powered "$state"
-    waynot send "WiFi power" "${state^}"
+    waynot send "WiFi power" "$state"
 }
 
 off() {
@@ -60,14 +60,14 @@ on() {
 }
 
 toggle() {
-    [ "$(get_powered)" -eq 0 ] && assign "on" || assign "off"
+    [ "$(get_state)" -eq 0 ] && assign "on" || assign "off"
 }
 
 case "$1" in
     "get")
         case "$2" in
-            "powered")
-                get_powered
+            "state")
+                get_state
                 ;;
             "connected")
                 get_connected

@@ -71,9 +71,34 @@ get_weather() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
+get_keyboard() {
+    local class
+    local text
+    local tooltip
+
+    local mode=$(herodot keyboard get mode)
+
+    text="$mode"
+    tooltip="$mode"
+
+    case "$mode" in
+        *English*)
+            class="en"
+            ;;
+        *Russian*)
+            class="ru"
+            ;;
+        *)
+            class="unknown"
+            ;;
+    esac
+
+    jsonify "$class" "$class" "$text" "$tooltip"
+}
+
 get_dice() {
-    local index="$(herodot dice get random)"
-    jsonify "$index" "$index" "$index" "$index"
+    local result="$(herodot dice get random)"
+    jsonify "$result" "$result" "$result" "$result"
 }
 
 get_gpu() {
@@ -307,7 +332,7 @@ get_bluetooth() {
     local text
     local tooltip
 
-    local powered=$(herodot bluetooth get powered)
+    local state=$(herodot bluetooth get state)
     local discoverable=$(herodot bluetooth get discoverable)
     local scan=$(herodot bluetooth get scanning)
     local pairable=$(herodot bluetooth get pairable)
@@ -317,7 +342,7 @@ get_bluetooth() {
 
     text="Bluetooth"
 
-    if [ "$powered" -eq 1 ]; then
+    if [ "$state" -eq 1 ]; then
         class="on"
         text+="On"
 
@@ -342,7 +367,7 @@ get_wifi() {
     local text
     local tooltip
 
-    local powered=$(herodot wifi get powered)
+    local state=$(herodot wifi get state)
     local connected=$(herodot wifi get connected)
     local network=$(herodot wifi get network)
     local ip4=$(herodot wifi get ip4)
@@ -352,7 +377,7 @@ get_wifi() {
 
     text="WiFi"
 
-    if [ "$powered" -eq 1 ]; then
+    if [ "$state" -eq 1 ]; then
         text+="On"
 
         if [ "$connected" -eq 1 ]; then
@@ -417,11 +442,14 @@ case "$1" in
             "dice")
                 get_dice
                 ;;
+            "keyboard")
+                get_keyboard
+                ;;
             "gpu")
                 get_gpu
                 ;;
             "idle")
-                iget_dle
+                get_idle
                 ;;
             "fan")
                 get_fan
