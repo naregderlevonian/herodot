@@ -1,0 +1,25 @@
+[global]
+background = "#292929"
+corner_radius = 10
+font = Ubuntu Mono 9
+foreground = "#c0c0c0"
+format = "<b>%s</b>\n%b"
+frame_color = "#313131"
+frame_width = 1
+hide_dublicate_count = true
+horizontal_padding = 24
+line_height = 0
+max_icon_size = 0
+monitor = 1
+mouse_left_click = do_action
+mouse_middle_click = close_all
+mouse_right_click = close_current
+offset = 16x16
+origin = top, right
+padding = 24
+separator_color = "#313131"
+separator_height = 1
+show_indicators = no
+stack_duplicates = false
+sticky_history = yes
+timeout = 3

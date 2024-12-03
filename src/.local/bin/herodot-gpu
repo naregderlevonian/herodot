@@ -1,0 +1,75 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot gpu set mode
+        herodot gpu get mode intel|hybrid
+EOF
+    exit 1
+}
+
+get_mode() {
+    [ "$(lspci | grep "GeForce")" ] && echo "hybrid" || echo "intel"
+}
+
+get_temperature() {
+    echo "$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)"
+}
+
+set_mode() {
+    local mode="$1"
+    if zenity --question \
+              --icon="/usr/share/icons/empty.png" \
+              --text="Are you sure you want to toggle GPU to $mode? It require reboot."; then
+        if pkexec intel-nvidia-switch --switch "$mode"; then
+            waynot "Optimus" "switched to ${mode^}"
+            herodot shutdown reboot
+        fi
+    fi
+}
+
+toggle() {
+    [ $(get_mode) = "intel" ] && set_mode "hybrid" || set_mode "intel"
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "mode")
+                get_mode
+                ;;
+            "temperature")
+                get_temperature
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "mode")
+                case "$3" in
+                    "intel")
+                        set_mode "intel"                
+                        ;;
+                    "hybrid")
+                        set_mode "hybrid"
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+            ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

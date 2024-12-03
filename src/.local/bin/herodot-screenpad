@@ -1,0 +1,74 @@
+#!/bin/sh
+
+usage() {
+    cat <<EOF
+Usage:  herodot screenpad get state
+        herodot screenpad set state off|on|toggle
+EOF
+}
+
+DISABLED_CONFIG_LINE=$(herodot settings read "screenpad.disabledSetup")
+ENABLED_CONFIG_LINE=$(herodot settings read "screenpad.enabledSetup")
+
+get_state() {
+    herodot settings read "screenpad.isEnabled"
+}
+
+set_state() {
+    hyprctl keyword monitor "$1"
+    herodot settings assign "screenpad.isEnabled" "$2"
+    waynot send "Screenpad" "${2^}"
+}
+
+off() {
+    set_state "$DISABLED_CONFIG_LINE" "false"
+    herodot waybar set view join
+}
+
+on() {
+    set_state "$ENABLED_CONFIG_LINE" "true"
+    herodot waybar set view split
+}
+
+toggle() {
+    [ $(get_state) = "true" ] && off || on
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "state")
+                get_state
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "state")
+                case "$3" in
+                    "off")
+                        off              
+                        ;;
+                    "on")
+                        on                
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

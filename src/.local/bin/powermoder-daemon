@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set_mode() {
+    herodot performance set mode "$1"
+}
+
+udevadm monitor --udev --property | while IFS= read -r line; do
+    case "$line" in
+        POWER_SUPPLY_ONLINE=*)
+            state="${line#*=}"
+            if [ "$state" = "1" ]; then
+                herodot performance set mode "performance"
+                herodot idle set state off
+            else
+                herodot performance set mode "power"
+                herodot idle set state on
+            fi
+            ;;
+    esac
+done
