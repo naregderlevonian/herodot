@@ -31,8 +31,6 @@ get_brightness() {
 }
 
 set_brightness() {
-    [ $SAVE -eq 1 ] && save_brightness "$DEVICE"
-
     if [ -z "$DEVICE" ]; then
         for current in "${DEVICES[@]}"; do
             brightnessctl --device="$current" set "$1"
@@ -40,6 +38,8 @@ set_brightness() {
     else
         brightnessctl --device="$DEVICE" set "$1"
     fi
+
+    [ $SAVE -eq 1 ] && save_brightness "$DEVICE"
 }
 
 save_brightness() {

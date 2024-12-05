@@ -81,7 +81,7 @@
                 "5": "",
                 "6": ""
             },
-            "on-click": "hyprdot waybar get dice",
+            "on-click": "herodot waybar get dice",
             "return-type": "json",
             "signal": 6
         },

@@ -14,7 +14,12 @@ SCHEMES=(
 
 paths=(
 "$HOME/.config/dunst"
-
+"$HOME/.config/gtk-3.0"
+"$HOME/.config/hypr"
+"$HOME/.config/kitty"
+"$HOME/.config/mc"
+"$HOME/.config/nvim/lua/config"
+"$HOME/.config/tofi"
 )
 
 get_mode() {
@@ -26,13 +31,16 @@ replace_scheme() {
         echo "$path $1 $2"
         if [ -d "$path" ]; then
             find "$path" -type f -exec sed -i "s/$1/$2/g" {} +
-            find . -type l -exec sh -c 'ln -sf "$(readlink "{}" | sed "s/'"$1"'/'"$2"'/g")" "{}"' \;
+            find "$path" -type l -exec sh -c 'ln -sf "$(readlink "{}" | sed "s/'"\/$1"'/'"\/$2"'/g")" "{}"' \;
         fi
     done
 }
 
 set_mode() {
     replace_scheme "$(get_mode)" "$1"
+    
+    eval "$(dbus-launch)"
+
     herodot settings assign "interface.scheme" "$1"
     waynot send "Scheme" "set to $1"
 }

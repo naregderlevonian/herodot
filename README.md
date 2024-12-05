@@ -80,8 +80,9 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | SUPER, right                   | Move focus to the window on the right                        |
 | SUPER, up                      | Move focus to the window above                               |
 | SUPER, down                    | Move focus to the window below                               |
-| SUPER SHIFT, G                 | Lock and unlock the current group                            |
-| SUPER SHIFT CTRL, G            | Lock all groups                                              |
+| SUPER SHIFTL, G                | Toggles the current window into a group                      |
+| SUPER SHIFT CTRL, G            | Lock and unlock the current group                            |
+| SUPER SHIFT CTRL ALT, G        | Lock all groups                                              |
 | SUPER SHIFT, left              | Activate the previous window in the current group            |
 | SUPER SHIFT, right             | Activate the next window in the current group                |
 | SUPER SHIFT, home              | Move the window to the left group                            |

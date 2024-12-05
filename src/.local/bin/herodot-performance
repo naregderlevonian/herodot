@@ -5,6 +5,7 @@ usage() {
 Usage:  hyprdor-control-performance get mode
         hyprdor-control-performance set mode performance|balance-performance|balance-power|power
         hyprdor-control-performance set mode back|next
+        hyprdor-control-performance set mode auto
 EOF
     exit 1
 }
@@ -83,6 +84,16 @@ next() {
     esac
 }
 
+auto() {
+    if [ "$(herodot battery get ac)" = "on" ]; then
+        herodot performance set mode "performance"
+        herodot idle set state off
+    else
+        herodot performance set mode "power"
+        herodot idle set state on
+    fi
+}
+
 case "$1" in
     "get")
         case "$2" in
@@ -115,6 +126,9 @@ case "$1" in
                         ;;
                     "next")
                         next
+                        ;;
+                    "auto")
+                        auto
                         ;;
                     *)
                         usage

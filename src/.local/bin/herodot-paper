@@ -17,9 +17,6 @@ PAPERS=($(ls "$PAPERS_PATH" | grep -v "current" | sort))
 
 apply_decoration_settings() {
     hyprctl keyword "decoration:blur:enabled" false
-    hyprctl keyword "decoration:fullscreen_opacity" 1
-    hyprctl keyword "decoration:active_opacity" 1
-    hyprctl keyword "decoration:inactive_opacity" 1
 }
 
 check_paper_exists() {
@@ -64,6 +61,7 @@ save_state() {
 }
 
 save_mode() {
+    waynot send "$1"
     herodot settings assign "paper.mode" "$1"
 }
 
@@ -79,16 +77,16 @@ get_mode() {
 set_mode() {
     local paper="$1"
 
+    [ "$SAVE" -eq 1 ] && {
+        save_state "true"
+        save_mode "$paper";
+    }
+
     check_paper_exists "$paper"
 
     waynot send "Paper" "set to $paper"
     refresh_symlink "$paper"
     restart
-
-    [ "$SAVE" -eq 1 ] && {
-        save_state "true"
-        save_mode "$paper";
-    }
 }
 
 off() {

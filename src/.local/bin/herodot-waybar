@@ -62,9 +62,9 @@ get_battery() {
     local text
     local tooltip
 
-    local level=$(herodot battery get level)
-    local state=$(herodot battery get state)
-    local left=$(herodot battery get left)
+    local level="$(herodot battery get level)"
+    local state="$(herodot battery get state)"
+    local left="$(herodot battery get left)"
 
     if [ "$level" -ne 100 ]; then
         class="${state,,}"
@@ -87,13 +87,13 @@ get_weather() {
     local text
     local tooltip
 
-    local country=$(herodot weather get country)
-    local name=$(herodot weather get location)
-    local temperature=$(herodot weather get temperature)
-    local windspeed=$(herodot weather get windspeed)
-    local winddirection=$(herodot weather get winddirection)
-    local pressure=$(herodot weather get pressure)
-    local humidity=$(herodot weather get humidity)
+    local country="$(herodot weather get country)"
+    local name="$(herodot weather get location)"
+    local temperature="$(herodot weather get temperature)"
+    local windspeed="$(herodot weather get windspeed)"
+    local winddirection="$(herodot weather get winddirection)"
+    local pressure="$(herodot weather get pressure)"
+    local humidity="$(herodot weather get humidity)"
 
     class="$(classify_temperature "$(echo $temperature | sed "s/°C//g")")"
 
@@ -109,7 +109,7 @@ get_keyboard() {
     local text
     local tooltip
 
-    local mode=$(herodot keyboard get mode)
+    local mode="$(herodot keyboard get mode)"
 
     text="$mode"
     tooltip="$mode"
@@ -139,7 +139,7 @@ get_gpu() {
     local text
     local tooltip
 
-    local state=$(herodot gpu get mode)
+    local state="$(herodot gpu get mode)"
 
     text="Optimus "
 
@@ -188,7 +188,7 @@ get_fan() {
     local text
     local tooltip
 
-    local state=$(herodot fan get state)
+    local state="$(herodot fan get state)"
 
     text="Fan"
 
@@ -365,13 +365,13 @@ get_bluetooth() {
     local text
     local tooltip
 
-    local state=$(herodot bluetooth get state)
-    local discoverable=$(herodot bluetooth get discoverable)
-    local scan=$(herodot bluetooth get scanning)
-    local pairable=$(herodot bluetooth get pairable)
-    local devices=$(herodot bluetooth get devices)
+    local state="$(herodot bluetooth get state)"
+    local discoverable="$(herodot bluetooth get discoverable)"
+    local scan="$(herodot bluetooth get scanning)"
+    local pairable="$(herodot bluetooth get pairable)"
+    local devices="$(herodot bluetooth get devices)"
 
-    local paired=$(echo "$devices" | jq -R -s -c 'split("\n") | map(select(length > 0))' | jq -r ". | join(\"\\r\")")
+    local paired="$(echo "$devices" | jq -R -s -c 'split("\n") | map(select(length > 0))' | jq -r ". | join(\"\\r\")")"
 
     text="Bluetooth"
 
@@ -400,13 +400,13 @@ get_wifi() {
     local text
     local tooltip
 
-    local state=$(herodot wifi get state)
-    local connected=$(herodot wifi get connected)
-    local network=$(herodot wifi get network)
-    local ip4=$(herodot wifi get ip4)
-    local rssi=$(herodot wifi get rssi)
-    local tx=$(herodot wifi get tx)
-    local rx=$(herodot wifi get rx)
+    local state="$(herodot wifi get state)"
+    local connected="$(herodot wifi get connected)"
+    local network="$(herodot wifi get network)"
+    local ip4="$(herodot wifi get ip4)"
+    local rssi="$(herodot wifi get rssi)"
+    local tx="$(herodot wifi get tx)"
+    local rx="$(herodot wifi get rx)"
 
     text="WiFi"
 

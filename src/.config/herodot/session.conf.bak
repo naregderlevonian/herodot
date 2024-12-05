@@ -1,13 +1,13 @@
 gpu.mode: hybrid
 
 paper.isEnabled: true
-paper.mode: Sky
+paper.mode: Pinky
 
-shader.isEnabled: false
-shader.mode: matrix
+shader.isEnabled: true
+shader.mode: caramel-beethoven
 
 interface.performance = true
-interface.scheme: yerevan
+interface.scheme: van
 
 touchpad.isEnabled: true
 
