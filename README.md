@@ -149,6 +149,7 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 
 ```
 .
+.
 ├── .config
 │   ├── dunst
 │   │   ├── dunstrc -> schemes/van
@@ -231,15 +232,15 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 │   │   │   ├── van.conf
 │   │   │   └── yerevan.conf
 │   │   ├── papers
-│   │   │   ├── current -> /home/naregderlevonian/.config/hypr/papers/Sky
+│   │   │   ├── current -> ~/.config/hypr/papers/Sky
 │   │   │   ├── Pinky
-│   │   │   │   ├── Pinky -> /home/naregderlevonian/.config/hypr/papers/Pinky
+│   │   │   │   ├── Pinky -> ~/.config/hypr/papers/Pinky
 │   │   │   │   ├── screenpad.png
 │   │   │   │   └── screen.png
 │   │   │   └── Sky
 │   │   │       ├── screenpad.png
 │   │   │       ├── screen.png
-│   │   │       └── Sky -> /home/naregderlevonian/.config/hypr/papers/Sky
+│   │   │       └── Sky -> ~/.config/hypr/papers/Sky
 │   │   └── shaders
 │   │       ├── abyss
 │   │       ├── caramel-bach
@@ -256,7 +257,7 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 │   │   └── yerevan.conf
 │   ├── mc
 │   │   ├── ini
-│   │   ├── mc -> /home/naregderlevonian/.config/mc
+│   │   ├── mc -> ~/.config/mc
 │   │   └── panels.ini
 │   ├── nvim
 │   │   ├── colors
@@ -288,7 +289,7 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 │   └── waybar
 │       ├── config
 │       └── style.css
-├── .gtkrc-2.0 -> /home/naregderlevonian/.config/gtk-3.0/settings.ini
+├── .gtkrc-2.0 -> ~/.config/gtk-3.0/settings.ini
 ├── .local
 │   ├── bin
 │   │   ├── herodot
