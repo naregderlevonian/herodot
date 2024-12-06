@@ -1,10 +1,10 @@
 gpu.mode: hybrid
 
 paper.isEnabled: true
-paper.mode: Pinky
+paper.mode: Sky
 
 shader.isEnabled: true
-shader.mode: caramel-beethoven
+shader.mode: negative
 
 interface.performance = true
 interface.scheme: van
@@ -30,3 +30,4 @@ brightness.input3::capslock: 0
 brightness.input3::scrolllock: 0
 brightness.platform::micmute: 1
 brightness.asus::kbd_backlight: 3
+brightness.intel_backlight: 400

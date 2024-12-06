@@ -19,7 +19,6 @@ Available:              audio
                         performance
                         scheme
                         screenpad
-                        screenshot
                         shader
                         shutdown
                         submap
@@ -78,9 +77,6 @@ case "$1" in
         ;;
     "screenpad")
         herodot-screenpad "$2" "$3" "$4"
-        ;;
-    "screenshot")
-        herodot-screenshot "$2" "$3"
         ;;
     "settings")
         herodot-settings "$2" "$3" "$4"

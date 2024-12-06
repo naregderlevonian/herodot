@@ -15,7 +15,8 @@
             "clock",
             "custom/weather",
             "custom/keyboard",
-            "custom/dice"
+            "custom/dice",
+            "custom/ashot"
         ],
         "modules-center": [
             "hyprland/workspaces"
@@ -84,6 +85,10 @@
             "on-click": "herodot waybar get dice",
             "return-type": "json",
             "signal": 6
+        },
+        "custom/ashot": {
+            "format": "",
+            "on-click": "ashot area"
         },
         "hyprland/workspaces": {
             "all-outputs": false,

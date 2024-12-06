@@ -42,6 +42,35 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 |:--:|:--:|:--:|:--:|
 | Common | Launcher | Notification | Yerevan Scheme |
 
+# Repository Dependencies
+
+Below is a list of the primary dependencies:
+
+1. **acpi**: A tool for displaying information about power management and battery status.
+2. **bluez**: The official Bluetooth protocol stack for Linux.
+3. **bluez-utils**: Utilities for managing Bluetooth devices and connections.
+4. **brightnessctl**: A command-line tool for controlling screen brightness.
+5. **dunst**: A lightweight and configurable notification daemon.
+6. **font-awesome-6**: A popular icon font library for web applications.
+7. **grim**: A screen capture utility for Wayland.
+8. **hyprland**: A dynamic tiling Wayland compositor.
+9. **hypridle**: A utility for executing commands when the user is idle.
+10. **hyprlock**: A screen locker for Wayland compositors.
+11. **hyprpaper**: A wallpaper management tool for Hyprland.
+12. **intel-nvidia-switch**: Tools for switching between Intel and NVIDIA graphics on hybrid systems.
+13. **iwd**: A Wi-Fi daemon for managing wireless connections.
+14. **kitty**: A fast, feature-rich terminal emulator.
+15. **mc**: Midnight Commander, a text-based file manager.
+16. **neovim**: An extensible Vim-based text editor.
+17. **nvidia-utils**: Utilities and drivers for NVIDIA graphics cards.
+18. **slurp**: A tool for selecting a region of the screen for capturing.
+19. **tofi**: A simple menu and notification tool for Wayland.
+20. **waybar**: A customizable status bar for Wayland compositors.
+21. **weather-Cli**: A command-line interface for fetching weather information.
+22. **wl-clipboard**: A simple clipboard manager for Wayland.
+23. **wptcl**: A utility for controlling Wayland compositors.
+24. **zenity**: A tool for displaying GTK dialog boxes from the command line.
+
 # Hotkeys
 
 | Hotkey                         | Description                                                  |
@@ -118,9 +147,10 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | SUPER ALT, PRINT               | Capture the active window and save it as a file              |
 | SUPER, XF86MonBrightnessDown   | Disable the shader effect                                    |
 | SUPER, XF86MonBrightnessUp     | Enable the shader effect                                     |
-| SUPER, L                       | Lock the screen                                              |
-| CTRL ALT, BACKSPACE            | Exit the Hyprland session                                    |
-| CTRL ALT, DELETE               | Reboot the system                                            |
+| SUPER ALT, ESCAPE              | Lock the screen                                              |
+| SUPER ALT, BACKSPACE           | Exit the Hyprland session                                    |
+| SUPER ALT, DELETE              | Reboot the system                                            |
+| SUPER, XF86PowerOff            | Reboot the system                                            |
 | XF86PowerOff                   | Power off the computer                                       |
 | XF86AudioRaiseVolume           | Increase speaker volume by 5%                                |
 | XF86AudioLowerVolume           | Decrease speaker volume by 5%                                |
