@@ -88,7 +88,7 @@
         },
         "custom/ashot": {
             "format": "",
-            "on-click": "ashot area"
+            "on-click": "ashot area file"
         },
         "hyprland/workspaces": {
             "all-outputs": false,

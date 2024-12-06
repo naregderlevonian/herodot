@@ -1,10 +1,9 @@
 clear
 export ZSH_DISABLE_COMPFIX=true
-export PATH=$HOME/.local/bin:$PATH:$HOME/.cargo/bin
-export EDITOR=/usr/bin/nvim
+export PATH="$HOME/.local/bin:$PATH:$HOME/.cargo/bin"
+export EDITOR="/usr/bin/nvim"
 export ZSH="$HOME/.oh-my-zsh"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
-
 export MARK=" "
 
 [ $TERM = "linux" ] && MARK="└→"
@@ -23,7 +22,7 @@ fi
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
-export RPROMPT='%{$FG[007]%}${vcs_info_msg_0_}%{$reset_color%} '
+export RPROMPT='%{$FG[005]%}${vcs_info_msg_0_}%{$reset_color%} '
 
 zstyle ':vcs_info:git:*' formats 'git:%b'
 

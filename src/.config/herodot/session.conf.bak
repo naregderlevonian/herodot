@@ -4,7 +4,7 @@ paper.isEnabled: true
 paper.mode: Sky
 
 shader.isEnabled: true
-shader.mode: negative
+shader.mode: caramel-beethoven
 
 interface.performance = true
 interface.scheme: van
