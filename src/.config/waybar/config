@@ -16,6 +16,7 @@
             "custom/weather",
             "custom/keyboard",
             "custom/dice",
+            "custom/picker",
             "custom/ashot"
         ],
         "modules-center": [
@@ -86,9 +87,13 @@
             "return-type": "json",
             "signal": 6
         },
+        "custom/picker": {
+            "format": "",
+            "on-click": "herodot waybar run picker"
+        },
         "custom/ashot": {
-            "format": "",
-            "on-click": "ashot area file"
+            "format": "",
+            "on-click": "herodot waybar run ashot"
         },
         "hyprland/workspaces": {
             "all-outputs": false,

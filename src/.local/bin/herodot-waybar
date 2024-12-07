@@ -4,7 +4,8 @@ usage() {
     cat << EOF
 Usage:  herodot waybar get weather|dice|gpu|idle|fan|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
-        herodot waybar set view join|split
+        herodot waybar set view join|spliti
+        herodot waybar run picker|ashot
 EOF
 }
 
@@ -466,6 +467,14 @@ set_view_split() {
     waybar
 }
 
+run_picker() {
+    hyprpicker --autocopy && waynot send "Color" "$(wl-paste) has been copied to the clipboard" || exit 1
+}
+
+run_ashot() {
+    ashot area && waynot send "Screenshot" "has been copied to the clipboard" || exit 1
+}
+
 off() {
     dunstctl set-paused false
     killall "$PROCESS"
@@ -545,6 +554,19 @@ case "$1" in
                         set_view_split
                         ;;
                 esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "run")
+        case "$2" in
+            "picker")
+                run_picker
+                ;;
+            "ashot")
+                run_ashot
                 ;;
             *)
                 usage

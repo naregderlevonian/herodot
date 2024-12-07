@@ -98,7 +98,7 @@ Below is a list of the primary dependencies:
 | SHIFT, XF86MonBrightnessUp     | Increase screen brightness to 100%                           |
 | SHIFT, XF86MonBrightnessDown   | Increase screen brightness to 0%                             |
 | SUPER SHIFT, C                 | Launch clipboard manager                                     |
-| SUPER CTRL, tab                | Show or hide the Waybar panel                                |
+| SUPER, escape                  | Show or hide the Waybar panel                                |
 | SUPER, tab                     | Show or hide the application launcher                        |
 | XF86AudioMicMute               | Toggle the microphone on/off                                 |
 | SUPER, Mouse Left              | Initiate window movement with drag                           |

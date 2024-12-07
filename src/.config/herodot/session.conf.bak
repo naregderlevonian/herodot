@@ -4,7 +4,7 @@ paper.isEnabled: true
 paper.mode: Sky
 
 shader.isEnabled: true
-shader.mode: caramel-beethoven
+shader.mode: caramel-mozart
 
 interface.performance = true
 interface.scheme: van
@@ -31,3 +31,4 @@ brightness.input3::scrolllock: 0
 brightness.platform::micmute: 1
 brightness.asus::kbd_backlight: 3
 brightness.intel_backlight: 400
+brightness.asus_screenpad: 235
