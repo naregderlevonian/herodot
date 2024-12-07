@@ -19,8 +19,8 @@ exclusive-zone = 24
 
 padding-top = 12
 padding-bottom = 12
-padding-left = 24
-padding-right = 24
+padding-left = 16
+padding-right = 16
 
 margin-top = 0
 margin-bottom = 0
@@ -28,7 +28,7 @@ margin-left = 16
 margin-right = 16
 
 prompt-padding = 8
-result-spacing = 12
+result-spacing = 24
 
 border-width = 0
 outline-width = 0
