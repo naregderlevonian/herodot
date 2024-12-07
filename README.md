@@ -99,7 +99,7 @@ Below is a list of the primary dependencies:
 | SHIFT, XF86MonBrightnessDown   | Increase screen brightness to 0%                             |
 | SUPER SHIFT, C                 | Launch clipboard manager                                     |
 | SUPER, escape                  | Show or hide the Waybar panel                                |
-| SUPER, tab                     | Show or hide the application launcher                        |
+| SUPER, grave                   | Show or hide the application launcher                        |
 | XF86AudioMicMute               | Toggle the microphone on/off                                 |
 | SUPER, Mouse Left              | Initiate window movement with drag                           |
 | SUPER, Mouse Right             | Initiate window resizing with drag                           |
@@ -135,8 +135,8 @@ Below is a list of the primary dependencies:
 | SUPER, Q                       | Close the currently active window                            |
 | SUPER SHIFT, Q                 | Close all instances of the active window                     |
 | SUPER ALT, R                   | Enter window resize mode                                     |
-| SUPER, S                       | Show the special workspace                                   |
-| SUPER SHIFT, S                 | Move the active window to the special workspace              |
+| SUPER, TAB                     | Show the special workspace                                   |
+| SUPER ALT, TAB                 | Move the active window to the special workspace              |
 | PRINT                          | Capture a screenshot of the entire screen to clipboard       |
 | CTRL, PRINT                    | Capture a screenshot of the current workspace to clipboard   |
 | SHIFT, PRINT                   | Capture a screenshot of selected area to clipboard           |
