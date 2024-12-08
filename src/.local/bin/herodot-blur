@@ -3,7 +3,8 @@
 usage() {
     cat << EOF
 Usage:  herodot blur get
-        herodot blur set {name}
+        herodot blur set back|next
+        herodot blur set restore
 EOF
 }
 
@@ -45,6 +46,10 @@ next() {
     navigate "+1"
 }
 
+restore() {
+    set_mode $(get_mode)
+}
+
 case "$1" in
     "get")
         get_mode
@@ -56,6 +61,9 @@ case "$1" in
                 ;;
             "next")
                 next
+                ;;
+            "restore")
+                restore
                 ;;
         esac
         ;;

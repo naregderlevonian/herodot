@@ -1,7 +1,7 @@
 local colors = require('schemes.yerevan.palette')
 
 local core = {
-    Normal                       = { fg = colors.Gray16, bg = colors.Gray2 },
+    Normal                       = { fg = colors.Gray16 },
     Comment                      = { fg = colors.Gray8, italic = true },
     SpecialComment                 = { fg = colors.Gray8, italic = true  },
     Todo                         = { fg = colors.Gray8, italic = true },

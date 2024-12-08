@@ -39,8 +39,8 @@ restart() {
 }
 
 refresh_symlink() {
-    rm -r "$PAPERS_PATH/current"
-    ln -s "$PAPERS_PATH/$1" "$PAPERS_PATH/current"
+    rm "$PAPERS_PATH/current"
+    ln -sf "$PAPERS_PATH/$1" "$PAPERS_PATH/current"
 }
 
 restore() {

@@ -1,7 +1,7 @@
 local colors = require('schemes.erzurum.palette')
 
 local core = {
-    Normal                       = { fg = colors.Gray8, bg = colors.Gray20 },
+    Normal                       = { fg = colors.Gray8 },
     Comment                      = { fg = colors.Gray16, italic = true },
     SpecialComment               = { fg = colors.Gray16, italic = true  },
     Todo                         = { fg = colors.Gray16, italic = true },
@@ -73,7 +73,7 @@ local core = {
     healthSuccess                = { fg = colors.Green8 },
     
     Error                        = { fg = colors.Red8 },
-    Warning                        = { fg = colors.Orange8 },
+    Warning                      = { fg = colors.Orange8 },
     Info                         = { fg = colors.Blue8 },
     Hint                         = { fg = colors.Orchid8 },
     ErrorMsg                     = { fg = colors.Red8 },
@@ -81,19 +81,19 @@ local core = {
     Question                     = { fg = colors.Yellow8 },
     MoreMsg                      = { fg = colors.Gray8 },
                                 
-    DiagnosticError             = { fg = colors.Red8 },
-    DiagnosticWarn              = { fg = colors.Orange8 },
-    DiagnosticInfo              = { fg = colors.Blue8 },
-    DiagnosticHint              = { fg = colors.Orchid8 },
-    DiagnosticUnnecessary       = { fg = colors.Gray8 },
-    DiagnosticVirtualTextError  = { fg = colors.Red8 },
-    DiagnosticVirtualTextWarn   = { fg = colors.Orange8 },
-    DiagnosticVirtualTextInfo   = { fg = colors.Blue8 },
-    DiagnosticVirtualTextHint   = { fg = colors.Orchid8 },
-    DiagnosticUnderlineError    = { fg = colors.Red8 },
-    DiagnosticUnderlineWarn     = { fg = colors.Orange8 },
-    DiagnosticUnderlineInfo     = { fg = colors.Blue8 },
-    DiagnosticUnderlineHint     = { fg = colors.Orchid8 },
+    DiagnosticError              = { fg = colors.Red8 },
+    DiagnosticWarn               = { fg = colors.Orange8 },
+    DiagnosticInfo               = { fg = colors.Blue8 },
+    DiagnosticHint               = { fg = colors.Orchid8 },
+    DiagnosticUnnecessary        = { fg = colors.Gray8 },
+    DiagnosticVirtualTextError   = { fg = colors.Red8 },
+    DiagnosticVirtualTextWarn    = { fg = colors.Orange8 },
+    DiagnosticVirtualTextInfo    = { fg = colors.Blue8 },
+    DiagnosticVirtualTextHint    = { fg = colors.Orchid8 },
+    DiagnosticUnderlineError     = { fg = colors.Red8 },
+    DiagnosticUnderlineWarn      = { fg = colors.Orange8 },
+    DiagnosticUnderlineInfo      = { fg = colors.Blue8 },
+    DiagnosticUnderlineHint      = { fg = colors.Orchid8 },
 }
 
 return core

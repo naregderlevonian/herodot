@@ -649,7 +649,6 @@ local colors = {
     Wine22           = '#fbcace',
     Wine23           = '#fdd8db',
     Wine24           = '#ffe6e8',
-
 }
 
 return colors
