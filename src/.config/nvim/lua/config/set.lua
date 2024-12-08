@@ -17,4 +17,4 @@ vim.opt.cursorline = true
 
 vim.opt.clipboard = 'unnamed,unnamedplus'
 
-vim.cmd('colorscheme van')
+vim.cmd('colorscheme erzurum')

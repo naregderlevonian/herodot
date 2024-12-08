@@ -97,6 +97,7 @@ Below is a list of the primary dependencies:
 | ALT, XF86MonBrightnessDown     | Decrease screen brightnessy by 1%                            |
 | SHIFT, XF86MonBrightnessUp     | Increase screen brightness to 100%                           |
 | SHIFT, XF86MonBrightnessDown   | Increase screen brightness to 0%                             |
+| CTRL ALT, B                    | Toggles the current blur mod                                 |
 | SUPER SHIFT, C                 | Launch clipboard manager                                     |
 | SUPER, escape                  | Show or hide the Waybar panel                                |
 | SUPER, grave                   | Show or hide the application launcher                        |
@@ -105,6 +106,7 @@ Below is a list of the primary dependencies:
 | SUPER, Mouse Right             | Initiate window resizing with drag                           |
 | SUPER, Mouse Wheel Down        | Switch to the next workspace                                 |
 | SUPER, Mouse Wheel Up          | Switch to the previous workspace                             |
+| CTRL ALT, Hc                   | Switch the waybar scheme                                     |
 | SUPER, left                    | Move focus to the window on the left                         |
 | SUPER, right                   | Move focus to the window on the right                        |
 | SUPER, up                      | Move focus to the window above                               |
@@ -130,7 +132,7 @@ Below is a list of the primary dependencies:
 | SUPER ALT, right               | Shift the active window to the right                         |
 | SUPER ALT, up                  | Shift the active window upwards                              |
 | SUPER ALT, down                | Shift the active window downwards                            |
-| CTRL ALT, B                    | Disable wallpaper                                            |
+| SHIFT CTRL ALT, W              | Disable wallpaper                                            |
 | CTRL ALT, W                    | Enable wallpaper or select the next                          |
 | SUPER, Q                       | Close the currently active window                            |
 | SUPER SHIFT, Q                 | Close all instances of the active window                     |

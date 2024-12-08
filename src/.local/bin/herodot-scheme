@@ -8,6 +8,7 @@ EOF
 }
 
 SCHEMES=(
+    erzurum
     van
     yerevan
 )
@@ -20,15 +21,15 @@ paths=(
 "$HOME/.config/mc"
 "$HOME/.config/nvim/lua/config"
 "$HOME/.config/tofi"
+"$HOME/.config/waybar"
 )
 
 get_mode() {
-    echo "$(herodot settings read "interface.scheme")"
+    echo "$(herodot settings read "environment.scheme.mode")"
 }
 
 replace_scheme() {
     for path in "${paths[@]}"; do
-        echo "$path $1 $2"
         if [ -d "$path" ]; then
             find "$path" -type f -exec sed -i "s/$1/$2/g" {} +
             find "$path" -type l -exec sh -c 'ln -sf "$(readlink "{}" | sed "s/'"\/$1"'/'"\/$2"'/g")" "{}"' \;
@@ -41,7 +42,7 @@ set_mode() {
     
     eval "$(dbus-launch)"
 
-    herodot settings assign "interface.scheme" "$1"
+    herodot settings assign "environment.scheme.mode" "$1"
     waynot send "Scheme" "set to $1"
 }
 

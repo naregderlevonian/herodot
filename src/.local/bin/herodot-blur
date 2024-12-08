@@ -1,0 +1,65 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot blur get
+        herodot blur set {name}
+EOF
+}
+
+CONFIG_PATH="$HOME/.config/hypr/hyprland/layout"
+CONFIG_FILE="$CONFIG_PATH/blur.conf"
+
+MODES=(
+"none"
+"glass"
+)
+
+get_mode() {
+    echo "$(herodot settings read "environment.blur")"
+}
+
+set_mode() {
+    local current="$(get_mode)"
+    ln -sf "$(readlink $CONFIG_FILE | sed "s/$current/$1/g")" "$CONFIG_FILE"   
+    herodot settings assign "environment.blur" "$1"
+    hyprctl reload
+}
+
+navigate() {
+    local offset="$1"
+
+    for i in "${!MODES[@]}"; do
+        if [ "${MODES[$i]}" = "$(get_mode)" ]; then
+            set_mode "${MODES[$(( (i + offset + ${#MODES[@]}) % ${#MODES[@]} ))]}"
+            return
+        fi
+    done
+}
+
+back() {
+    navigate "-1"
+}
+
+next() {
+    navigate "+1"
+}
+
+case "$1" in
+    "get")
+        get_mode
+        ;;
+    "set")
+        case "$2" in
+            "back")
+                back
+                ;;
+            "next")
+                next
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

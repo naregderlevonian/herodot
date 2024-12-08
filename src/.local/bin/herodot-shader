@@ -32,21 +32,21 @@ restore() {
 }
 
 load_state() {
-    herodot settings read "shader.isEnabled"
+    herodot settings read "environment.shader.isEnabled"
 }
 
 load_mode() {
-    herodot settings read "shader.mode"
+    herodot settings read "environment.shader.mode"
 }
 
 save_state() {
     local state="$1"
-    herodot settings assign "shader.isEnabled" "$state"
+    herodot settings assign "environment.shader.isEnabled" "$state"
 }
 
 save_mode() {
     local shader="$1"
-    herodot settings assign "shader.mode" "$shader"
+    herodot settings assign "environment.shader.mode" "$shader"
 }
 
 get_state() {

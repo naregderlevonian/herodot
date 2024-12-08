@@ -7,6 +7,7 @@ Usage:  herodot command [arguments...]
 Available:              audio
                         battery
                         bluetooth
+                        blur
                         brightness
                         dice
                         fan
@@ -41,6 +42,9 @@ case "$1" in
         ;;
     "bluetooth")
         herodot-bluetooth "$2" "$3" "$4"
+        ;;
+    "blur")
+        herodot-blur "$2" "$3"
         ;;
     "brightness")
         herodot-brightness "$2" "$3" "$4" "$5" "$6"

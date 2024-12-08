@@ -49,20 +49,20 @@ restore() {
 }
 
 load_state() {
-    herodot settings read "paper.isEnabled"
+    herodot settings read "environment.paper.isEnabled"
 }
 
 load_mode() {
-    herodot settings read "paper.mode"
+    herodot settings read "environment.paper.mode"
 }
 
 save_state() {
-    herodot settings assign "paper.isEnabled" "$1"
+    herodot settings assign "environment.paper.isEnabled" "$1"
 }
 
 save_mode() {
     waynot send "$1"
-    herodot settings assign "paper.mode" "$1"
+    herodot settings assign "environment.paper.mode" "$1"
 }
 
 get_state() {

@@ -543,6 +543,9 @@ case "$1" in
                     "toggle")
                         toggle
                         ;;
+                    *)
+                        usage
+                        ;;
                 esac
                 ;;
             "view")
@@ -552,6 +555,9 @@ case "$1" in
                         ;;
                     "split")
                         set_view_split
+                        ;;
+                    *)
+                        usage
                         ;;
                 esac
                 ;;
