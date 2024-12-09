@@ -75,10 +75,11 @@ Below is a list of the primary dependencies:
 
 | Hotkey                         | Description                                                  |
 |--------------------------------|--------------------------------------------------------------|
-| SUPER CTRL ALT, M              | Cycle through available color scheme modes                   |
-| SUPER CTRL ALT, N              | Enable or disable Wi-Fi connection                           |
-| SUPER CTRL ALT, B              | Enable or disable Bluetooth connection                       |
-| SUPER CTRL ALT, V              | Enable or disable Hypridle                                   |
+| SUPER ALT, K                   | Toggles the current interface mode (dark or light)           |
+| SUPER ALT, M                   | Cycle through available color scheme modes                   |
+| SUPER ALT, N                   | Enable or disable Wi-Fi connection                           |
+| SUPER ALT, B                   | Enable or disable Bluetooth connection                       |
+| SUPER ALT, V                   | Enable or disable Hypridle                                   |
 | SUPER, F1                      | Open the terminal application (Kitty)                        | 
 | SUPER ALT, F1                  | Open the terminal with root privileges (Kitty)               |
 | SUPER, F2                      | Launch the file manager (Nautilus)                           |
@@ -97,7 +98,7 @@ Below is a list of the primary dependencies:
 | ALT, XF86MonBrightnessDown     | Decrease screen brightnessy by 1%                            |
 | SHIFT, XF86MonBrightnessUp     | Increase screen brightness to 100%                           |
 | SHIFT, XF86MonBrightnessDown   | Increase screen brightness to 0%                             |
-| CTRL ALT, B                    | Toggles the current blur mod                                 |
+| CTRL ALT, B                    | Toggles the current blur mode                                |
 | SUPER SHIFT, C                 | Launch clipboard manager                                     |
 | SUPER, escape                  | Show or hide the Waybar panel                                |
 | SUPER, grave                   | Show or hide the application launcher                        |

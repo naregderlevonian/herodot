@@ -25,11 +25,11 @@ try_lock() {
 }
 
 try_exit() {
-    try "hyprctl dispatch exit" "Are you sure you want to exit?"
+    try "killall -u $(whoami)" "Are you sure you want to exit?"
 }
 
 try_suspend() {
-    try "systemctl suspend" "Are you sure you want to sleep?" 
+    try "systemctl suspend && hyprlock" "Are you sure you want to sleep?" 
 }
 
 try_reboot() {

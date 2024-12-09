@@ -49,6 +49,7 @@
         "clock": {
             "format": "{:%H:%M:%S}",
             "interval": 1,
+            "on-click-right": "gnome-clocks",
             "tooltip": true,
             "tooltip-format": "{:%d %b %Y %a %T}"
         },
@@ -57,6 +58,7 @@
             "format": "{}",
             "interval": 1,
             "on-click": "herodot weather set update",
+            "on-click-right": "gnome-weather",
             "return-type": "json",
             "tooltip": true
         },
@@ -89,7 +91,8 @@
         },
         "custom/picker": {
             "format": "",
-            "on-click": "herodot waybar run picker"
+            "on-click": "herodot waybar run picker",
+            "on-click-right": "eyedropper"
         },
         "custom/ashot": {
             "format": "",
@@ -154,6 +157,7 @@
             "hyprland/workspaces"
         ],
         "modules-right": [
+            "custom/darkmode",
             "custom/gpu",
             "custom/idle",
             "custom/fan",
@@ -206,6 +210,19 @@
             "on-scroll-up": "herodot workspace set back",
             "on-scroll-down": "herodot workspace set next",
             "smooth-scrolling-threshold": 3
+        },
+        "custom/darkmode": {
+            "exec": "herodot waybar get darkmode",
+            "format": "{icon}",
+            "format-icons": {
+                "light": "",
+                "dark": ""
+            },
+            "interval": 1,
+            "on-click": "herodot darkmode set toggle",
+            "return-type": "json",
+            "tooltip": true,
+            "tooltip-format": "{}"
         },
         "custom/gpu": {
             "exec": "herodot waybar get gpu",
@@ -275,6 +292,7 @@
             },
             "interval": 1,
             "on-click": "herodot audio microphone set state toggle",
+            "on-click-right": "helvum",
             "on-scroll-down": "herodot audio microphone set level up",
             "on-scroll-up": "herodot audio microphone set level down",
             "return-type": "json",
@@ -294,6 +312,7 @@
             },
             "interval": 1,
             "on-click": "herodot audio speaker set state toggle",
+            "on-click-right": "pavucontrol",
             "on-scroll-down": "herodot audio speaker set level up",
             "on-scroll-up": "herodot audio speaker set level down",
             "return-type": "json",
@@ -316,6 +335,7 @@
             },
             "interval": 1,
             "on-click": "herodot bluetooth set state toggle",
+            "on-click-right": "overskride",
             "return-type": "json",
             "tooltip": true,
             "tooltip-format": "{}"

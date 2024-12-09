@@ -135,6 +135,11 @@ get_dice() {
     jsonify "$result" "$result" "$result" "$result"
 }
 
+get_darkmode() {
+    local class="$(herodot darkmode get)"
+    jsonify "$class" "$class" "${class^}" "${class^}"
+}
+
 get_gpu() {
     local class
     local text
@@ -500,6 +505,9 @@ case "$1" in
                 ;;
             "dice")
                 get_dice
+                ;;
+            "darkmode")
+                get_darkmode
                 ;;
             "keyboard")
                 get_keyboard
