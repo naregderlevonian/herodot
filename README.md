@@ -115,8 +115,8 @@ Below is a list of the primary dependencies:
 | SUPER SHIFTL, G                | Toggles the current window into a group                      |
 | SUPER SHIFT CTRL, G            | Lock and unlock the current group                            |
 | SUPER SHIFT CTRL ALT, G        | Lock all groups                                              |
-| SUPER SHIFT, left              | Activate the previous window in the current group            |
-| SUPER SHIFT, right             | Activate the next window in the current group                |
+| CTRL ALT, left                 | Activate the previous window in the current group            |
+| CTRL ALT, right                | Activate the next window in the current group                |
 | SUPER SHIFT, home              | Move the window to the left group                            |
 | SUPER SHIFT, end               | Move the window to the right group                           |
 | SUPER SHIFT, page_up           | Move the window to the group above                           |
@@ -182,16 +182,20 @@ Below is a list of the primary dependencies:
 
 ```
 .
-.
 ├── .config
+│   ├── ashot
+│   │   └── config
 │   ├── dunst
 │   │   ├── dunstrc -> schemes/van
 │   │   └── schemes
+│   │       ├── erzurum
 │   │       ├── van
 │   │       └── yerevan
 │   ├── gtk-3.0
-│   │   ├── gtk.css
+│   │   ├── bookmarks
+│   │   ├── gtk.css -> schemes/van.css
 │   │   ├── schemes
+│   │   │   ├── erzurum.css
 │   │   │   ├── van.css
 │   │   │   └── yerevan.css
 │   │   └── settings.ini
@@ -205,6 +209,7 @@ Below is a list of the primary dependencies:
 │   │   │   ├── bind
 │   │   │   │   ├── actions.conf
 │   │   │   │   ├── applications.conf
+│   │   │   │   ├── blur.conf
 │   │   │   │   ├── brightness.conf
 │   │   │   │   ├── clipboard.conf
 │   │   │   │   ├── environment.conf
@@ -225,6 +230,7 @@ Below is a list of the primary dependencies:
 │   │   │   │   ├── speaker.conf
 │   │   │   │   ├── swapwindow.conf
 │   │   │   │   ├── touchpad.conf
+│   │   │   │   ├── waybar.conf
 │   │   │   │   ├── window.conf
 │   │   │   │   ├── workspace.conf
 │   │   │   │   └── zoom.conf
@@ -247,6 +253,10 @@ Below is a list of the primary dependencies:
 │   │   │   ├── input.conf
 │   │   │   ├── layout
 │   │   │   │   ├── animation.conf
+│   │   │   │   ├── blur.conf -> blurs/none.conf
+│   │   │   │   ├── blurs
+│   │   │   │   │   ├── glass.conf
+│   │   │   │   │   └── none.conf
 │   │   │   │   ├── decoration.conf
 │   │   │   │   ├── dwindle.conf
 │   │   │   │   ├── general.conf
@@ -254,26 +264,32 @@ Below is a list of the primary dependencies:
 │   │   │   │   ├── master.conf
 │   │   │   │   └── misc.conf
 │   │   │   ├── layout.conf
-│   │   │   ├── scheme
-│   │   │   │   ├── van.conf
-│   │   │   │   └── yerevan.conf
-│   │   │   └── scheme.conf
+│   │   │   ├── scheme.conf -> schemes/van.conf
+│   │   │   └── schemes
+│   │   │       ├── erzurum.conf
+│   │   │       ├── van.conf
+│   │   │       └── yerevan.conf
 │   │   ├── hyprland.conf
-│   │   ├── hyprlock.conf
+│   │   ├── hyprlock.conf -> locks/van.conf
 │   │   ├── hyprpaper.conf
 │   │   ├── locks
+│   │   │   ├── erzurum.conf
 │   │   │   ├── van.conf
 │   │   │   └── yerevan.conf
 │   │   ├── papers
-│   │   │   ├── current -> ~/.config/hypr/papers/Sky
-│   │   │   ├── Pinky
-│   │   │   │   ├── Pinky -> ~/.config/hypr/papers/Pinky
+│   │   │   ├── current -> ~/.config/hypr/papers/sky
+│   │   │   ├── sky
 │   │   │   │   ├── screenpad.png
-│   │   │   │   └── screen.png
-│   │   │   └── Sky
+│   │   │   │   ├── screen.png
+│   │   │   │   └── sky -> ~/.config/hypr/papers/sky
+│   │   │   ├── sunrise
+│   │   │   │   ├── screenpad.png
+│   │   │   │   ├── screen.png
+│   │   │   │   └── sunrise -> ~/.config/hypr/papers/sunrise
+│   │   │   └── sunset
 │   │   │       ├── screenpad.png
 │   │   │       ├── screen.png
-│   │   │       └── Sky -> ~/.config/hypr/papers/Sky
+│   │   │       └── sunset -> ~/.config/hypr/papers/sunset
 │   │   └── shaders
 │   │       ├── abyss
 │   │       ├── caramel-bach
@@ -286,14 +302,18 @@ Below is a list of the primary dependencies:
 │   │       └── vibrance
 │   ├── kitty
 │   │   ├── kitty.conf
-│   │   ├── van.conf
-│   │   └── yerevan.conf
+│   │   ├── scheme.conf -> schemes/van.conf
+│   │   └── schemes
+│   │       ├── erzurum.conf
+│   │       ├── van.conf
+│   │       └── yerevan.conf
 │   ├── mc
 │   │   ├── ini
 │   │   ├── mc -> ~/.config/mc
 │   │   └── panels.ini
 │   ├── nvim
 │   │   ├── colors
+│   │   │   ├── erzurum.lua
 │   │   │   ├── van.lua
 │   │   │   └── yerevan.lua
 │   │   ├── init.lua
@@ -304,6 +324,11 @@ Below is a list of the primary dependencies:
 │   │       │   └── set.lua
 │   │       ├── plugins.lua
 │   │       └── schemes
+│   │           ├── erzurum
+│   │           │   ├── core.lua
+│   │           │   ├── init.lua
+│   │           │   ├── palette.lua
+│   │           │   └── ts.lua
 │   │           ├── van
 │   │           │   ├── core.lua
 │   │           │   ├── init.lua
@@ -314,22 +339,38 @@ Below is a list of the primary dependencies:
 │   │               ├── init.lua
 │   │               ├── palette.lua
 │   │               └── ts.lua
+│   ├── qt5ct
+│   │   ├── colors
+│   │   ├── qss
+│   │   └── qt5ct.conf
+│   ├── qt6ct
+│   │   ├── colors
+│   │   ├── qss
+│   │   └── qt6ct.conf
 │   ├── tofi
-│   │   ├── config
+│   │   ├── config -> schemes/van
 │   │   └── schemes
+│   │       ├── erzurum
 │   │       ├── van
 │   │       └── yerevan
 │   └── waybar
 │       ├── config
-│       └── style.css
+│       ├── schemes
+│       │   ├── erzurum.css
+│       │   ├── van.css
+│       │   └── yerevan.css
+│       └── style.css -> schemes/van.css
 ├── .gtkrc-2.0 -> ~/.config/gtk-3.0/settings.ini
 ├── .local
 │   ├── bin
+│   │   ├── ashot
 │   │   ├── herodot
 │   │   ├── herodot-audio
 │   │   ├── herodot-battery
 │   │   ├── herodot-bluetooth
+│   │   ├── herodot-blur
 │   │   ├── herodot-brightness
+│   │   ├── herodot-darkmode
 │   │   ├── herodot-dice
 │   │   ├── herodot-fan
 │   │   ├── herodot-gpu
@@ -341,7 +382,6 @@ Below is a list of the primary dependencies:
 │   │   ├── herodot-performance
 │   │   ├── herodot-scheme
 │   │   ├── herodot-screenpad
-│   │   ├── herodot-screenshot
 │   │   ├── herodot-settings
 │   │   ├── herodot-shader
 │   │   ├── herodot-shutdown
@@ -352,6 +392,7 @@ Below is a list of the primary dependencies:
 │   │   ├── herodot-wifi
 │   │   ├── herodot-workspace
 │   │   ├── herodot-zoom
+│   │   ├── mod-desktop
 │   │   ├── poweralert-daemon
 │   │   ├── powermoder-daemon
 │   │   ├── waynot
@@ -359,7 +400,10 @@ Below is a list of the primary dependencies:
 │   └── share
 │       └── mc
 │           └── skins
+│               ├── erzurum.ini
 │               ├── van.ini
 │               └── yerevan.ini
 └── .zshrc
+
+54 directories, 169 files
 ```
