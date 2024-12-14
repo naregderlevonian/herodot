@@ -24,7 +24,7 @@ return {
     {
         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
         config = function()
-            require("lsp_lines").setup()
+            require('lsp_lines').setup()
         end,
     },
     {
@@ -37,14 +37,14 @@ return {
     {
         'lukas-reineke/indent-blankline.nvim',
         config = function()
-            require("ibl").setup({
+            require('ibl').setup({
                 indent = { char = '┊'},
             })
         end,
     },
     {
         'windwp/nvim-autopairs',
-        event = "InsertEnter",
+        event = 'InsertEnter',
         config = true,
     },
     {
@@ -77,13 +77,26 @@ return {
         'simrat39/rust-tools.nvim',
     },
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
+        'nvim-tree/nvim-tree.lua',
+        version = '*',
+        lazy = false,
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        }
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function()
+            require('nvim-tree').setup({
+                renderer = {
+                    icons = {
+                        show = {
+                            file = false,
+                            folder = false,
+                            folder_arrow = false,
+                            git = false,
+                        },
+                    },
+                },
+            })
+        end
     },
     {
         'echasnovski/mini.nvim',

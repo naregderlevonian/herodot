@@ -31,7 +31,7 @@ case "$1" in
                 movetoworkspace $([ "$CLIENT_WORKSPACE" = "$HOME_WORKSPACE" ] && echo "r-1" || echo "m-1")
                 ;;
             "next")
-                [ "$CLIENT_COUNT" -eq 1 ] && exit 1
+                [ "$CLIENT_WORKSPACE" = "$LAST_WORKSPACE" ] && [ "$CLIENT_COUNT" -eq 1 ] && exit 1
                 movetoworkspace $([ "$CLIENT_WORKSPACE" = "$LAST_WORKSPACE" ] && echo "r+1" || echo "m+1")
                 ;;
             "home")
