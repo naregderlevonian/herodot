@@ -21,12 +21,7 @@ return {
             require('cmp').setup()
         end,
     },
-    {
-        'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-        config = function()
-            require('lsp_lines').setup()
-        end,
-    },
+
     {
         'chentoast/marks.nvim',
     },
@@ -69,7 +64,7 @@ return {
                         lsp_format = 'fallback',
                     },
                 },
-                format_on_save = true,
+                format_on_save = false,
             })
         end,
     },
