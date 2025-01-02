@@ -1,7 +1,7 @@
 [global]
 background = "#080808"
 corner_radius = 10
-font = Noto Sans Mono 10
+font = Ubuntu Sans Mono 10
 foreground = "#c0c0c0"
 format = "<b>%s</b>\n%b"
 frame_color = "#1a1a1a"

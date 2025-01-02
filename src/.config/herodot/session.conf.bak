@@ -3,7 +3,7 @@ environment.paper.isEnabled: true
 environment.paper.mode: sky
 environment.scheme.mode: van
 environment.scheme.type: dark
-environment.shader.mode: antihazard
+environment.shader.mode: antihazard-ultima
 environment.shader.sEnabled: false
 
 gpu.mode: hybrid
@@ -19,8 +19,9 @@ screenpad.enabledSetup: DP-1, 2880x864@120, 0x1200, 1.5, bitdepth, 10
 screenpad.isEnabled: true
 
 touchpad.isEnabled: true
-environment.shader.isEnabled: false
+environment.shader.isEnabled: true
 
-brightness.intel_backlight: 400
-brightness.asus_screenpad: 235
-brightness.asus::kbd_backlight: 3
+brightness.intel_backlight: 300
+brightness.asus_screenpad: 175
+brightness.asus::kbd_backlight: 1
+brightness.asus_screenpad: 175
