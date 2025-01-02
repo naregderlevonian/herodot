@@ -8,9 +8,18 @@ EOF
     exit 1
 }
 
+PROCESS="zenity"
+
+is_process_running() {
+    pgrep "$1" > /dev/null 2>&1
+    return $?
+}
+
 try() {
     local command="$1"
     local message="$2"
+
+    is_process_running "$PROCESS" && return
 
     if zenity --question \
         --icon="/usr/share/icons/empty.png" \
@@ -41,6 +50,8 @@ try_poweroff() {
 }
 
 dialog() {
+    is_process_running "$PROCESS" && return
+
     choice=$(zenity --info \
         --icon="/usr/share/icons/empty.png" \
         --title "Shutdown" \

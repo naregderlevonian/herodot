@@ -12,7 +12,7 @@ WEATHER_PATH="/tmp/weather"
 
 update() {
     CITY=$(wget -qO- ipinfo.io | jq -r ".city")
-    INFO=$(weather-Cli get -r $CITY)
+    INFO=$(weather-Cli get -r "$CITY")
     echo "$INFO" > "$WEATHER_PATH"
 }
 

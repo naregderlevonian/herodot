@@ -4,7 +4,7 @@ usage() {
     cat << EOF
 Usage:  herodot waybar get weather|dice|gpu|idle|fan|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
-        herodot waybar set view join|spliti
+        herodot waybar set view join|split
         herodot waybar run picker|ashot
 EOF
 }
@@ -458,18 +458,14 @@ get_wifi() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-set_view_join() {
+join() {
     local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREEN" '.[1].output[0] = $monitor')"
     echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
-    killall waybar
-    waybar
 }
 
-set_view_split() {
+split() {
     local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREENPAD" '.[1].output[0] = $monitor')"
     echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
-    killall waybar
-    waybar
 }
 
 run_picker() {
@@ -480,13 +476,25 @@ run_ashot() {
     ashot area && waynot send "Screenshot" "has been copied to the clipboard" || exit 1
 }
 
+configure() {
+    [ "$(herodot settings read "screenpad.isEnabled")" = "true" ] && {
+        herodot screenpad set state on;
+        split;
+    } || {
+        herodot screenpad set state off;
+        join;
+    }
+}
+
 off() {
     dunstctl set-paused false
+    configure
     killall "$PROCESS"
 }
 
 on() {
     dunstctl set-paused true
+    configure
     "$PROCESS"
 }
 
@@ -559,10 +567,10 @@ case "$1" in
             "view")
                 case "$3" in
                     "join")
-                        set_view_join
+                        join
                         ;;
                     "split")
-                        set_view_split
+                        split
                         ;;
                     *)
                         usage

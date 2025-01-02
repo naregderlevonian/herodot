@@ -13,7 +13,11 @@ EOF
 
 PROCESS="hyprpaper"
 PAPERS_PATH="$HOME/.config/hypr/papers"
-PAPERS=($(ls "$PAPERS_PATH" | grep -v "current" | sort))
+PAPERS=(
+    sky
+    future
+    sunset
+)
 
 apply_decoration_settings() {
     hyprctl keyword "decoration:blur:enabled" false

@@ -49,16 +49,16 @@ set_mode() {
 back() {
     case "$CURRENT_ENERGY_MODE" in
         "performance")
-            set_mode "powersave" "balance_performance" 0
+            set_mode "powersave" "balance_performance" 1
             ;;
         "balance_performance")
-            set_mode "powersave" "balance_power" 0
+            set_mode "powersave" "balance_power" 1
             ;;
         "balance_power")
-            set_mode "powersave" "power" 0
+            set_mode "powersave" "power" 1
             ;;
         "power")
-            set_mode "performance" "performance" 1
+            set_mode "performance" "performance" 0
             ;;
         *)
             echo "Error. Unknown value."
@@ -68,16 +68,16 @@ back() {
 next() {
     case "$CURRENT_ENERGY_MODE" in
         "performance")
-            set_mode "powersave" "power" 0
+            set_mode "powersave" "power" 1
             ;;
         "balance_performance")
-            set_mode "performance" "performance" 1
+            set_mode "performance" "performance" 0
             ;;
         "balance_power")
-            set_mode "powersave" "balance_performance" 0
+            set_mode "powersave" "balance_performance" 1
             ;;
         "power")
-            set_mode "powersave" "balance_power" 0
+            set_mode "powersave" "balance_power" 1
             ;;
         *)
             echo "Error. Unknown value."

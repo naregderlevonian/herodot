@@ -1,10 +1,10 @@
 [global]
-background = "#292929"
+background = "#080808"
 corner_radius = 10
-font = Ubuntu Mono 9
+font = Noto Sans Mono 10
 foreground = "#c0c0c0"
 format = "<b>%s</b>\n%b"
-frame_color = "#313131"
+frame_color = "#1a1a1a"
 frame_width = 1
 hide_dublicate_count = true
 horizontal_padding = 24
@@ -17,7 +17,7 @@ mouse_right_click = close_current
 offset = 16x16
 origin = top, right
 padding = 24
-separator_color = "#313131"
+separator_color = "#1a1a1a"
 separator_height = 1
 show_indicators = no
 stack_duplicates = false

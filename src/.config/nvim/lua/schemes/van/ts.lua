@@ -69,7 +69,7 @@ local ts = {
     ['@number']                     = { fg = colors.Orange12 },
     ['@number.float']               = { fg = colors.Yellow12 },
     ['@operator']                   = { fg = colors.Rose18, bold = true },
-    ['@property']                   = { fg = colors.Gray24 },
+    ['@property']                   = { fg = colors.Mint12 },
     ['@punctuation.bracket']        = { fg = colors.Cyan8 },
     ['@punctuation.delimiter']      = { fg = colors.Gray18 },
     ['@punctuation.special']        = { fg = colors.Rose18},

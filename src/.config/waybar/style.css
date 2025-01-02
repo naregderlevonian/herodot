@@ -1,1 +1,295 @@
-schemes/van.css
+* { 
+    border: none;
+    border-radius: 0;
+    font-family: "Noto Sans Mono";
+    font-size: 13px;
+    min-height: 0;
+}
+
+@keyframes blink {
+    to {
+        background: @text_color;
+        color: @base_color;
+    }
+}
+
+window#waybar.top {
+    color: @text_color;
+    background: transparent;
+}
+
+window#waybar.bottom {
+    color: @text_color;
+    background: transparent;
+}
+
+tooltip {
+    background: @base_color;
+    border-radius: 4px;
+    padding: 64px;
+}
+
+tooltip label {
+    color: @text_color;
+}
+
+.warning {
+    color: @warning_color;
+}
+
+.critical {
+    color: @error_color;
+}
+
+#workspaces button {
+    box-shadow: none;
+    background: none;
+    color: @text_color;
+    margin: 0;
+    padding: 0;
+    opacity: 0.32;
+}
+
+#workspaces button.active {
+    opacity: 1;
+}
+
+#custom-battery.charging {
+    color: @text_color;
+}
+
+#custom-battery.charging-warning {
+    color: @warning_color;
+}
+
+#custom-battery.charging-critical {
+    color: @error_color;
+    animation-name: blink;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-battery.discharging {
+    color: @text_color;
+}
+
+#custom-battery.discharging-warning {
+    color: rgb(251, 204, 112);
+}
+
+#custom-battery.discharging-critical {
+    color: @error_color;
+    animation-name: blink;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-weather.extreme-cold {
+    color: #c240c9;
+}
+
+#custom-weather.very-cold {
+    color: #834fe3;
+}
+
+#custom-weather.cold {
+    color: #2c5edd;
+}
+
+#custom-weather.cool {
+    color: #00a5b8;
+}
+
+#custom-weather.mildly-cool {
+    color: #009e84;
+}
+
+#custom-weather.mild {
+    color: #179227;
+}
+
+#custom-weather.warm {
+    color: #a3a800;
+}
+
+#custom-weather.warm-hot {
+    color: #ffb805;
+}
+
+#custom-weather.hot {
+    color: #eb7500;
+}
+
+#custom-weather.extreme-hot {
+    color: #c9312c;
+}
+
+#custom-weather.zero {
+    color: #0088cc;
+}
+
+#custom-waynot {
+    color: @text_color;
+    animation-name: blink;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-gpu.hybrid {
+    color: @text_color;
+}
+
+#custom-gpu.intel {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-idle.on {
+    color: @text_color;
+}
+
+#custom-idle.off {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-fan.auto {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-fan.maximum {
+    color: @text_color;
+}
+
+#custom-performance.performance {
+    color: @error_color;
+}
+
+#custom-performance.balance-performance {
+    color: @text_color;
+}
+
+#custom-performance.balance-power {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-performance.power {
+    color: @success_color;
+}
+
+#custom-speaker.off,
+#custom-microphone.off {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-speaker.muted,
+#custom-microphone.muted {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-speaker.zero,
+#custom-microphone.zero {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-speaker.low,
+#custom-microphone.low {
+    color: @text_color;
+}
+
+#custom-speaker.medium,
+#custom-microphone.medium {
+    color: @text_color;
+}
+
+#custom-speaker.high,
+#custom-microphone.high {
+    color: @text_color;
+}
+
+#custom-speaker.critical,
+#custom-microphone.critical {
+    color: @error_color;
+}
+
+#custom-bluetooth.off {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-bluetooth.on,
+#custom-bluetooth.on-discoverable {
+    color: @text_color;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-bluetooth.on-paired,
+#custom-bluetooth.on-discoverable-paired {
+    color: @success_color;
+}
+
+#custom-bluetooth.on-scan-paired,
+#custom-bluetooth.on-discoverable-scan-paired {
+    color: @success_color;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-bluetooth.on-scan,
+#custom-bluetooth.on-discoverable-scan {
+    color: @text_color;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-wifi.off {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-wifi.on-disconnected {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-wifi.on-connected {
+    color: @text_color;
+
+}
+
+#custom-wifi.on-connected-good {
+    color: @success_color;
+}
+
+#custom-wifi.on-connected-fair {
+    color: @warning_color;
+}
+
+#custom-wifi.on-connected-poor
+#custom-wifi.on-connected-unknown {
+    color: @desctructive_color;
+}
+
+
+

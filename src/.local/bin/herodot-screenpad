@@ -3,9 +3,12 @@
 usage() {
     cat <<EOF
 Usage:  herodot screenpad get state
-        herodot screenpad set state off|on|toggle
+        herodot screenpad set state on|off|toggle
+        herodot screenpad set state resume
 EOF
 }
+
+MONITORS_CONFIG="$HOME/.config/hypr/hyprland/common/monitors.conf"
 
 DISABLED_CONFIG_LINE=$(herodot settings read "screenpad.disabledSetup")
 ENABLED_CONFIG_LINE=$(herodot settings read "screenpad.enabledSetup")
@@ -20,18 +23,26 @@ set_state() {
     waynot send "Screenpad" "${2^}"
 }
 
+resume() {
+    [ "$(get_state)" = "true" ] && on || off
+}
+
 off() {
     set_state "$DISABLED_CONFIG_LINE" "false"
+    sed -i "s/$(herodot settings read "screenpad.enabledSetup")/$(herodot settings read "screenpad.disabledSetup")/" "$MONITORS_CONFIG"
+    herodot brightness asus_screenpad set level min
     herodot waybar set view join
 }
 
 on() {
     set_state "$ENABLED_CONFIG_LINE" "true"
+    sed -i "s/$(herodot settings read "screenpad.disabledSetup")/$(herodot settings read "screenpad.enabledSetup")/" "$MONITORS_CONFIG"
+    herodot brightness asus_screenpad set level resume               
     herodot waybar set view split
 }
 
 toggle() {
-    [ $(get_state) = "true" ] && off || on
+    [ "$(get_state)" = "true" ] && off || on
 }
 
 case "$1" in
@@ -57,6 +68,9 @@ case "$1" in
                         ;;
                     "toggle")
                         toggle
+                        ;;
+                    "resume")
+                        resume
                         ;;
                     *)
                         usage

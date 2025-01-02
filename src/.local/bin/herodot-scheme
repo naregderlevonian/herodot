@@ -8,7 +8,6 @@ EOF
 }
 
 SCHEMES=(
-    erzurum
     van
     yerevan
 )
@@ -21,7 +20,6 @@ paths=(
 "$HOME/.config/mc"
 "$HOME/.config/nvim/lua/config"
 "$HOME/.config/tofi"
-"$HOME/.config/waybar"
 )
 
 get_mode() {
