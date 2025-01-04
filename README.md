@@ -1,4 +1,4 @@
-This repository contains personal configurations for Hyprland and other applications. It powered by the Herodot helper script. The settings feature numerous dependencies (which will be published later) and have been tested exclusively on an ASUS Zenbook Duo 14 OLED laptop with a dual-display setup. Many parameters are specific to this model, yet they can be easily adapted for other systems.
+This repository contains personal configurations for Hyprland and other applications. It powered by the Herodot helper script. The settings feature numerous depEndencies (which will be published later) and have been tested exclusively on an ASUS Zenbook Duo 14 OLED laptop with a dual-display setup. Many parameters are specific to this model, yet they can be easily adapted for other systems.
 
 ## Features
 
@@ -14,7 +14,7 @@ This repository contains personal configurations for Hyprland and other applicat
     - Weather information
     - Keyboard layout indicator
     - Dice rolling feature
-    - Shutdown options with notifications (lock, restart session, suspend, reboot, and power off)
+    - Shutdown options with notifications (lock, restart session, suspEnd, reboot, and power off)
     - System information (RAM usage, CPU load and temperature, GPU temperature)
     - Toggle between discrete and integrated graphics
     - Enable/disable system idle tracking and automatic shutdown
@@ -42,9 +42,9 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 |:--:|:--:|:--:|:--:|
 | Common | Launcher | Notification | Yerevan Scheme |
 
-# Repository Dependencies
+# Repository DepEndencies
 
-Below is a list of the primary dependencies:
+Below is a list of the primary depEndencies:
 
 1. **acpi**: A tool for displaying information about power management and battery status.
 2. **bluez**: The official Bluetooth protocol stack for Linux.
@@ -75,115 +75,114 @@ Below is a list of the primary dependencies:
 
 | Hotkey                             | Description                                                  |
 |------------------------------------|--------------------------------------------------------------|
-| SUPER ALT, K                       | Toggles the current interface mode (dark or light)           |
-| SUPER ALT, M                       | Cycle through available color scheme modes                   |
-| SUPER ALT, N                       | Enable or disable Wi-Fi connection                           |
-| SUPER ALT, B                       | Enable or disable Bluetooth connection                       |
-| SUPER ALT, V                       | Enable or disable Hypridle                                   |
-| SUPER, F1                          | Open the terminal application (Kitty)                        | 
-| SUPER ALT, F1                      | Open the terminal with root privileges (Kitty)               |
-| SUPER, F2                          | Launch the file manager (Nautilus)                           |
-| SUPER, F3                          | Open the Firefox web browser                                 |
-| SUPER ALT, F3                      | Launch Firefox in private browsing mode                      |
-| SUPER, F4                          | Open the Thunderbird client                                  |
-| SUPER ALT, F4                      | Create a new email compose window in Thunderbird             |
-| SUPER, F5                          | Start the Obsidian                                           |
-| SUPER, F6                          | Open the Planify                                             |
-| SUPER, F7                          | Launch the Dialect translator                                |
-| SUPER, F8                          | Open the calculator                                          |
-| SUPER, F9                          | Start the Shortwave radio streaming app                      |
+| Super Alt, K                       | Toggles the current interface mode (dark or light)           |
+| Super Alt, M                       | Cycle through available color scheme modes                   |
+| Super Alt, N                       | Enable or disable Wi-Fi connection                           |
+| Super Alt, B                       | Enable or disable Bluetooth connection                       |
+| Super Alt, V                       | Enable or disable Hypridle                                   |
+| Super, F1                          | Open the terminal application (Kitty)                        | 
+| Super Alt, F1                      | Open the terminal with root privileges (Kitty)               |
+| Super, F2                          | Launch the file manager (Nautilus)                           |
+| Super, F3                          | Open the Firefox web browser                                 |
+| Super Alt, F3                      | Launch Firefox in private browsing mode                      |
+| Super, F4                          | Open the Thunderbird client                                  |
+| Super Alt, F4                      | Create a new email compose window in Thunderbird             |
+| Super, F5                          | Start the Obsidian                                           |
+| Super, F6                          | Open the Planify                                             |
+| Super, F7                          | Launch the Dialect translator                                |
+| Super, F8                          | Open the calculator                                          |
+| Super, F9                          | Start the Shortwave radio streaming app                      |
 | XF86MonBrightnessUp                | Increase screen brightness by 5%                             |
 | XF86MonBrightnessDown              | Decrease screen brightness by 5%                             |
-| ALT, XF86MonBrightnessUp           | Increase screen brightness by 1%                             |
-| ALT, XF86MonBrightnessDown         | Decrease screen brightnessy by 1%                            |
-| SHIFT, XF86MonBrightnessUp         | Increase screen brightness to 100%                           |
-| SHIFT, XF86MonBrightnessDown       | Increase screen brightness to 0%                             |
-| SUPER ALT, B                       | Toggles the current blur mode                                |
-| SUPER SHIFT, C                     | Launch clipboard manager                                     |
-| SUPER, escape                      | Show or hide the Waybar panel                                |
-| SUPER, grave                       | Show or hide the application launcher                        |
+| Alt, XF86MonBrightnessUp           | Increase screen brightness by 1%                             |
+| Alt, XF86MonBrightnessDown         | Decrease screen brightnessy by 1%                            |
+| Shift, XF86MonBrightnessUp         | Increase screen brightness to 100%                           |
+| Shift, XF86MonBrightnessDown       | Increase screen brightness to 0%                             |
+| Super Alt, B                       | Toggles the current blur mode                                |
+| Super, Escape                      | Show or hide the Waybar panel                                |
+| Super, Grave                       | Show or hide the application launcher                        |
 | XF86AudioMicMute                   | Toggle the microphone on/off                                 |
-| SUPER< XF86AudioRaiseVolume        | Increase microphone volume by 5%                             |
-| SUPER, XF86AudioLowerVolume        | Decrease microphone volume by 5%                             |
-| SUPER ALT, XF86AudioRaiseVolume    | Increase microphone volume by 1%                             |
-| SUPER ALT, XF86AudioLowerVolume    | Decrease microphone volume by 1%                             |
-| SUPER SHIFT, XF86AudioRaiseVolume  | Increase microphone volume to 100%                           |
-| SUPER SHIFT, XF86AudioLowerVolume  | Decrease microphone volume to 0%                             |
-| SUPER XF86AudioMute                | Toggle microphone mute on/off                                |
-| SUPER, Mouse Left                  | Initiate window movement with drag                           |
-| SUPER, Mouse Right                 | Initiate window resizing with drag                           |
-| SUPER, Mouse Wheel Down            | Switch to the next workspace                                 |
-| SUPER, Mouse Wheel Up              | Switch to the previous workspace                             |
-| SUPER ALT, H                       | Switch the waybar scheme                                     |
-| SUPER, left                        | Move focus to the window on the left                         |
-| SUPER, right                       | Move focus to the window on the right                        |
-| SUPER, up                          | Move focus to the window above                               |
-| SUPER, down                        | Move focus to the window below                               |
-| CTRL ALT, G                        | Toggles the current window into a group                      |
-| SUPER CTRL ALTL, G                 | Lock and unlock the current group                            |
-| SUPER SHIFT CTRL ALT, G            | Lock all groups                                              |
-| CTRL ALT, left                     | Activate the previous window in the current group            |
-| CTRL ALT, right                    | Activate the next window in the current group                |
-| SUPER SHIFT, home                  | Move the window to the left group                            |
-| SUPER SHIFT, end                   | Move the window to the right group                           |
-| SUPER SHIFT, page_up               | Move the window to the group above                           |
-| SUPER SHIFT, page_down             | Move the window to the group below                           |
-| SUPER ALT, home                    | Move the active window to the previous workspace             |
-| SUPER ALT, end                     | Move the active window to the next workspace                 |
-| SUPER ALT, page_up                 | Move the active window to the previous monitor               |
-| SUPER ALT, page_down               | Move the active window to the next monitor                   |
-| SUPER CTRL ALT, home               | Move the active window to the first workspace                |
-| SUPER CTRL ALT, end                | Move the active window to the last workspace                 |
-| SUPER SHIFT ALT, home              | Move the active window to the previous workspace (silent)    |
-| SUPER SHIFT ALT, end               | Move the active window to the next workspace (silent)        |
-| SUPER ALT, left                    | Shift the active window to the left                          |
-| SUPER ALT, right                   | Shift the active window to the right                         |
-| SUPER ALT, up                      | Shift the active window upwards                              |
-| SUPER ALT, down                    | Shift the active window downwards                            |
-| SUPER SHIFT ALT, W                 | Disable wallpaper                                            |
-| SUPER ALT, W                       | Enable wallpaper or select the next                          |
-| SUPER, Q                           | Close the currently active window                            |
-| SUPER SHIFT, Q                     | Close all instances of the active window                     |
-| SUPER ALT, R                       | Enter window resize mode                                     |
-| SUPER, TAB                         | Show the special workspace                                   |
-| SUPER ALT, TAB                     | Move the active window to the special workspace              |
-| PRINT                              | Capture a screenshot of the entire screen to clipboard       |
-| CTRL, PRINT                        | Capture a screenshot of the current workspace to clipboard   |
-| SHIFT, PRINT                       | Capture a screenshot of selected area to clipboard           |
-| ALT, PRINT                         | Capture a screenshot of the active window to clipboard       |
-| SUPER, PRINT                       | Capture an entire screenshot and save it as a file           |
-| SUPER CTRL, PRINT                  | Capture the current workspace and save it as a file          |
-| SUPER SHIFT, PRINT                 | Capture selected area and save it as a file                  |
-| SUPER ALT, PRINT                   | Capture the active window and save it as a file              |
-| SUPER, XF86MonBrightnessDown       | Disable the shader effect                                    |
-| SUPER, XF86MonBrightnessUp         | Enable the shader effect                                     |
-| SUPER ALT, ESCAPE                  | Lock the screen                                              |
-| SUPER ALT, BACKSPACE               | Exit the Hyprland session                                    |
-| SUPER ALT, DELETE                  | Reboot the system                                            |
-| SUPER, XF86PowerOff                | Reboot the system                                            |
+| Super< XF86AudioRaiseVolume        | Increase microphone volume by 5%                             |
+| Super, XF86AudioLowerVolume        | Decrease microphone volume by 5%                             |
+| Super Alt, XF86AudioRaiseVolume    | Increase microphone volume by 1%                             |
+| Super Alt, XF86AudioLowerVolume    | Decrease microphone volume by 1%                             |
+| Super Shift, XF86AudioRaiseVolume  | Increase microphone volume to 100%                           |
+| Super Shift, XF86AudioLowerVolume  | Decrease microphone volume to 0%                             |
+| Super XF86AudioMute                | Toggle microphone mute on/off                                |
+| Super, Mouse Left                  | Initiate window movement with drag                           |
+| Super, Mouse Right                 | Initiate window resizing with drag                           |
+| Super, Mouse Wheel Down            | Switch to the next workspace                                 |
+| Super, Mouse Wheel Up              | Switch to the previous workspace                             |
+| Super Alt, H                       | Switch the waybar scheme                                     |
+| Super, Left                        | Move focus to the window on the Left                         |
+| Super, Right                       | Move focus to the window on the Right                        |
+| Super, Up                          | Move focus to the window above                               |
+| Super, Down                        | Move focus to the window below                               |
+| Ctrl Alt, G                        | Toggles the current window into a group                      |
+| Super Ctrl AltL, G                 | Lock and unlock the current group                            |
+| Super Shift Ctrl Alt, G            | Lock all groups                                              |
+| Ctrl Alt, Left                     | Activate the previous window in the current group            |
+| Ctrl Alt, Right                    | Activate the next window in the current group                |
+| Super Shift, Home                  | Move the window to the Left group                            |
+| Super Shift, End                   | Move the window to the Right group                           |
+| Super Shift, Page Up               | Move the window to the group above                           |
+| Super Shift, Page Down             | Move the window to the group below                           |
+| Super Alt, Home                    | Move the active window to the previous workspace             |
+| Super Alt, End                     | Move the active window to the next workspace                 |
+| Super Alt, Page Up                 | Move the active window to the previous monitor               |
+| Super Alt, Page Down               | Move the active window to the next monitor                   |
+| Super Ctrl Alt, Home               | Move the active window to the first workspace                |
+| Super Ctrl Alt, End                | Move the active window to the last workspace                 |
+| Super Shift Alt, Home              | Move the active window to the previous workspace (silent)    |
+| Super Shift Alt, End               | Move the active window to the next workspace (silent)        |
+| Super Alt, Left                    | Shift the active window to the Left                          |
+| Super Alt, Right                   | Shift the active window to the Right                         |
+| Super Alt, Up                      | Shift the active window upwards                              |
+| Super Alt, Down                    | Shift the active window downwards                            |
+| Super Shift Alt, W                 | Disable wallpaper                                            |
+| Super Alt, W                       | Enable wallpaper or select the next                          |
+| Super, Q                           | Close the currently active window                            |
+| Super Shift, Q                     | Close all instances of the active window                     |
+| Super Alt, R                       | Enter window resize mode                                     |
+| Super, Grave                       | Show the special workspace                                   |
+| Super, Grave (Long Press)          | Move the active window to the special workspace              |
+| Print                              | Capture a screenshot of the entire screen to clipboard       |
+| Ctrl, Print                        | Capture a screenshot of the current workspace to clipboard   |
+| Shift, Print                       | Capture a screenshot of selected area to clipboard           |
+| Alt, Print                         | Capture a screenshot of the active window to clipboard       |
+| Super, Print                       | Capture an entire screenshot and save it as a file           |
+| Super Ctrl, Print                  | Capture the current workspace and save it as a file          |
+| Super Shift, Print                 | Capture selected area and save it as a file                  |
+| Super Alt, Print                   | Capture the active window and save it as a file              |
+| Super, XF86MonBrightnessDown       | Disable the shader effect                                    |
+| Super, XF86MonBrightnessUp         | Enable the shader effect                                     |
+| Super Alt, Escape                  | Lock the screen                                              |
+| Super Alt, Backspace               | Exit the Hyprland session                                    |
+| Super Alt, Delete                  | Reboot the system                                            |
+| Super, XF86PowerOff                | Reboot the system                                            |
 | XF86PowerOff                       | Power off the computer                                       |
 | XF86AudioRaiseVolume               | Increase speaker volume by 5%                                |
 | XF86AudioLowerVolume               | Decrease speaker volume by 5%                                |
-| ALT, XF86AudioRaiseVolume          | Increase speaker volume by 1%                                |
-| ALT, XF86AudioLowerVolume          | Decrease speaker volume by 1%                                |
-| SHIFT, XF86AudioRaiseVolume        | Increase speaker volume to 100%                              |
-| SHIFT, XF86AudioLowerVolume        | Decrease speaker volume to 0%                                |
+| Alt, XF86AudioRaiseVolume          | Increase speaker volume by 1%                                |
+| Alt, XF86AudioLowerVolume          | Decrease speaker volume by 1%                                |
+| Shift, XF86AudioRaiseVolume        | Increase speaker volume to 100%                              |
+| Shift, XF86AudioLowerVolume        | Decrease speaker volume to 0%                                |
 | XF86AudioMute                      | Toggle speaker mute on/off                                   |
-| SUPER TAB, left                    | Swap the active window with the window on the left           |
-| SUPER TAB, right                   | Swap the active window with the window on the right          |
-| SUPER TAB, up                      | Swap the active window with the window above                 |
-| SUPER TAB, down                    | Swap the active window with the window below                 |
-| SUPER, F                           | Toggle the floating state of the window                      |
-| SUPER, P                           | Pin the active window to stay on top                         |
-| SUPER, T                           | Toggle between split and single window view                  |
-| SUPER SHIFT, T                     | Swap the current split layout                                |
-| SUPER, C                           | Center the active window on the screen                       |
-| SUPER CTRL, right                  | Move to the next workspace                                   | 
-| SUPER CTRL, left                   | Move to the previous workspace                               |
-| SUPER CTRL, home                   | Move to the first workspace                                  |
-| SUPER CTRL, end                    | Move to the last workspace                                   |
-| SUPER ALT, 2                       | Zoom the interface to 200%                                   |
-| SUPER ALT, 1                       | Reset the interface zoom level                               |
+| Super Tab, Left                    | Swap the active window with the window on the Left           |
+| Super Tab, Right                   | Swap the active window with the window on the Right          |
+| Super Tab, Up                      | Swap the active window with the window above                 |
+| Super Tab, Down                    | Swap the active window with the window below                 |
+| Super, F                           | Toggle the floating state of the window                      |
+| Super, P                           | Pin the active window to stay on top                         |
+| Super, T                           | Toggle between split and single window view                  |
+| Super Shift, T                     | Swap the current split layout                                |
+| Super, C                           | Center the active window on the screen                       |
+| Super Ctrl, Right                  | Move to the next workspace                                   | 
+| Super Ctrl, Left                   | Move to the previous workspace                               |
+| Super Ctrl, Home                   | Move to the first workspace                                  |
+| Super Ctrl, End                    | Move to the last workspace                                   |
+| Super Alt, 2                       | Zoom the interface to 200%                                   |
+| Super Alt, 1                       | Reset the interface zoom level                               |
 
 # Structure
 

@@ -1,0 +1,601 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot waybar get weather|dice|gpu|idle|fan|performance|microphone|speaker|bluetooth|wifi
+        herodot waybar set state off|on|toggle 
+        herodot waybar set view join|split
+        herodot waybar run picker|ashot
+EOF
+}
+
+MESSAGE_PATH="/tmp/alert"
+WAYBAR_CONFIG="$HOME/.config/waybar/config"
+
+SCREEN="eDP-2"
+SCREENPAD="DP-1"
+
+PROCESS="waybar"
+
+is_process_running() {
+    pgrep "$1" > /dev/null 2>&1
+    return $?
+}
+
+jsonify() {
+    printf "{\"class\":\"%s\",\"alt\":\"%s\",\"text\":\"%s\",\"tooltip\":\"%s\"}" "$1" "$2" "$3" "$4"
+}
+
+classify_temperature() {
+    local temperature="$1"
+    local class=""
+
+    declare -A temperature_classes=(
+        ["extreme-cold"]="-99.9 -18.1"
+        ["very-cold"]="-18.0 -10.1"
+        ["cold"]="-10.0 -0.1"
+        ["cool"]="0.1 9.9"
+        ["mildly-cool"]="10.0 15.9"
+        ["mild"]="16.0 20.9"
+        ["warm"]="21.0 26.9"
+        ["warm-hot"]="27.0 31.9"
+        ["hot"]="32.0 37.9"
+        ["extreme-hot"]="38.0 99.9"
+    )
+
+    temperature=$(echo "$temperature" | sed "s/°C//g")
+
+    for class_candidate in "${!temperature_classes[@]}"; do
+        read lower_bound upper_bound <<< "${temperature_classes[$class_candidate]}"
+        
+        if (( $(echo "$temperature >= $lower_bound" | bc -l) )) && (( $(echo "$temperature <= $upper_bound" | bc -l) )); then
+            class="$class_candidate"
+            break
+        fi
+    done
+
+    class="${class:-zero}"
+    echo "$class"
+}
+
+get_battery() {
+    local class
+    local text
+    local tooltip
+
+    local level="$(herodot battery get level)"
+    local state="$(herodot battery get state)"
+    local left="$(herodot battery get left)"
+
+    if [ "$level" -ne 100 ]; then
+        class="${state,,}"
+        text="$level"
+
+        [ "$text" -le 20 ] && [ "$text" -gt 10 ] && class+="-warning" 
+        [ "$text" -le 10 ] && class+="-critical" 
+
+        text=" $text%"
+        [ "$class" = "charging" ] && text=""
+
+        tooltip="$level%\r${state^}, $left"
+
+        jsonify "$class" "$class" "$text" "$level%\r${state^}, $left"
+    fi
+}
+
+get_weather() {
+    local class
+    local text
+    local tooltip
+
+    local country="$(herodot weather get country)"
+    local name="$(herodot weather get location)"
+    local temperature="$(herodot weather get temperature)"
+    local windspeed="$(herodot weather get windspeed)"
+    local winddirection="$(herodot weather get winddirection)"
+    local pressure="$(herodot weather get pressure)"
+    local humidity="$(herodot weather get humidity)"
+
+    class="$(classify_temperature "$(echo $temperature | sed "s/°C//g")")"
+
+    alt="$class"
+    text="$temperature"
+    tooltip="$country/$name\r$temperature\rWind: $windspeed, $winddirection\rPressure: $pressure\rHumidity: $humidity"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_keyboard() {
+    local class
+    local text
+    local tooltip
+
+    local mode="$(herodot keyboard get mode)"
+
+    text="$mode"
+    tooltip="$mode"
+
+    case "$mode" in
+        *English*)
+            class="en"
+            ;;
+        *Russian*)
+            class="ru"
+            ;;
+        *)
+            class="unknown"
+            ;;
+    esac
+
+    jsonify "$class" "$class" "$text" "$tooltip"
+}
+
+get_dice() {
+    local result="$(herodot dice get random)"
+    jsonify "$result" "$result" "$result" "$result"
+}
+
+get_darkmode() {
+    local class="$(herodot darkmode get)"
+    jsonify "$class" "$class" "${class^}" "${class^}"
+}
+
+get_gpu() {
+    local class
+    local text
+    local tooltip
+
+    local state="$(herodot gpu get mode)"
+
+    text="Optimus "
+
+    case $state in
+        "hybrid")
+            class="hybrid"
+            text+="Hybrid"
+            ;;
+        "integrated")
+            class="integrated"
+            text+="Integrated"
+            ;;
+    esac
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_idle() {
+    local class
+    local text
+    local tooltip
+
+    local state="$(herodot idle get state)"
+
+    text="Idle"
+
+    if [ "$state" -eq 1 ]; then
+        class="on"
+        text+=" Enabled"
+    else
+        class="off"
+        text+=" Disabled"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_fan() {
+    local class
+    local text
+    local tooltip
+
+    local state="$(herodot fan get state)"
+
+    text="Fan"
+
+    case $state in
+        "Auto")
+            class="auto"
+            text+=" Auto"
+            ;;
+        "Maximum")
+            class="maximum"
+            text+=" Maximum Speed"
+            ;;
+    esac
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_performance() {
+    local class
+    local text
+    local tooltip
+
+    local mode="$(herodot performance get mode)"
+
+    case $mode in
+        "Performance")
+            class="performance"
+            text="Performance"
+            ;;
+        "Balance Performance")
+            class="balance-performance"
+            text="Balance Performance"
+            ;;
+        "Balance Power")
+            class="balance-power"
+            text="Balance Power"
+            ;;
+        "Power")
+            class="power"
+            text="Power"
+            ;;
+    esac
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_microphone() {
+    local class
+    local text
+    local tooltip
+
+    local device
+    local volume
+    local sample_rate
+    local buffer_size
+    local latency
+
+    device="$(herodot audio microphone get name)"
+    volume="$(herodot audio microphone get level)"
+    sample_rate="$(herodot audio microphone get samplerate)Hz"
+    buffer_size="$(herodot audio microphone get buffersize)"
+    latency="$(herodot audio microphone get latency)ms"
+
+    if [ "$device" = "Dummy Output" ]; then
+        class="off"
+        text="Not Exist"
+    else
+        text="$device "
+
+        case "$volume" in
+            "Muted")
+                class="muted"
+                text+="Muted"
+                ;;
+            0)
+                class="zero"
+                text+="$volume%"
+                ;;
+            [1-9]|[1][0-9])
+                class="low"
+                text+="$volume%"
+                ;;
+            [2-7][0-9]) 
+                class="medium"
+                text+="$volume%"
+                ;;
+            [8-9][0-9]|100) 
+                class="high"
+                text+="$volume%"
+                ;;
+            *)
+                class="critical"
+                text+="$volume%"
+                ;;
+        esac
+
+        text+="\r$sample_rate $buffer_size $latency"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_speaker() {
+    local class
+    local text
+    local tooltip
+
+    local device
+    local volume
+    local sample_rate
+    local buffer_size
+    local latency
+
+    device="$(herodot audio speaker get name)"
+    volume="$(herodot audio speaker get level)"
+    sample_rate="$(herodot audio speaker get samplerate)Hz"
+    buffer_size="$(herodot audio speaker get buffersize)"
+    latency="$(herodot audio speaker get latency)ms"
+
+    if [ "$device" = "Dummy Output" ]; then
+        class="off"
+        text="Not Exist"
+    else
+        text="$device "
+
+        case "$volume" in
+            "Muted")
+                class="muted"
+                text+="Muted"
+                ;;
+            0)
+                class="zero"
+                text+="$volume%"
+                ;;
+            [1-9]|[1][0-9])
+                class="low"
+                text+="$volume%"
+                ;;
+            [2-7][0-9]) 
+                class="medium"
+                text+="$volume%"
+                ;;
+            [8-9][0-9]|100) 
+                class="high"
+                text+="$volume%"
+                ;;
+            *)
+                class="critical"
+                text+="$volume%"
+                ;;
+        esac
+
+        text+="\r$sample_rate $buffer_size $latency"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_bluetooth() {
+    local class
+    local alt
+    local text
+    local tooltip
+
+    local state="$(herodot bluetooth get state)"
+    local discoverable="$(herodot bluetooth get discoverable)"
+    local scan="$(herodot bluetooth get scanning)"
+    local pairable="$(herodot bluetooth get pairable)"
+    local devices="$(herodot bluetooth get devices)"
+
+    local paired="$(echo "$devices" | jq -R -s -c 'split("\n") | map(select(length > 0))' | jq -r ". | join(\"\\r\")")"
+
+    text="Bluetooth"
+
+    if [ "$state" -eq 1 ]; then
+        class="on"
+        text+="On"
+
+        [ "$discoverable" -eq 1 ] && { class+="-discoverable"; text+="\rDiscoverable"; }
+        [ "$scan" -eq 1 ] && { class+="-scan"; text+="\rScan..."; }
+        [ -n "$paired" ] && { class+="-paired"; text+="\rPaired with:\r$paired"; } || { text+="\rNot paired"; }
+
+    else
+        class="off"
+        text+="Off"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_wifi() {
+    local class
+    local alt
+    local text
+    local tooltip
+
+    local state="$(herodot wifi get state)"
+    local connected="$(herodot wifi get connected)"
+    local network="$(herodot wifi get network)"
+    local ip4="$(herodot wifi get ip4)"
+    local rssi="$(herodot wifi get rssi)"
+    local tx="$(herodot wifi get tx)"
+    local rx="$(herodot wifi get rx)"
+
+    text="WiFi"
+
+    if [ "$state" -eq 1 ]; then
+        text+="On"
+
+        if [ "$connected" -eq 1 ]; then
+            class+="on-connected"
+            text+="\r$network"
+            text+="\r$ip4"
+            text+="\r$rssi dBm"
+            text+="\rtx $tx Kbps"
+            text+="\rrx $rx Kbps"
+
+            case "$rssi" in
+                [0-9]|[1-6][0-9])
+                    ;;
+                [7][0-9])
+                    class+="-good"
+                    ;;
+                [8-9][0-9]) 
+                    class+="-fair"
+                    ;;
+                [1-9][0-9][0-9])
+                    class+="-poor"
+                    ;;
+                *)
+                    class+="-unknown"
+                    ;;
+            esac
+        else
+            class+="on-disconnected"
+            text+="\rDisconnected"
+        fi
+    else
+        class="off"
+        text+="Off"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+join() {
+    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREEN" '.[1].output[0] = $monitor')"
+    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
+}
+
+split() {
+    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREENPAD" '.[1].output[0] = $monitor')"
+    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
+}
+
+run_picker() {
+    hyprpicker --autocopy && waynot send "Color" "$(wl-paste) has been copied to the clipboard" || exit 1
+}
+
+run_ashot() {
+    ashot area && waynot send "Screenshot" "has been copied to the clipboard" || exit 1
+}
+
+configure() {
+    [ "$(herodot settings read "screenpad.isEnabled")" = "true" ] && {
+        herodot screenpad set state on;
+        split;
+    } || {
+        herodot screenpad set state off;
+        join;
+    }
+}
+
+off() {
+    dunstctl set-paused false
+    configure
+    killall "$PROCESS"
+}
+
+on() {
+    dunstctl set-paused true
+    configure
+    "$PROCESS"
+}
+
+toggle() {
+    is_process_running "$PROCESS" && off || on
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "battery")
+                get_battery
+                ;;
+            "weather")
+                get_weather
+                ;;
+            "dice")
+                get_dice
+                ;;
+            "darkmode")
+                get_darkmode
+                ;;
+            "keyboard")
+                get_keyboard
+                ;;
+            "gpu")
+                get_gpu
+                ;;
+            "idle")
+                get_idle
+                ;;
+            "fan")
+                get_fan
+                ;;
+            "performance")
+                get_performance
+                ;;
+            "microphone")
+                get_microphone
+                ;;
+            "speaker")
+                get_speaker
+                ;;
+            "bluetooth")
+                get_bluetooth
+                ;;
+            "wifi")
+                get_wifi
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "state")
+                case "$3" in
+                    "off")
+                        off
+                        ;;
+                    "on")
+                        on
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            "view")
+                case "$3" in
+                    "join")
+                        join
+                        ;;
+                    "split")
+                        split
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "run")
+        case "$2" in
+            "picker")
+                run_picker
+                ;;
+            "ashot")
+                run_ashot
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

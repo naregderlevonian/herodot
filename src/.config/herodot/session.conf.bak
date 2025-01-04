@@ -3,14 +3,14 @@ environment.paper.isEnabled: true
 environment.paper.mode: sky
 environment.scheme.mode: van
 environment.scheme.type: dark
-environment.shader.mode: antihazard-ultima
+environment.shader.mode: monochrome-red
 environment.shader.sEnabled: false
 
 gpu.mode: hybrid
 
-screen.disabledSetup: eDP-2, disabled
-screen.enabledSetup.scaled: eDP-2, 2880x1800@120, 0x0, 3, bitdepth, 10
-screen.enabledSetup: eDP-2, 2880x1800@120, 0x0, 1.5, bitdepth, 10
+screen.disabledSetup: eDP-1, disabled
+screen.enabledSetup.scaled: eDP-1, 2880x1800@120, 0x0, 3, bitdepth, 10
+screen.enabledSetup: eDP-1, 2880x1800@120, 0x0, 1.5, bitdepth, 10
 screen.isEnabled: true
 
 screenpad.disabledSetup: DP-1, disabled
@@ -21,7 +21,10 @@ screenpad.isEnabled: true
 touchpad.isEnabled: true
 environment.shader.isEnabled: true
 
-brightness.intel_backlight: 300
-brightness.asus_screenpad: 175
-brightness.asus::kbd_backlight: 1
-brightness.asus_screenpad: 175
+brightness.intel_backlight: 400
+brightness.asus_screenpad: 235
+brightness.asus::kbd_backlight: 3
+brightness.asus_screenpad: 235
+brightness.asus::kbd_backlight: 3
+brightness.asus::kbd_backlight: 3
+brightness.asus::kbd_backlight: 3

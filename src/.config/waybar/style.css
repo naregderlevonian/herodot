@@ -145,7 +145,7 @@ tooltip label {
     color: @text_color;
 }
 
-#custom-gpu.intel {
+#custom-gpu.integrated {
     color: @text_color;
     opacity: 0.24;
 }

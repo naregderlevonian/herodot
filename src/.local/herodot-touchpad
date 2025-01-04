@@ -1,0 +1,73 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage: herodot touchpad get state
+       herodot touchpad set state off|on|toggle
+EOF
+    exit 1
+}
+
+TOUCHPAD_ENABLED="touchpad_enabled"
+
+get_state() {
+    herodot settings read "touchpad.isEnabled"
+}
+
+set_state() {
+    local state="$1"
+    hyprctl keyword "\$TOUCHPAD_ENABLED" "$state" -r
+    herodot settings assign "touchpad.isEnabled" "$state"
+    waynot send "Touchpad state" "set to ${state^}"
+}
+
+off() {
+    set_state "false"
+}
+
+on() {
+    set_state "true"
+}
+
+toggle() {
+    set_state $([ "$(get_state)" = "true" ] && echo "false" || echo "true")
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "state")
+                get_state
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "state")
+                case "$3" in
+                    "off")
+                        off
+                        ;;
+                    "on")
+                        on
+                        ;;
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

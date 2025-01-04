@@ -1,0 +1,20 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot dice get random
+EOF
+}
+
+get_random() {
+    echo "$((RANDOM % 6 + 1))"
+}
+
+case "$1" in
+    "get")
+        get_random
+        ;;
+    *)
+        usage
+        ;;
+esac
