@@ -118,15 +118,14 @@ Below is a list of the primary depEndencies:
 | Super, Right                       | Move focus to the window on the Right                        |
 | Super, Up                          | Move focus to the window above                               |
 | Super, Down                        | Move focus to the window below                               |
-| Ctrl Alt, G                        | Toggles the current window into a group                      |
-| Super Ctrl AltL, G                 | Lock and unlock the current group                            |
-| Super Shift Ctrl Alt, G            | Lock all groups                                              |
+| Ctrl Alt, Enter                    | Toggles the current window into a group                      |
+| Shift Ctrl Alt, Enter              | Lock and unlock the current group                            |
 | Ctrl Alt, Left                     | Activate the previous window in the current group            |
 | Ctrl Alt, Right                    | Activate the next window in the current group                |
-| Super Shift, Home                  | Move the window to the Left group                            |
-| Super Shift, End                   | Move the window to the Right group                           |
-| Super Shift, Page Up               | Move the window to the group above                           |
-| Super Shift, Page Down             | Move the window to the group below                           |
+| Ctrl Alt, Home                     | Move the window to the Left group                            |
+| Ctrl Alt, End                      | Move the window to the Right group                           |
+| Ctrl Alt, Page Up                  | Move the window to the group above                           |
+| Ctrl Alt, Page Down                | Move the window to the group below                           |
 | Super Alt, Home                    | Move the active window to the previous workspace             |
 | Super Alt, End                     | Move the active window to the next workspace                 |
 | Super Alt, Page Up                 | Move the active window to the previous monitor               |

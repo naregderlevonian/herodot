@@ -1,7 +1,7 @@
-environment.blur: none
+environment.blur: glass
 environment.paper.isEnabled: true
-environment.paper.mode: sky
-environment.scheme.mode: van
+environment.paper.mode: future
+environment.scheme.mode: yerevan
 environment.scheme.type: dark
 environment.shader.mode: monochrome-red
 environment.shader.sEnabled: false
@@ -16,15 +16,16 @@ screen.isEnabled: true
 screenpad.disabledSetup: DP-1, disabled
 screenpad.enabledSetup.scaled: DP-1, 2880x864@120, 0x600, 3, bitdepth, 10
 screenpad.enabledSetup: DP-1, 2880x864@120, 0x1200, 1.5, bitdepth, 10
-screenpad.isEnabled: true
+screenpad.isEnabled: false
 
 touchpad.isEnabled: true
 environment.shader.isEnabled: true
 
-brightness.intel_backlight: 400
-brightness.asus_screenpad: 235
+brightness.intel_backlight: 260
+brightness.asus_screenpad: 151
 brightness.asus::kbd_backlight: 3
-brightness.asus_screenpad: 235
+brightness.asus_screenpad: 151
 brightness.asus::kbd_backlight: 3
 brightness.asus::kbd_backlight: 3
 brightness.asus::kbd_backlight: 3
+brightness.intel_backlight: 260
