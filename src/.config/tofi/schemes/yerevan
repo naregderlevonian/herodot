@@ -15,8 +15,8 @@ horizontal = true
 anchor = top
 exclusive-zone = 24
 
-padding-top = 12
-padding-bottom = 12
+padding-top = 8
+padding-bottom = 8
 padding-left = 16
 padding-right = 16
 
@@ -31,7 +31,7 @@ result-spacing = 24
 border-width = 0
 outline-width = 0
 
-prompt-text = 
+prompt-text = :
 placeholder-text = 
 
 font = Ubuntu Sans Mono

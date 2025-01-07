@@ -8,8 +8,7 @@
 
 @keyframes blink {
     to {
-        background: @text_color;
-        color: @base_color;
+        opacity: 0.32;
     }
 }
 

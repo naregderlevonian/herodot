@@ -154,9 +154,9 @@ get_gpu() {
             class="hybrid"
             text+="Hybrid"
             ;;
-        "intel")
-            class="intel"
-            text+="Intel"
+        "integrated")
+            class="integrated"
+            text+="Integrated"
             ;;
     esac
 
