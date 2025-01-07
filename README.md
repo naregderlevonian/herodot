@@ -38,9 +38,8 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 
 # Demo
 
-| ![Image 1](assets/van-1.png) | ![Image 1](assets/van-2.png) | ![Image 1](assets/van-3.png)  | ![Image 1](assets/yerevan-1.png)  |
+| ![Image 1](assets/van-1.png) | ![Image 1](assets/van-2.png) | ![Image 1](assets/yerevan-1.png)  | ![Image 1](assets/yerevan-2.png)  |
 |:--:|:--:|:--:|:--:|
-| Common | Launcher | Notification | Yerevan Scheme |
 
 # Repository DepEndencies
 
@@ -57,7 +56,7 @@ Below is a list of the primary depEndencies:
 9. **hypridle**: A utility for executing commands when the user is idle.
 10. **hyprlock**: A screen locker for Wayland compositors.
 11. **hyprpaper**: A wallpaper management tool for Hyprland.
-12. **intel-nvidia-switch**: Tools for switching between Intel and NVIDIA graphics on hybrid systems.
+12. **envycontrol**: Tools for switching between Intel and NVIDIA graphics on hybrid systems.
 13. **iwd**: A Wi-Fi daemon for managing wireless connections.
 14. **kitty**: A fast, feature-rich terminal emulator.
 15. **mc**: Midnight Commander, a text-based file manager.
@@ -193,18 +192,15 @@ Below is a list of the primary depEndencies:
 │   ├── dunst
 │   │   ├── dunstrc -> schemes/van
 │   │   └── schemes
-│   │       ├── erzurum
 │   │       ├── van
 │   │       └── yerevan
 │   ├── gtk-3.0
 │   │   ├── bookmarks
 │   │   ├── gtk.css -> schemes/van.css
 │   │   ├── schemes
-│   │   │   ├── erzurum.css
 │   │   │   ├── van.css
 │   │   │   └── yerevan.css
 │   │   └── settings.ini
-│   ├── gtk-4.0 -> gtk-3.0
 │   ├── herodot
 │   │   ├── session.conf
 │   │   └── session.conf.bak
@@ -218,6 +214,7 @@ Below is a list of the primary depEndencies:
 │   │   │   │   ├── brightness.conf
 │   │   │   │   ├── clipboard.conf
 │   │   │   │   ├── environment.conf
+│   │   │   │   ├── expo.conf
 │   │   │   │   ├── microphone.conf
 │   │   │   │   ├── mouse.conf
 │   │   │   │   ├── movefocus.conf
@@ -244,6 +241,7 @@ Below is a list of the primary depEndencies:
 │   │   │   │   ├── cursor.conf
 │   │   │   │   ├── environment.conf
 │   │   │   │   ├── exec-once.conf
+│   │   │   │   ├── gpu.conf
 │   │   │   │   ├── monitors.conf
 │   │   │   │   ├── windowrules.conf
 │   │   │   │   └── xwayland.conf
@@ -261,6 +259,7 @@ Below is a list of the primary depEndencies:
 │   │   │   │   ├── blur.conf -> blurs/none.conf
 │   │   │   │   ├── blurs
 │   │   │   │   │   ├── glass.conf
+│   │   │   │   │   ├── light.conf
 │   │   │   │   │   └── none.conf
 │   │   │   │   ├── decoration.conf
 │   │   │   │   ├── dwindle.conf
@@ -269,47 +268,50 @@ Below is a list of the primary depEndencies:
 │   │   │   │   ├── master.conf
 │   │   │   │   └── misc.conf
 │   │   │   ├── layout.conf
-│   │   │   ├── scheme.conf -> schemes/van.conf
-│   │   │   └── schemes
-│   │   │       ├── erzurum.conf
-│   │   │       ├── van.conf
-│   │   │       └── yerevan.conf
+│   │   │   ├── plugin
+│   │   │   │   ├── hyprexpo.conf
+│   │   │   │   └── hyprgrass.conf
+│   │   │   ├── plugin.conf
+│   │   │   ├── scheme
+│   │   │   │   ├── van.conf
+│   │   │   │   └── yerevan.conf
+│   │   │   └── scheme.conf -> scheme/van.conf
 │   │   ├── hyprland.conf
 │   │   ├── hyprlock.conf -> locks/van.conf
 │   │   ├── hyprpaper.conf
 │   │   ├── locks
-│   │   │   ├── erzurum.conf
 │   │   │   ├── van.conf
 │   │   │   └── yerevan.conf
 │   │   ├── papers
 │   │   │   ├── current -> ~/.config/hypr/papers/sky
+│   │   │   ├── future
+│   │   │   │   ├── future -> ~/.config/hypr/papers/future
+│   │   │   │   ├── screenpad.png
+│   │   │   │   └── screen.png
 │   │   │   ├── sky
 │   │   │   │   ├── screenpad.png
 │   │   │   │   ├── screen.png
 │   │   │   │   └── sky -> ~/.config/hypr/papers/sky
-│   │   │   ├── sunrise
-│   │   │   │   ├── screenpad.png
-│   │   │   │   ├── screen.png
-│   │   │   │   └── sunrise -> ~/.config/hypr/papers/sunrise
 │   │   │   └── sunset
 │   │   │       ├── screenpad.png
-│   │   │       ├── screen.png
-│   │   │       └── sunset -> ~/.config/hypr/papers/sunset
+│   │   │       └── screen.png
 │   │   └── shaders
 │   │       ├── abyss
-│   │       ├── caramel-bach
-│   │       ├── caramel-beethoven
-│   │       ├── caramel-mozart
-│   │       ├── caramel-schubert
-│   │       ├── matrix
+│   │       ├── antihazard
+│   │       ├── antihazard-extra
+│   │       ├── antihazard-ultima
+│   │       ├── monochrome
+│   │       ├── monochrome-blue
+│   │       ├── monochrome-green
+│   │       ├── monochrome-red
 │   │       ├── negative
+│   │       ├── sepia
 │   │       ├── vhs
 │   │       └── vibrance
 │   ├── kitty
 │   │   ├── kitty.conf
 │   │   ├── scheme.conf -> schemes/van.conf
 │   │   └── schemes
-│   │       ├── erzurum.conf
 │   │       ├── van.conf
 │   │       └── yerevan.conf
 │   ├── mc
@@ -318,7 +320,6 @@ Below is a list of the primary depEndencies:
 │   │   └── panels.ini
 │   ├── nvim
 │   │   ├── colors
-│   │   │   ├── erzurum.lua
 │   │   │   ├── van.lua
 │   │   │   └── yerevan.lua
 │   │   ├── init.lua
@@ -329,11 +330,6 @@ Below is a list of the primary depEndencies:
 │   │       │   └── set.lua
 │   │       ├── plugins.lua
 │   │       └── schemes
-│   │           ├── erzurum
-│   │           │   ├── core.lua
-│   │           │   ├── init.lua
-│   │           │   ├── palette.lua
-│   │           │   └── ts.lua
 │   │           ├── van
 │   │           │   ├── core.lua
 │   │           │   ├── init.lua
@@ -355,18 +351,14 @@ Below is a list of the primary depEndencies:
 │   ├── tofi
 │   │   ├── config -> schemes/van
 │   │   └── schemes
-│   │       ├── erzurum
 │   │       ├── van
 │   │       └── yerevan
 │   └── waybar
 │       ├── config
-│       ├── schemes
-│       │   ├── erzurum.css
-│       │   ├── van.css
-│       │   └── yerevan.css
-│       └── style.css -> schemes/van.css
+│       └── style.css
 ├── .gtkrc-2.0 -> ~/.config/gtk-3.0/settings.ini
 ├── .local
+│   ├── ashot
 │   ├── bin
 │   │   ├── ashot
 │   │   ├── herodot
@@ -397,18 +389,44 @@ Below is a list of the primary depEndencies:
 │   │   ├── herodot-wifi
 │   │   ├── herodot-workspace
 │   │   ├── herodot-zoom
-│   │   ├── mod-desktop
-│   │   ├── poweralert-daemon
-│   │   ├── powermoder-daemon
 │   │   ├── waynot
 │   │   └── waynot-daemon
-│   └── share
-│       └── mc
-│           └── skins
-│               ├── erzurum.ini
-│               ├── van.ini
-│               └── yerevan.ini
+│   ├── herodot
+│   ├── herodot-audio
+│   ├── herodot-battery
+│   ├── herodot-bluetooth
+│   ├── herodot-blur
+│   ├── herodot-brightness
+│   ├── herodot-darkmode
+│   ├── herodot-dice
+│   ├── herodot-fan
+│   ├── herodot-gpu
+│   ├── herodot-idle
+│   ├── herodot-keyboard
+│   ├── herodot-movetoworkspace
+│   ├── herodot-movewindow
+│   ├── herodot-paper
+│   ├── herodot-performance
+│   ├── herodot-scheme
+│   ├── herodot-screenpad
+│   ├── herodot-settings
+│   ├── herodot-shader
+│   ├── herodot-shutdown
+│   ├── herodot-submap
+│   ├── herodot-touchpad
+│   ├── herodot-waybar
+│   ├── herodot-weather
+│   ├── herodot-wifi
+│   ├── herodot-workspace
+│   ├── herodot-zoom
+│   ├── share
+│   │   └── mc
+│   │       └── skins
+│   │           ├── van.ini
+│   │           └── yerevan.ini
+│   ├── waynot
+│   └── waynot-daemon
 └── .zshrc
-
-54 directories, 169 files
 ```
+
+
