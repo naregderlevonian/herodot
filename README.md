@@ -1,4 +1,4 @@
-This repository contains personal configurations for Hyprland and other applications. It powered by the Herodot helper script. The settings feature numerous depEndencies (which will be published later) and have been tested exclusively on an ASUS Zenbook Duo 14 OLED laptop with a dual-display setup. Many parameters are specific to this model, yet they can be easily adapted for other systems.
+This repository contains personal configurations for Hyprland and other applications powered by the Herodot helper script. The settings feature numerous dependencies (which will be published later) and have been tested exclusively on an ASUS Zenbook Duo 14 OLED laptop with a dual-display setup. Many parameters are specific to this model, yet they can be easily adapted for other systems.
 
 ## Features
 
@@ -14,8 +14,7 @@ This repository contains personal configurations for Hyprland and other applicat
     - Weather information
     - Keyboard layout indicator
     - Dice rolling feature
-    - Shutdown options with notifications (lock, restart session, suspEnd, reboot, and power off)
-    - System information (RAM usage, CPU load and temperature, GPU temperature)
+    - Shutdown options with notifications (lock, restart session, suspend, reboot, and power off)
     - Toggle between discrete and integrated graphics
     - Enable/disable system idle tracking and automatic shutdown
     - Fan control (on/off)
@@ -24,15 +23,13 @@ This repository contains personal configurations for Hyprland and other applicat
     - Bluetooth status and controls
     - Wi-Fi status and controls# Demo
 
-3. A power management daemon that monitors network power and smartly switches between performance modes as necessary.
+3. A dedicated low battery notification daemon that provides timely alerts for low battery levels.
 
-4. A dedicated low battery notification daemon that provides timely alerts for low battery levels.
+4. A system notification daemon that monitors system notifications and displays them within Waybar for easy access.
 
-5. A system notification daemon that monitors system notifications and displays them within Waybar for easy access.
+5. A comprehensive set of keyboard shortcuts for seamless interaction with 5our environment and peripherals.
 
-6. A comprehensive set of keyboard shortcuts for seamless interaction with your environment and peripherals.
-
-7. Enhanced usability through support for multi-touch gestures and additional features.
+6. Enhanced usability through support for multi-touch gestures and additional features.
 
 Feel free to explore, customize, and adapt these configurations to meet your unique needs.
 
