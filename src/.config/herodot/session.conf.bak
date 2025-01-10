@@ -1,9 +1,9 @@
-environment.blur: none
+environment.blur: glass
 environment.paper.isEnabled: true
 environment.paper.mode: sky
 environment.scheme.mode: van
 environment.scheme.type: dark
-environment.shader.mode: antihazard-extra
+environment.shader.mode: monochrome-red
 environment.shader.sEnabled: false
 
 gpu.mode: hybrid

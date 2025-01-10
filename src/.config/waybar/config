@@ -24,7 +24,9 @@
             "hyprland/workspaces"
         ],
         "modules-right": [
-            "custom/darkmode",
+            "memory",
+            "cpu",
+            "temperature",
             "custom/gpu",
             "custom/idle",
             "custom/fan",
@@ -125,6 +127,31 @@
             "return-type": "json",
             "signal": 7
         },
+        "memory": {
+            "format": "",
+            "interval": 1,
+            "states": {
+                "warning": 60,
+                "critical": 90
+            },
+            "tooltip": true
+        },
+        "cpu": {
+            "format": "",
+            "interval": 1,
+            "states": {
+                "warning": 60,
+                "critical": 90
+            },
+            "tooltip": true
+        },
+        "temperature": {
+            "critical-threshold": 90,
+            "format": "",
+            "interval": 1,
+            "tooltip": true,
+            "tootip-format": "CPU {}C°"
+        },
         "custom/gpu": {
             "exec": "herodot waybar get gpu",
             "format": "{icon}",
@@ -133,7 +160,7 @@
                 "integrated": ""
             },
             "interval": 1,
-            "on-click": "herodot gpu set mode toggle",
+            "on-click": "kitty -e herodot gpu set mode toggle",
             "return-type": "json",
             "tooltip-format": "{}"
         },

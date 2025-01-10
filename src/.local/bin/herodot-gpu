@@ -17,7 +17,7 @@ NVIDIA_DAEMONS=(
 )
 
 get_mode() {
-    echo $(envycontrol -q)
+    echo "$(envycontrol -q)"
 }
 
 get_temperature() {
@@ -33,13 +33,12 @@ daemons() {
 
 set_mode() {
     local mode="$1"
-    if zenity --question \
-              --icon="/usr/share/icons/empty.png" \
-              --text="Are you sure you want to toggle GPU to $mode? It require reboot."; then
-        [ "$mode" = "hybrid" ] && daemons "enable" || daemons "disable"
-        kitty sh -c "sudo envycontrol -s "$mode" && sudo mkinitcpio -P"
-        notify-send "GPU" "will switch to "$mode" after reboot"
-    fi
+    echo "Switch GPU mode to $mode"
+    [ "$mode" = "hybrid" ] && daemons "enable" || daemons "disable"
+    sudo envycontrol -s "$mode"
+    sudo mkinitcpio -P
+    read -p "Reboot the system? (y/N): " answer
+    [ "$answer" = "y" ] && reboot
 }
 
 toggle() {
