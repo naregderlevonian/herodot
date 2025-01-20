@@ -143,7 +143,7 @@
         },
         "temperature": {
             "critical-threshold": 90,
-            "format": "",
+            "format": "",
             "interval": 1,
             "tootip-format": "CPU {}C°"
         },
