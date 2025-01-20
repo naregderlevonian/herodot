@@ -2,9 +2,8 @@
 
 usage() {
     cat << EOF
-Usage:  herodot waybar get weather|dice|gpu|idle|fan|performance|microphone|speaker|bluetooth|wifi
+Usage:  herodot waybar get weather|diceidle|fan|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
-        herodot waybar set view join|split
         herodot waybar run picker|ashot
 EOF
 }
@@ -24,38 +23,6 @@ is_process_running() {
 
 jsonify() {
     printf "{\"class\":\"%s\",\"alt\":\"%s\",\"text\":\"%s\",\"tooltip\":\"%s\"}" "$1" "$2" "$3" "$4"
-}
-
-classify_temperature() {
-    local temperature="$1"
-    local class=""
-
-    declare -A temperature_classes=(
-        ["extreme-cold"]="-99.9 -18.1"
-        ["very-cold"]="-18.0 -10.1"
-        ["cold"]="-10.0 -0.1"
-        ["cool"]="0.1 9.9"
-        ["mildly-cool"]="10.0 15.9"
-        ["mild"]="16.0 20.9"
-        ["warm"]="21.0 26.9"
-        ["warm-hot"]="27.0 31.9"
-        ["hot"]="32.0 37.9"
-        ["extreme-hot"]="38.0 99.9"
-    )
-
-    temperature=$(echo "$temperature" | sed "s/°C//g")
-
-    for class_candidate in "${!temperature_classes[@]}"; do
-        read lower_bound upper_bound <<< "${temperature_classes[$class_candidate]}"
-        
-        if (( $(echo "$temperature >= $lower_bound" | bc -l) )) && (( $(echo "$temperature <= $upper_bound" | bc -l) )); then
-            class="$class_candidate"
-            break
-        fi
-    done
-
-    class="${class:-zero}"
-    echo "$class"
 }
 
 get_battery() {
@@ -84,25 +51,11 @@ get_battery() {
 }
 
 get_weather() {
-    local class
-    local text
-    local tooltip
+    curl 'wttr.in/{Moscow}?format=3' | cut -d ' ' -f 2,5 | paste -d ' ' -s
+}
 
-    local country="$(herodot weather get country)"
-    local name="$(herodot weather get location)"
-    local temperature="$(herodot weather get temperature)"
-    local windspeed="$(herodot weather get windspeed)"
-    local winddirection="$(herodot weather get winddirection)"
-    local pressure="$(herodot weather get pressure)"
-    local humidity="$(herodot weather get humidity)"
-
-    class="$(classify_temperature "$(echo $temperature | sed "s/°C//g")")"
-
-    alt="$class"
-    text="$temperature"
-    tooltip="$country/$name\r$temperature\rWind: $windspeed, $winddirection\rPressure: $pressure\rHumidity: $humidity"
-
-    jsonify "$class" "$alt" "$text" "$tooltip"
+get_moon() {
+    curl 'wttr.in/{Moscow}?format=%m'
 }
 
 get_keyboard() {
@@ -133,37 +86,6 @@ get_keyboard() {
 get_dice() {
     local result="$(herodot dice get random)"
     jsonify "$result" "$result" "$result" "$result"
-}
-
-get_darkmode() {
-    local class="$(herodot darkmode get)"
-    jsonify "$class" "$class" "${class^}" "${class^}"
-}
-
-get_gpu() {
-    local class
-    local text
-    local tooltip
-
-    local state="$(herodot gpu get mode)"
-
-    text="Optimus "
-
-    case $state in
-        "hybrid")
-            class="hybrid"
-            text+="Hybrid"
-            ;;
-        "integrated")
-            class="integrated"
-            text+="Integrated"
-            ;;
-    esac
-
-    alt="$class"
-    tooltip="$text"
-
-    jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
 get_idle() {
@@ -458,16 +380,6 @@ get_wifi() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
-join() {
-    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREEN" '.[1].output[0] = $monitor')"
-    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
-}
-
-split() {
-    local updated="$(cat "$WAYBAR_CONFIG" | jq --arg monitor "$SCREENPAD" '.[1].output[0] = $monitor')"
-    echo $updated | jq --indent 4 . > "$WAYBAR_CONFIG"
-}
-
 run_picker() {
     hyprpicker --autocopy && waynot send "Color" "$(wl-paste) has been copied to the clipboard" || exit 1
 }
@@ -476,25 +388,14 @@ run_ashot() {
     ashot area && waynot send "Screenshot" "has been copied to the clipboard" || exit 1
 }
 
-configure() {
-    [ "$(herodot settings read "screenpad.isEnabled")" = "true" ] && {
-        herodot screenpad set state on;
-        split;
-    } || {
-        herodot screenpad set state off;
-        join;
-    }
-}
 
 off() {
     dunstctl set-paused false
-    configure
     killall "$PROCESS"
 }
 
 on() {
     dunstctl set-paused true
-    configure
     "$PROCESS"
 }
 
@@ -511,17 +412,14 @@ case "$1" in
             "weather")
                 get_weather
                 ;;
-            "dice")
-                get_dice
-                ;;
-            "darkmode")
-                get_darkmode
+            "moon")
+                get_moon
                 ;;
             "keyboard")
                 get_keyboard
                 ;;
-            "gpu")
-                get_gpu
+            "dice")
+                get_dice
                 ;;
             "idle")
                 get_idle
@@ -558,19 +456,6 @@ case "$1" in
                         ;;
                     "toggle")
                         toggle
-                        ;;
-                    *)
-                        usage
-                        ;;
-                esac
-                ;;
-            "view")
-                case "$3" in
-                    "join")
-                        join
-                        ;;
-                    "split")
-                        split
                         ;;
                     *)
                         usage

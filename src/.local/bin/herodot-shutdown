@@ -38,15 +38,15 @@ try_exit() {
 }
 
 try_suspend() {
-    try "systemctl suspend && hyprlock" "Are you sure you want to sleep?" 
+    try "loginctl suspend && hyprlock" "Are you sure you want to sleep?" 
 }
 
 try_reboot() {
-    try "systemctl reboot" "Are you sure you want to restart system?" 
+    try "loginctl reboot" "Are you sure you want to restart system?" 
 }
 
 try_poweroff() {
-    try "systemctl poweroff" "Are you sure you want to shutdown?" 
+    try "loginctl poweroff" "Are you sure you want to shutdown?" 
 }
 
 dialog() {
@@ -71,13 +71,13 @@ dialog() {
             hyprctl dispatch exit
             ;;
         "Suspend")  
-            systemctl suspend
+            loginctl suspend
             ;;
         "Reboot")  
-            systemctl reboot
+            loginctl reboot
             ;;
         "Poweroff")  
-            systemctl poweroff
+            loginctl poweroff
             ;;
         *) 
             exit 1

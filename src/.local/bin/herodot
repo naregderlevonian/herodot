@@ -9,10 +9,8 @@ Available:              audio
                         bluetooth
                         blur
                         brightness
-                        darkmode
                         dice
                         fan
-                        gpu
                         idle
                         keyboard
                         movetoworkspace
@@ -50,17 +48,11 @@ case "$1" in
     "brightness")
         herodot-brightness "$2" "$3" "$4" "$5" "$6"
         ;;
-    "darkmode")
-        herodot-darkmode "$2" "$3"
-        ;;
     "dice")
         herodot-dice "$2" "$3"
         ;;
     "fan")
         herodot-fan "$2" "$3" "$4"
-        ;;
-    "gpu")
-        herodot-gpu "$2" "$3" "$4" "$5"
         ;;
     "idle")
         herodot-idle "$2" "$3" "$4"

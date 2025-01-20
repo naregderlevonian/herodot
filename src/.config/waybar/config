@@ -14,20 +14,20 @@
             "custom/battery",
             "clock",
             "custom/weather",
+            "custom/moon",
             "custom/keyboard",
             "custom/dice",
-            "custom/picker",
-            "custom/ashot",
             "custom/waynot"
         ],
         "modules-center": [
             "hyprland/workspaces"
         ],
         "modules-right": [
+            "custom/ashot",
+            "custom/picker",
             "memory",
             "cpu",
             "temperature",
-            "custom/gpu",
             "custom/idle",
             "custom/fan",
             "custom/performance",
@@ -35,7 +35,6 @@
             "custom/speaker",
             "custom/bluetooth",
             "custom/wifi",
-            "custom/separator",
             "custom/lock",
             "custom/exit",
             "custom/suspend",
@@ -56,21 +55,26 @@
             },
             "interval": 1,
             "return-type": "json",
-            "tooltip-format": "{}"
+            "tooltip": false
         },
         "clock": {
-            "format": "{:%T}",
+            "format": "{:%d %b %Y %a %T}",
             "interval": 1,
-            "on-click-right": "gnome-clocks",
-            "tooltip-format": "{:%d %b %Y %a %T}"
+            "on-click": "gnome-clocks",
+            "tooltip": "false"
         },
         "custom/weather": {
             "exec": "herodot waybar get weather",
             "format": "{}",
-            "interval": 1,
-            "on-click": "herodot weather set update",
-            "on-click-right": "gnome-weather",
-            "return-type": "json"
+            "interval": 360,
+            "on-click": "gnome-weather",
+            "tooltip": false
+        },
+        "custom/moon": {
+            "exec": "herodot waybar get moon",
+            "format": "{}",
+            "interval": 360,
+            "tooltip": false
         },
         "custom/keyboard": {
             "exec": "herodot waybar get keyboard",
@@ -82,7 +86,8 @@
             },
             "interval": 1,
             "on-click": "herodot keyboard set next",
-            "return-type": "json"
+            "return-type": "json",
+            "tooltip": false
         },
         "custom/dice": {
             "exec": "herodot waybar get dice",
@@ -97,16 +102,16 @@
             },
             "on-click": "herodot waybar get dice",
             "return-type": "json",
-            "signal": 6
+            "signal": 6,
+            "tooltip": false
         },
-        "custom/picker": {
-            "format": "",
-            "on-click": "herodot waybar run picker",
-            "on-click-right": "eyedropper"
-        },
-        "custom/ashot": {
-            "format": "",
-            "on-click": "herodot waybar run ashot"
+        "custom/waynot": {
+            "exec": "waynot post",
+            "format": "{}",
+            "max-length": 64,
+            "return-type": "json",
+            "signal": 7,
+            "tooltip": false
         },
         "hyprland/workspaces": {
             "all-outputs": false,
@@ -120,21 +125,13 @@
             "on-scroll-down": "herodot workspace set next",
             "smooth-scrolling-threshold": 3
         },
-        "custom/waynot": {
-            "exec": "waynot post",
-            "format": "{}",
-            "max-length": 64,
-            "return-type": "json",
-            "signal": 7
-        },
         "memory": {
             "format": "",
             "interval": 1,
             "states": {
                 "warning": 60,
                 "critical": 90
-            },
-            "tooltip": true
+            }
         },
         "cpu": {
             "format": "",
@@ -143,26 +140,12 @@
                 "warning": 60,
                 "critical": 90
             },
-            "tooltip": true
         },
         "temperature": {
             "critical-threshold": 90,
             "format": "",
             "interval": 1,
-            "tooltip": true,
             "tootip-format": "CPU {}C°"
-        },
-        "custom/gpu": {
-            "exec": "herodot waybar get gpu",
-            "format": "{icon}",
-            "format-icons": {
-                "hybrid": "",
-                "integrated": ""
-            },
-            "interval": 1,
-            "on-click": "kitty -e herodot gpu set mode toggle",
-            "return-type": "json",
-            "tooltip-format": "{}"
         },
         "custom/idle": {
             "exec": "herodot waybar get idle",
@@ -174,7 +157,7 @@
             "interval": 1,
             "on-click": "herodot idle set state toggle",
             "return-type": "json",
-            "tooltip-format": "{}"
+            "tooltip": false
         },
         "custom/fan": {
             "exec": "herodot waybar get fan",
@@ -186,7 +169,7 @@
             "interval": 1,
             "on-click": "herodot fan set state toggle",
             "return-type": "json",
-            "tooltip-format": "{}"
+            "tooltip": false
         },
         "custom/performance": {
             "exec": "herodot waybar get performance",
@@ -201,7 +184,7 @@
             "on-click": "herodot performance set mode next",
             "on-click-right": "herodot performance set mode back",
             "return-type": "json",
-            "tooltip-format": "{}"
+            "tooltip": false
         },
         "custom/microphone": {
             "exec": "herodot waybar get microphone",
@@ -217,8 +200,6 @@
             "interval": 1,
             "on-click": "herodot audio microphone set state toggle",
             "on-click-right": "helvum",
-            "on-scroll-down": "herodot audio microphone set level up",
-            "on-scroll-up": "herodot audio microphone set level down",
             "return-type": "json",
             "tooltip-format": "{}"
         },
@@ -236,8 +217,6 @@
             "interval": 1,
             "on-click": "herodot audio speaker set state toggle",
             "on-click-right": "pavucontrol",
-            "on-scroll-down": "herodot audio speaker set level up",
-            "on-scroll-up": "herodot audio speaker set level down",
             "return-type": "json",
             "tooltip-format": "{}"
         },
@@ -257,7 +236,6 @@
             },
             "interval": 1,
             "on-click": "herodot bluetooth set state toggle",
-            "on-click-right": "overskride",
             "return-type": "json",
             "tooltip-format": "{}"
         },
@@ -277,9 +255,6 @@
             "on-click": "herodot wifi set state toggle",
             "return-type": "json",
             "tooltip-format": "{}"
-        },
-        "custom/separator": {
-            "format": "·"
         },
         "custom/lock": {
             "format": "",

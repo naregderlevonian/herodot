@@ -24,21 +24,21 @@ get_state() {
 }
 
 set_state() {
-    echo "$1" | sudo tee "$FAN" > /dev/null
+    echo "$1" | sudo tee "$FAN"
     FAN_STATUS="$1"
     waynot send "Fan speed" "set to $(get_state "$1")"
 }
 
 off() {
-    set_state 0
-}
-
-on() {
     set_state 2
 }
 
+on() {
+    set_state 0
+}
+
 toggle() {
-    [ "$FAN_STATUS" -eq 0 ] && on || off
+    [ "$FAN_STATUS" -eq 2 ] && on || off
 }
 
 FAN=$(find_current_fan)

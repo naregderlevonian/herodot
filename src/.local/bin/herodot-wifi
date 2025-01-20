@@ -28,16 +28,12 @@ get_rssi() {
     iwctl station "$DEVICE" show | grep "AverageRSSI" | awk "{print \$2}" | tr -d "-"
 }
 
-get_stat() {
-    ifstat | grep "$DEVICE"
-}
-
 get_tx() {
-    get_stat | awk "{print \$6}" 
+     iwctl station "$DEVICE" show | grep "TxBitrate" | awk "{print \$2}"
 }
 
 get_rx() {
-    get_stat | awk "{print \$8}"
+     iwctl station "$DEVICE" show | grep "RxBitrate" | awk "{print \$2}"
 
 }
 

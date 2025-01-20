@@ -31,14 +31,12 @@ off() {
     set_state "$DISABLED_CONFIG_LINE" "false"
     sed -i "s/$(herodot settings read "screenpad.enabledSetup")/$(herodot settings read "screenpad.disabledSetup")/" "$MONITORS_CONFIG"
     herodot brightness asus_screenpad set level min
-    herodot waybar set view join
 }
 
 on() {
     set_state "$ENABLED_CONFIG_LINE" "true"
     sed -i "s/$(herodot settings read "screenpad.disabledSetup")/$(herodot settings read "screenpad.enabledSetup")/" "$MONITORS_CONFIG"
     herodot brightness asus_screenpad set level resume               
-    herodot waybar set view split
 }
 
 toggle() {

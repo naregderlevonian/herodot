@@ -23,13 +23,10 @@ window#waybar.bottom {
 }
 
 tooltip {
-    background: @base_color;
-    border-radius: 4px;
-    padding: 64px;
-}
-
-tooltip label {
     color: @text_color;
+    background: transparent;
+    border-radius: 4px;
+    padding: 16px;
 }
 
 .warning {
@@ -87,50 +84,6 @@ tooltip label {
     animation-direction: alternate;
 }
 
-#custom-weather.extreme-cold {
-    color: #c240c9;
-}
-
-#custom-weather.very-cold {
-    color: #834fe3;
-}
-
-#custom-weather.cold {
-    color: #2c5edd;
-}
-
-#custom-weather.cool {
-    color: #00a5b8;
-}
-
-#custom-weather.mildly-cool {
-    color: #009e84;
-}
-
-#custom-weather.mild {
-    color: #179227;
-}
-
-#custom-weather.warm {
-    color: #a3a800;
-}
-
-#custom-weather.warm-hot {
-    color: #ffb805;
-}
-
-#custom-weather.hot {
-    color: #eb7500;
-}
-
-#custom-weather.extreme-hot {
-    color: #c9312c;
-}
-
-#custom-weather.zero {
-    color: #0088cc;
-}
-
 #custom-waynot {
     color: @text_color;
     animation-name: blink;
@@ -138,15 +91,6 @@ tooltip label {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-
-#custom-gpu.hybrid {
-    color: @text_color;
-}
-
-#custom-gpu.integrated {
-    color: @text_color;
-    opacity: 0.24;
 }
 
 #custom-idle.on {

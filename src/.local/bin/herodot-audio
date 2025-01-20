@@ -21,7 +21,7 @@ notify() {
 }
 
 set_microphone_led() {
-    herodot brightness "$MIC_LED" set level $([ "$1" -eq 0 ] && echo "min" || echo "max")
+    brightnessctl --device="$MIC_LED" set "$1"
 }
 
 extract_value() {

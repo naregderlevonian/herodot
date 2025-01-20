@@ -14,8 +14,7 @@ readarray -t EXTRA_DEVICES <<< $(brightnessctl --list | grep "Device" | awk -F "
 DEVICE=""
 DEVICES=(
 intel_backlight
-asus_screenpad
-asus::kbd_backlight
+asus::screenpad
 )
 
 SAVE=0

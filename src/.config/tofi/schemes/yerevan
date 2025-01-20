@@ -1,7 +1,6 @@
 output = eDP-1
 
 history = true
-matching-algorithm = fuzzy
 require-match = true
 drun-launch = true
 
@@ -32,10 +31,10 @@ border-width = 0
 outline-width = 0
 
 prompt-text = :
-placeholder-text = 
+placeholder-text = .
 
 font = Ubuntu Sans Mono
-font-size = 10px
+font-size = 10
 
 background-color = #00000000
 text-color = #ffffff
