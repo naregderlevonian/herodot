@@ -98,3 +98,15 @@ undershoot.right,
 undershoot.left {
     background-image: none;
 }
+
+* {
+    box-shadow: none;
+}
+
+button {
+    border-radius: 8px;
+}
+
+splitbutton {
+    botder-radois: 0px;
+}

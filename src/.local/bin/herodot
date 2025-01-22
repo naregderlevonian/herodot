@@ -24,7 +24,6 @@ Available:              audio
                         submap
                         touchpad
                         waybar
-                        weather
                         wifi
                         workspace
                         zoom
@@ -95,9 +94,6 @@ case "$1" in
         ;;
     "waybar")
         herodot-waybar "$2" "$3" "$4"
-        ;;
-    "weather")
-        herodot-weather "$2" "$3"
         ;;
     "wifi")
         herodot-wifi "$2" "$3" "$4"

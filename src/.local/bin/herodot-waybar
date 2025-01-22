@@ -2,17 +2,11 @@
 
 usage() {
     cat << EOF
-Usage:  herodot waybar get weather|diceidle|fan|performance|microphone|speaker|bluetooth|wifi
+Usage:  herodot waybar get weather|moon|dice|idle|fan|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
         herodot waybar run picker|ashot
 EOF
 }
-
-MESSAGE_PATH="/tmp/alert"
-WAYBAR_CONFIG="$HOME/.config/waybar/config"
-
-SCREEN="eDP-2"
-SCREENPAD="DP-1"
 
 PROCESS="waybar"
 
@@ -51,7 +45,7 @@ get_battery() {
 }
 
 get_weather() {
-    curl 'wttr.in/{Moscow}?format=3' | cut -d ' ' -f 2,5 | paste -d ' ' -s
+    curl 'wttr.in/{Moscow}?format=%t'
 }
 
 get_moon() {

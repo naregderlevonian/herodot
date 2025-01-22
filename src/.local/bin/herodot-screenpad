@@ -13,41 +13,43 @@ MONITORS_CONFIG="$HOME/.config/hypr/hyprland/common/monitors.conf"
 DISABLED_CONFIG_LINE=$(herodot settings read "screenpad.disabledSetup")
 ENABLED_CONFIG_LINE=$(herodot settings read "screenpad.enabledSetup")
 
-get_state() {
+SCREENPAD="asus::screenpad"
+
+load() {
     herodot settings read "screenpad.isEnabled"
 }
 
-set_state() {
+apply() {
     hyprctl keyword monitor "$1"
     herodot settings assign "screenpad.isEnabled" "$2"
     waynot send "Screenpad" "${2^}"
 }
 
 resume() {
-    [ "$(get_state)" = "true" ] && on || off
+    [ "$(load)" = "true" ] && on || off
 }
 
 off() {
-    set_state "$DISABLED_CONFIG_LINE" "false"
+    apply "$DISABLED_CONFIG_LINE" "false"
     sed -i "s/$(herodot settings read "screenpad.enabledSetup")/$(herodot settings read "screenpad.disabledSetup")/" "$MONITORS_CONFIG"
-    herodot brightness asus_screenpad set level min
+    brightnessctl --device="$SCREENPAD" set "0"
 }
 
 on() {
-    set_state "$ENABLED_CONFIG_LINE" "true"
+    apply "$ENABLED_CONFIG_LINE" "true"
     sed -i "s/$(herodot settings read "screenpad.disabledSetup")/$(herodot settings read "screenpad.enabledSetup")/" "$MONITORS_CONFIG"
-    herodot brightness asus_screenpad set level resume               
+    brightnessctl --device="$SCREENPAD" set "$(herodot brightness get level)"
 }
 
 toggle() {
-    [ "$(get_state)" = "true" ] && off || on
+    [ "$(load)" = "true" ] && off || on
 }
 
 case "$1" in
     "get")
         case "$2" in
             "state")
-                get_state
+                load
                 ;;
             *)
                 usage

@@ -2,97 +2,64 @@
 
 usage() {
     cat << EOF
-Usage:  herodot brightness all|default|{device} get level 
-        herodot brightness all|default|{device} set level increase|decrease|up|down|max|min [save]
-        herodot brightness all|default|{device} set level resume
+Usage:  herodot brightness get level 
+        herodot brightness set level increase|decrease|up|down|max|min [save]
+        herodot brightness set level resume
 EOF
     exit 1
 }
 
-readarray -t EXTRA_DEVICES <<< $(brightnessctl --list | grep "Device" | awk -F "'" "{print \$2}")
-
-DEVICE=""
-DEVICES=(
-intel_backlight
-asus::screenpad
-)
+SCREEN="intel_backlight"
+SCREENPAD="asus::screenpad"
 
 SAVE=0
 
-get_brightness() {
-    if [ -z "$DEVICE" ]; then
-        for current in "${DEVICES[@]}"; do
-            herodot settings read "brightness.$current"
-        done
-    else
-        herodot settings read "brightness.$DEVICE"
+
+load() {
+    herodot settings read "brightness"
+}
+
+save() {
+    local level="$(get)"
+    herodot settings assign "brightness" "$level"
+}
+
+get() {
+    echo $(brightnessctl --device="intel_backlight" | grep "%" | awk '{print $4}' | tr -d "(|)|%")
+}
+
+apply() {
+    brightnessctl --device="$SCREEN" --min-value set "$1"
+    [ "$(herodot settings read "screenpad.isEnabled")" = "false" ] && return
+    brightnessctl --device="$SCREENPAD" --min-value set "$(get)%"
+}
+
+update() {
+    [ $SAVE -eq 1 ] && save "$DEVICE"
+    apply "$1"
+}
+
+resume() {
+    apply "$(load)%"
+}
+
+fuse() {
+    local step="$(echo "$1" | sed 's/[^0-9]//g')"
+    local level="$(get)"
+    local result=$((level - step))
+
+    if (( result < 1 )); then
+        exit
     fi
 }
 
-set_brightness() {
-    if [ -z "$DEVICE" ]; then
-        for current in "${DEVICES[@]}"; do
-            brightnessctl --device="$current" set "$1"
-        done
-    else
-        brightnessctl --device="$DEVICE" set "$1"
-    fi
-
-    [ $SAVE -eq 1 ] && save_brightness "$DEVICE"
-}
-
-save_brightness() {
-    if [ -z "$DEVICE" ]; then
-        for current in "${DEVICES[@]}"; do
-            herodot settings assign "brightness.$current" $(brightnessctl --device="$current" get)
-        done
-    else
-        herodot settings assign "brightness.$DEVICE" $(brightnessctl --device="$DEVICE" get)
-    fi
-}
-
-load_brightness() {
-    if [ -z "$DEVICE" ]; then
-        for current in "${DEVICES[@]}"; do
-            brightnessctl --device="$current" set $(herodot settings read "brightness.$current")
-        done
-    else
-        brightnessctl --device="$DEVICE" set $(herodot settings read "brightness.$DEVICE")
-    fi
-}
-
-request_device() {
-    local device_found=0
-
-    for current in "${EXTRA_DEVICES[@]}"; do
-        [ "$current" = "$1" ] && device_found=1
-    done
-
-    [ "$device_found" -eq 0 ] && {
-        echo "Device not exist in list";
-        usage;
-        exit 1;
-    } 
-}
+[ "$4" = "save" ] && SAVE=1
 
 case "$1" in
-    "all")
-        ;;
-    "default")
-        DEVICE=${DEVICES[0]}
-        ;;
-    *)
-        request_device "$1"
-        DEVICE="$1"
-esac
-
-[ "$5" = "save" ] && SAVE=1
-
-case "$2" in
     "get")
-        case "$3" in
+        case "$2" in
             "level")
-                get_brightness
+                get
                 ;;
             *)
                 usage
@@ -100,32 +67,34 @@ case "$2" in
         esac
         ;;
     "set")
-        case "$3" in
+        case "$2" in
             "level")
-                case "$4" in
+                case "$3" in
                     "increase")
-                        set_brightness "+5%"  
+                        update "+5%"  
                         ;;
                     "decrease")
-                        set_brightness "5%-"  
+                        fuse "5"
+                        update "5%-"  
                         ;;
                     "up")
-                        set_brightness "+1%"  
+                        update "+1%"  
                         ;;
                     "down")
-                        set_brightness "1%-"  
+                        use "1"
+                        update "1%-"  
                         ;;
                     "max")
-                        set_brightness "100%" 
+                        update "100%" 
                         ;;
                     "min")
-                        set_brightness "5%"   
+                        update "1%"   
                         ;;
                     "off")
-                        set_brightness "0%"   
+                        update "0%"   
                         ;;
                     "resume")
-                        load_brightness
+                        resume
                         ;;
                     *)
                         usage
