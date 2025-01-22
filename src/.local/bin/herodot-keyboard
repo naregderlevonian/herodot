@@ -2,26 +2,35 @@
 
 usage() {
     cat << EOF
-Usage:  herodot keyboard get mode
-        herodot keyboard set next
+Usage:  herodot keyboard get brightness
+        herodot keyboard set birghtness toggle
 EOF
 }
 
-DEVICE="at-translated-set-2-keyboard"
+KEYBOARD="asus::kbd_backlight"
 
-get_mode() {
-    echo "$(hyprctl devices -j | jq -r --arg device "$DEVICE" ".keyboards[] | select(.name == \$device) | .active_keymap")"
+get() {
+    echo "$(brightnessctl --device="$KEYBOARD" get)"
 }
 
-set_next() {
-    hyprctl switchxkblayout "$DEVICE" next
+apply() {
+    brightnessctl --device="asus::kbd_backlight" set "$1"
+}
+
+off() {
+    apply "0"
+}
+
+toggle() {
+    local level="$(get)"
+    [ $level = "3" ] && off || apply "$((level + 1))"
 }
 
 case "$1" in
     "get")
         case "$2" in
-            "mode")
-                get_mode
+            "brightness")
+                get
                 ;;
             *)
                 usage
@@ -30,8 +39,15 @@ case "$1" in
         ;;
     "set")
         case "$2" in
-            "next")
-                set_next
+            "brightness")
+                case "$3" in
+                    "toggle")
+                        toggle
+                        ;;
+                    *)
+                        usage
+                        ;;
+                esac
                 ;;
             *)
                 usage

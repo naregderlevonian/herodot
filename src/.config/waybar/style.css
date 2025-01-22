@@ -93,13 +93,30 @@ tooltip {
     animation-direction: alternate;
 }
 
-#custom-idle.on {
+#custom-keyboard.off {
     color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-keyboard.low {
+    color: @text_color;
+}
+
+#custom-keyboard.medium {
+    color: @success_color;
+}
+
+#custom-keyboard.high {
+    color: @error_color;
 }
 
 #custom-idle.off {
     color: @text_color;
     opacity: 0.24;
+}
+
+#custom-idle.on {
+    color: @text_color;
 }
 
 #custom-fan.auto {

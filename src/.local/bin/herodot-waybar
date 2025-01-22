@@ -52,12 +52,12 @@ get_moon() {
     curl 'wttr.in/{Moscow}?format=%m'
 }
 
-get_keyboard() {
+get_keymap() {
     local class
     local text
     local tooltip
 
-    local mode="$(herodot keyboard get mode)"
+    local mode="$(herodot keymap get mode)"
 
     text="$mode"
     tooltip="$mode"
@@ -80,6 +80,40 @@ get_keyboard() {
 get_dice() {
     local result="$(herodot dice get random)"
     jsonify "$result" "$result" "$result" "$result"
+}
+
+get_keyboard() {
+    local class
+    local text
+    local tooltip
+
+    local state="$(herodot keyboard get brightness)"
+
+    text="Keyboard Brightness"
+
+    case "$state" in
+        "1")
+            class="low"
+            text+=" Low"
+            ;;
+        "2")
+            class="medium"
+            text+=" Medium"
+            ;;
+        "3")
+            class="high"
+            text+=" Hight"
+            ;;
+        *)
+            class="off"
+            text+=" Off"
+            ;;
+    esac
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
 get_idle() {
@@ -409,11 +443,14 @@ case "$1" in
             "moon")
                 get_moon
                 ;;
-            "keyboard")
-                get_keyboard
+            "keymap")
+                get_keymap
                 ;;
             "dice")
                 get_dice
+                ;;
+            "keyboard")
+                get_keyboard
                 ;;
             "idle")
                 get_idle

@@ -12,7 +12,7 @@ Available:              audio
                         dice
                         fan
                         idle
-                        keyboard
+                        keymap
                         movetoworkspace
                         movewindow
                         paper
@@ -57,7 +57,10 @@ case "$1" in
         herodot-idle "$2" "$3" "$4"
         ;;
     "keyboard")
-        herodot-keyboard "$2" "$3"
+        herodot-keyboard "$2" "$3" "$4"
+        ;;
+    "keymap")
+        herodot-keymap "$2" "$3" "$4"
         ;;
     "movetoworkspace")
         herodot-movetoworkspace "$2" "$3" "$4"

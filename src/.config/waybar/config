@@ -15,7 +15,7 @@
             "clock",
             "custom/weather",
             "custom/moon",
-            "custom/keyboard",
+            "custom/keymap",
             "custom/dice",
             "custom/picker",
             "custom/ashot",
@@ -28,6 +28,7 @@
             "memory",
             "cpu",
             "temperature",
+            "custom/keyboard",
             "custom/idle",
             "custom/fan",
             "custom/performance",
@@ -76,8 +77,8 @@
             "interval": 360,
             "tooltip": false
         },
-        "custom/keyboard": {
-            "exec": "herodot waybar get keyboard",
+        "custom/keymap": {
+            "exec": "herodot waybar get keymap",
             "format": "{icon}",
             "format-icons": {
                 "en": "En",
@@ -85,7 +86,7 @@
                 "unknown": "??"
             },
             "interval": 1,
-            "on-click": "herodot keyboard set next",
+            "on-click": "herodot keymap set next",
             "return-type": "json",
             "tooltip": false
         },
@@ -155,6 +156,20 @@
             "format": "",
             "interval": 1,
             "tootip-format": "CPU {}C°"
+        },
+        "custom/keyboard": {
+            "exec": "herodot waybar get keyboard",
+            "format": "{icon}",
+            "format-icons": {
+                "off": "",
+                "low": "",
+                "medium": "",
+                "high": ""
+            },
+            "interval": 1,
+            "on-click": "herodot keyboard set brightness toggle",
+            "return-type": "json",
+            "tooltip": false
         },
         "custom/idle": {
             "exec": "herodot waybar get idle",

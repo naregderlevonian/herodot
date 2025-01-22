@@ -1,9 +1,9 @@
 environment.blur: glass
 environment.paper.isEnabled: true
 environment.paper.mode: sunset
-environment.scheme.mode: yerevan
+environment.scheme.mode: van
 environment.scheme.type: dark
-environment.shader.mode: negative
+environment.shader.mode: monochrome-red
 environment.shader.sEnabled: false
 
 gpu.mode: hybrid
@@ -20,4 +20,4 @@ screenpad.isEnabled: true
 touchpad.isEnabled: true
 environment.shader.isEnabled: true
 
-brightness: 15
+brightness: 100

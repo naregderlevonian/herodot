@@ -15,7 +15,7 @@ vim.opt.cursorline = true
 
 vim.opt.clipboard = 'unnamed,unnamedplus'
 
-vim.cmd.colorscheme('yerevan')
+vim.cmd.colorscheme('van')
 
 vim.cmd [[
   highlight Normal guibg=none
