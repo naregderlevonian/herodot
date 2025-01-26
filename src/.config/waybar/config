@@ -172,12 +172,12 @@
             "exec": "herodot waybar get sunset",
             "format": "{icon}",
             "format-icons": {
-                "on": "",
-                "off": ""
+                "on": "",
+                "off": "`"
             },
             "interval": 1,
-            "on-click": "herodot sunset set state off",
-            "on-click-right": "herodot sunset set state on",
+            "on-click": "herodot sunset set state on save",
+            "on-click-right": "herodot sunset set state off save",
             "return-type": "json",
             "tooltip": false
         },

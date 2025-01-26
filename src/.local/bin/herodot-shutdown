@@ -50,34 +50,34 @@ try_poweroff() {
 }
 
 dialog() {
-    is_process_running "$PROCESS" && return
+    is_process_running "$PROCESS" && killall "$PROCESS"
 
     choice=$(zenity --info \
         --icon="/usr/share/icons/empty.png" \
         --title "Shutdown" \
-        --text=" " \
-        --ok-label "Cancel" \
-        --extra-button "Poweroff" \
-        --extra-button "Reboot" \
-        --extra-button "Suspend" \
-        --extra-button "Logout" \
-        --extra-button "Lock" \
+        --text="Please select an action to perform with your system" \
+        --ok-label "" \
+        --extra-button "" \
+        --extra-button "" \
+        --extra-button "" \
+        --extra-button "" \
+        --extra-button "" \
         --timeout="10" )
 
     case $choice in
-        "Lock")  
+        "")  
             hyprlock
             ;;
-        "Logout")  
+        "")  
             hyprctl dispatch exit
             ;;
-        "Suspend")  
+        "")  
             loginctl suspend
             ;;
-        "Reboot")  
+        "")  
             loginctl reboot
             ;;
-        "Poweroff")  
+        "")  
             loginctl poweroff
             ;;
         *) 

@@ -50,8 +50,9 @@ apply() {
     waynot send "Paper" "set to $(basename "$1")"
 
     on
-
-    hyprctl hyprpaper preload "$1"; hyprctl hyprpaper wallpaper "$MONITOR, $1"
+    sleep 2
+    hyprctl hyprpaper preload "$1"
+    hyprctl hyprpaper wallpaper "$MONITOR, $1"
 }
 
 set_mode() {
@@ -71,6 +72,8 @@ navigate() {
             return
         fi
     done
+
+    set_mode "${PAPERS[0]}"
 }
 
 back() {

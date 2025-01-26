@@ -1,12 +1,2 @@
 #!/bin/sh
 
-herodot brightness set level resume &
-herodot keyboard set brightness toggle &
-herodot bluetooth set state off &
-
-herodot waybar set state on &
-waynot-daemon &
-
-herodot weather set update &
-
-herodot paper set resume &

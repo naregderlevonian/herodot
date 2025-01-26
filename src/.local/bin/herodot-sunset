@@ -11,7 +11,7 @@ EOF
 PROCESS="hyprsunset"
 MIN=1000
 MAX=20000
-DEFAULT=6000
+DEFAULT=$DEFAULT
 STEP=100
 
 load_state() {
@@ -23,7 +23,7 @@ save_state() {
 }
 
 load_mode() {
-    herodot settigns read "environment.sunset.mode"
+    herodot settings read "environment.sunset.mode" 
 }
 
 save_mode() {
@@ -40,7 +40,7 @@ get_state() {
 }
 
 apply() {
-    off
+    killall $PROCESS
     "$PROCESS" --temperature "$1"
 }
 
@@ -57,12 +57,32 @@ off() {
     killall $PROCESS
 
     [ "$SAVE" -eq 1 ] && {
+        save_mode "$DEFAULT"
         save_state "false";
     }
 }
 
 on() {
-    set_mode "$(zenity --scale --value="$DEFAULT" --min-value="$MIN" --max-value="$MAX" --step="$STEP")"
+    local current="$(load_mode)"
+    local mode="$(zenity --scale \
+        --title="Sunset" \
+        --text="Set the temperature in K" \
+        --value="$current" \
+        --min-value="$MIN" \
+        --max-value="$MAX" \
+        --step="$STEP")"
+
+        case "$mode" in
+            "")
+                exit
+                ;;
+            "$DEFAULT")
+                [ "$current" = "$DEFAULT" ] && exit || off
+                ;;
+            *)
+                set_mode "$mode"
+                ;;
+        esac
 }
 
 resume() {
