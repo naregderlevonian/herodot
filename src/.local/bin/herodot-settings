@@ -38,7 +38,7 @@ assign() {
     local value="$2"
 
     if grep -q "^$property:" "$CONFIG"; then
-        sed -i.bak "s/^$property: .*/$property: $value/" "$CONFIG"
+        sed -i "s#^$property: .*#$property: $value#" "$CONFIG"
     else
         echo "$property: $value" >> "$CONFIG"
     fi

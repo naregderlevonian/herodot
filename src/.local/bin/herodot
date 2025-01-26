@@ -17,11 +17,13 @@ Available:              audio
                         movewindow
                         paper
                         performance
+                        resume
                         scheme
                         screenpad
                         shader
                         shutdown
                         submap
+                        sunse
                         touchpad
                         waybar
                         wifi
@@ -74,6 +76,9 @@ case "$1" in
     "performance")
         herodot-performance "$2" "$3" "$4"
         ;;
+    "resume")
+        herodot-resume
+        ;;
     "scheme")
         herodot-scheme "$2" "$3" "$4"
         ;;
@@ -91,6 +96,9 @@ case "$1" in
         ;;
     "submap")
         herodot-submap "$2" "$3" "${@:4}"
+        ;;
+    "sunset")
+        herodot-sunset "$2" "$3" "$4"
         ;;
     "touchpad")
         herodot-touchpad "$2" "$3" "$4"

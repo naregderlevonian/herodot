@@ -5,68 +5,35 @@ usage() {
 Usage:  herodot paper get state|mode
         herodot paper set state off|on|toggle [save] 
         herodot paper set mode back|next [save]
-        herodot paper set mode {paper} [save]
-        herodot paper set restore
+        herodot paper set resume
 EOF
     exit 1
 }
 
 PROCESS="hyprpaper"
-PAPERS_PATH="$HOME/.config/hypr/papers"
-PAPERS=(
-    sky
-    future
-    sunset
-)
-
-apply_decoration_settings() {
-    hyprctl keyword "decoration:blur:enabled" false
-}
-
-check_paper_exists() {
-    local paper="$1"
-    if [ ! -d "$PAPERS_PATH/$paper" ]; then
-        echo "Paper [$paper] not found."
-        exit 1
-    fi
-}
-
-is_enabled() {
-    pgrep "$PROCESS" > /dev/null 2>&1
-    return $?
-}
-
-restart() {
-    killall $PROCESS
-    hyprctl reload
-    $PROCESS > /dev/null 2>&1
-}
-
-refresh_symlink() {
-    rm "$PAPERS_PATH/current"
-    ln -sf "$PAPERS_PATH/$1" "$PAPERS_PATH/current"
-}
-
-restore() {
-    [ "$(load_state)" = "false" ] && { off; exit 0; }
-    set_mode "$(load_mode)"
-}
+MONITOR="eDP-1"
+PAPER_PATH="$HOME/.config/hypr/papers/*"
+PAPERS=($(ls -d $PAPER_PATH))
 
 load_state() {
     herodot settings read "environment.paper.isEnabled"
-}
-
-load_mode() {
-    herodot settings read "environment.paper.mode"
 }
 
 save_state() {
     herodot settings assign "environment.paper.isEnabled" "$1"
 }
 
+load_mode() {
+    herodot settings read "environment.paper.mode"
+}
+
 save_mode() {
-    waynot send "$1"
     herodot settings assign "environment.paper.mode" "$1"
+}
+
+is_enabled() {
+    pgrep "$PROCESS" > /dev/null 2>&1
+    return $?
 }
 
 get_state() {
@@ -75,49 +42,31 @@ get_state() {
 }
 
 get_mode() {
-    echo "$(basename "$(readlink -f "$PAPERS_PATH/current")")"
+    is_enabled
+    [ $? -eq 0 ] && hyprctl hyprpaper listactive | sed 's/ =/,/' | head -n 1
+}
+
+apply() {
+    waynot send "Paper" "set to $(basename "$1")"
+
+    on
+
+    hyprctl hyprpaper preload "$1"; hyprctl hyprpaper wallpaper "$MONITOR, $1"
 }
 
 set_mode() {
-    local paper="$1"
-
     [ "$SAVE" -eq 1 ] && {
-        save_state "true"
-        save_mode "$paper";
+        save_state "true";
+        save_mode "$1";
     }
 
-    check_paper_exists "$paper"
-
-    waynot send "Paper" "set to $paper"
-    refresh_symlink "$paper"
-    restart
-}
-
-off() {
-    waynot send "Paper" "turned off"
-    killall $PROCESS
-
-    apply_decoration_settings
-
-    [ "$SAVE" -eq 1 ] && {
-        save_state "false"
-    }
-}
-
-on() {
-    set_mode "$(load_mode)"
-}
-
-toggle() {
-    is_enabled
-    [ $? -eq 0 ]  && off || on
+    apply "$1"
 }
 
 navigate() {
     local offset="$1"
-
     for i in "${!PAPERS[@]}"; do
-        if [ "${PAPERS[$i]}" = "$(get_mode)" ]; then
+        if [ "${PAPERS[$i]}" = "$(load_mode)" ]; then
             set_mode "${PAPERS[$(( (i + offset + ${#PAPERS[@]}) % ${#PAPERS[@]} ))]}"
             return
         fi
@@ -126,16 +75,43 @@ navigate() {
 
 back() {
     is_enabled
-    [ $? -eq 0 ] && navigate "-1" || on
+    [ $? -eq 0 ] || on
+    navigate "-1"
 }
 
 next() {
     is_enabled
-    [ $? -eq 0 ] && navigate "+1" || on
+    [ $? -eq 0 ] || on
+    navigate "+1"
 }
 
-SAVE=0
-[ "$4" = "save" ] && SAVE=1
+off() {
+    waynot send "Paper" "off"
+    killall $PROCESS
+
+    [ "$SAVE" -eq 1 ] && {
+        save_state "false";
+    }
+}
+
+on() {
+    $PROCESS &
+}
+
+toggle() {
+    is_enabled
+    [ $? -eq 0 ] && off; exit
+    on
+    resume
+}
+
+resume() {
+    [ "$(load_state)" = "false" ] && {
+        off;
+        exit;
+    }
+    set_mode "$(load_mode)"
+}
 
 case "$1" in
     "get")
@@ -152,6 +128,9 @@ case "$1" in
         esac
         ;;
     "set")
+        SAVE=0
+        [ "$4" = "save" ] && SAVE=1
+
         case "$2" in
             "state")
                 case "$3" in
@@ -164,7 +143,7 @@ case "$1" in
                     "toggle")
                         toggle
                         ;;
-                    *)      
+                    *)
                         usage
                         ;;
                 esac
@@ -178,14 +157,14 @@ case "$1" in
                         next
                         ;;
                     *)
-                        set_mode "$3"
+                        usage
                         ;;
                 esac
                 ;;
-            "restore")
-                restore
+            "resume")
+                resume
                 ;;
-            *)      
+            *)
                 usage
                 ;;
         esac
@@ -194,3 +173,4 @@ case "$1" in
         usage
         ;;
 esac
+

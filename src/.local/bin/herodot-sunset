@@ -1,0 +1,72 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  herodot sunset get state
+        herodot sunset set state off|on
+EOF
+}
+
+PROCESS="hyprsunset"
+MIN=1000
+MAX=20000
+DEFAULT=6000
+STEP=100
+
+is_process_running() {
+    pgrep "$1" > /dev/null 2>&1
+    return $?
+}
+
+get_state() {
+    is_process_running "$PROCESS" && echo 1 || echo 0
+}
+
+apply() {
+    off
+    "$PROCESS" --temperature "$1"
+}
+
+off() {
+    killall $PROCESS
+}
+
+on() {
+    apply "$(zenity --scale --value="$DEFAULT" --min-value="$MIN" --max-value="$MAX" --step="$STEP")"
+}
+
+case "$1" in
+    "get")
+        case "$2" in
+            "state")
+                get_state
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    "set")
+        case "$2" in
+            "state")
+                case "$3" in
+                    "on")
+                        on                
+                        ;;
+                    "off")
+                        off
+                        ;;
+                    *)
+                        usage
+                    ;;
+                esac
+                ;;
+            *)
+                usage
+                ;;
+        esac
+        ;;
+    *)
+        usage
+        ;;
+esac

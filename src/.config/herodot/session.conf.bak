@@ -1,9 +1,12 @@
 environment.blur: glass
+
 environment.paper.isEnabled: true
-environment.paper.mode: sunset
-environment.scheme.mode: van
+environment.paper.mode: /home/naregderlevonian/.config/hypr/papers/sky.png
+
+environment.scheme.mode: yerevan
 environment.scheme.type: dark
-environment.shader.mode: monochrome-red
+
+environment.shader.mode: antihazard-extra
 environment.shader.sEnabled: false
 
 gpu.mode: hybrid
@@ -18,6 +21,6 @@ screenpad.enabledSetup: DP-1, 2880x864@120, 0x1200, 1.5, bitdepth, 10
 screenpad.isEnabled: true
 
 touchpad.isEnabled: true
-environment.shader.isEnabled: true
+environment.shader.isEnabled: false
 
 brightness: 100

@@ -20,8 +20,7 @@ load() {
 }
 
 save() {
-    local level="$(get)"
-    herodot settings assign "brightness" "$level"
+    herodot settings assign "brightness" "$(get)"
 }
 
 get() {
@@ -30,9 +29,8 @@ get() {
 
 apply() {
     echo $(get)
-    brightnessctl --exponent --device="$SCREEN" --min-value set "$1"
-    echo $(get)
-    [ $SAVE -eq 1 ] && save "$DEVICE"
+    brightnessctl --device="$SCREEN" --min-value set "$1"
+    [ $SAVE -eq 1 ] && save
     [ "$(herodot settings read "screenpad.isEnabled")" = "false" ] && return
     brightnessctl --device="$SCREENPAD" --min-value set "$(get)%"
 }

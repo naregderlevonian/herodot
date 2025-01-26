@@ -19,6 +19,7 @@
             "custom/dice",
             "custom/picker",
             "custom/ashot",
+            "custom/sunset",
             "custom/waynot"
         ],
         "modules-center": [
@@ -168,6 +169,19 @@
             },
             "interval": 1,
             "on-click": "herodot keyboard set brightness toggle",
+            "return-type": "json",
+            "tooltip": false
+        },
+        "custom/sunset": {
+            "exec": "herodot waybar get sunset",
+            "format": "{icon}",
+            "format-icons": {
+                "on": "",
+                "off": ""
+            },
+            "interval": 1,
+            "on-click": "herodot sunset set state off",
+            "on-click-right": "herodot sunset set state on",
             "return-type": "json",
             "tooltip": false
         },

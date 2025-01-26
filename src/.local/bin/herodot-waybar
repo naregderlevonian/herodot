@@ -116,6 +116,29 @@ get_keyboard() {
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
 
+get_sunset() {
+    local class
+    local text
+    local tooltip
+    
+    local state="$(herodot sunset get state)"
+
+    text="Sunset"
+
+    if [ "$state" -eq 1 ]; then
+        class="on"
+        text+=" Enabled"
+    else
+        class="off"
+        text+=" Disabled"
+    fi
+
+    alt="$class"
+    tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
 get_idle() {
     local class
     local text
@@ -451,6 +474,9 @@ case "$1" in
                 ;;
             "keyboard")
                 get_keyboard
+                ;;
+            "sunset")
+                get_sunset
                 ;;
             "idle")
                 get_idle
