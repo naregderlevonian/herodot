@@ -3,7 +3,8 @@
 usage() {
     cat << EOF
 Usage:  herodot sunset get state
-        herodot sunset set state off|on
+        herodot sunset set state off|on [save]
+        herodot sunset set resume
 EOF
 }
 
@@ -12,6 +13,22 @@ MIN=1000
 MAX=20000
 DEFAULT=6000
 STEP=100
+
+load_state() {
+    herodot settings read "environment.sunset.isEnabled"
+}
+
+save_state() {
+    herodot settings assign "environment.sunset.isEnabled" "$1"
+}
+
+load_mode() {
+    herodot settigns read "environment.sunset.mode"
+}
+
+save_mode() {
+    herodot settings assign "environment.sunset.mode" "$1"
+}
 
 is_process_running() {
     pgrep "$1" > /dev/null 2>&1
@@ -27,12 +44,33 @@ apply() {
     "$PROCESS" --temperature "$1"
 }
 
+set_mode() {
+    [ "$SAVE" -eq 1 ] && {
+        save_state "true";
+        save_mode "$1";
+    }
+
+    apply "$1"
+}
+
 off() {
     killall $PROCESS
+
+    [ "$SAVE" -eq 1 ] && {
+        save_state "false";
+    }
 }
 
 on() {
-    apply "$(zenity --scale --value="$DEFAULT" --min-value="$MIN" --max-value="$MAX" --step="$STEP")"
+    set_mode "$(zenity --scale --value="$DEFAULT" --min-value="$MIN" --max-value="$MAX" --step="$STEP")"
+}
+
+resume() {
+    [ "$(load_state)" = "false" ] && {
+        off;
+        exit;
+    }
+    set_mode "$(load_mode)"
 }
 
 case "$1" in
@@ -47,6 +85,8 @@ case "$1" in
         esac
         ;;
     "set")
+        SAVE=0; [ "$4" = "save" ] && SAVE=1
+
         case "$2" in
             "state")
                 case "$3" in
@@ -60,6 +100,9 @@ case "$1" in
                         usage
                     ;;
                 esac
+                ;;
+            "resume")
+                resume
                 ;;
             *)
                 usage

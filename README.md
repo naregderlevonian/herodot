@@ -12,18 +12,16 @@ This repository contains personal configurations for Hyprland and other applicat
     - Battery status
     - Date and time display
     - Weather information
+    - Moon phase
     - Keyboard layout indicator
     - Dice rolling feature
-    - Shutdown options with notifications (lock, restart session, suspend, reboot, and power off)
-    - Toggle between discrete and integrated graphics
-    - Enable/disable system idle tracking and automatic shutdown
-    - Fan control (on/off)
-    - Performance mode switching (power-saving and high-performance modes)
+    - Enable/disable system idle tracking 
+    - Fan control
+    - Performance mode switching
     - Volume and microphone control
     - Bluetooth status and controls
-    - Wi-Fi status and controls# Demo
-
-3. A dedicated low battery notification daemon that provides timely alerts for low battery levels.
+    - Wi-Fi status and controls
+    - Shutdown, etc.
 
 4. A system notification daemon that monitors system notifications and displays them within Waybar for easy access.
 
@@ -42,23 +40,11 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 
 | Hotkey                             | Description                                                  |
 |------------------------------------|--------------------------------------------------------------|
-| Super Alt, K                       | Toggles the current interface mode (dark or light)           |
 | Super Alt, M                       | Cycle through available color scheme modes                   |
 | Super Alt, N                       | Enable or disable Wi-Fi connection                           |
 | Super Alt, B                       | Enable or disable Bluetooth connection                       |
 | Super Alt, V                       | Enable or disable Hypridle                                   |
-| Super, F1                          | Open the terminal application (Kitty)                        | 
-| Super Alt, F1                      | Open the terminal with root privileges (Kitty)               |
-| Super, F2                          | Launch the file manager (Nautilus)                           |
-| Super, F3                          | Open the Firefox web browser                                 |
-| Super Alt, F3                      | Launch Firefox in private browsing mode                      |
-| Super, F4                          | Open the Thunderbird client                                  |
-| Super Alt, F4                      | Create a new email compose window in Thunderbird             |
-| Super, F5                          | Start the Obsidian                                           |
-| Super, F6                          | Open the Planify                                             |
-| Super, F7                          | Launch the Dialect translator                                |
-| Super, F8                          | Open the calculator                                          |
-| Super, F9                          | Start the Shortwave radio streaming app                      |
+| Super [Alt], F1-F9                 | Applications                                                 | 
 | XF86MonBrightnessUp                | Increase screen brightness by 5%                             |
 | XF86MonBrightnessDown              | Decrease screen brightness by 5%                             |
 | Alt, XF86MonBrightnessUp           | Increase screen brightness by 1%                             |
@@ -110,8 +96,8 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Super, Q                           | Close the currently active window                            |
 | Super Shift, Q                     | Close all instances of the active window                     |
 | Super Alt, R                       | Enter window resize mode                                     |
-| Super, Grave                       | Show the special workspace                                   |
-| Super, Grave (Long Press)          | Move the active window to the special workspace              |
+| Menu                               | Show the special workspace                                   |
+| Super, Menu                        | Move the active window to the special workspace              |
 | Print                              | Capture a screenshot of the entire screen to clipboard       |
 | Ctrl, Print                        | Capture a screenshot of the current workspace to clipboard   |
 | Shift, Print                       | Capture a screenshot of selected area to clipboard           |
@@ -122,7 +108,8 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Super Alt, Print                   | Capture the active window and save it as a file              |
 | Super, XF86MonBrightnessDown       | Disable the shader effect                                    |
 | Super, XF86MonBrightnessUp         | Enable the shader effect                                     |
-| Super Alt, Escape                  | Lock the screen                                              |
+| Super Alt, Escape                  | Display a shutdown dialog                                    |
+| Super Alt, Return                  | Lock the screen                                              |
 | Super Alt, Backspace               | Exit the Hyprland session                                    |
 | Super Alt, Delete                  | Reboot the system                                            |
 | Super, XF86PowerOff                | Reboot the system                                            |

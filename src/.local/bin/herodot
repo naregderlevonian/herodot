@@ -23,7 +23,7 @@ Available:              audio
                         shader
                         shutdown
                         submap
-                        sunse
+                        sunset
                         touchpad
                         waybar
                         wifi
@@ -98,7 +98,7 @@ case "$1" in
         herodot-submap "$2" "$3" "${@:4}"
         ;;
     "sunset")
-        herodot-sunset "$2" "$3" "$4"
+        herodot-sunset "$2" "$3" "$4" "$5"
         ;;
     "touchpad")
         herodot-touchpad "$2" "$3" "$4"

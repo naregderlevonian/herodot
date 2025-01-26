@@ -37,11 +37,7 @@
             "custom/speaker",
             "custom/bluetooth",
             "custom/wifi",
-            "custom/lock",
-            "custom/exit",
-            "custom/suspend",
-            "custom/reboot",
-            "custom/poweroff"
+            "custom/shutdown"
         ],
         "custom/battery": {
             "exec": "herodot waybar get battery",
@@ -294,30 +290,10 @@
             "return-type": "json",
             "tooltip-format": "{}"
         },
-        "custom/lock": {
-            "format": "",
-            "on-click": "herodot shutdown lock",
-            "tooltip-format": "Lock"
-        },
-        "custom/exit": {
-            "format": "",
-            "on-click": "herodot shutdown exit",
-            "tooltip-format": "Exit"
-        },
-        "custom/suspend": {
-            "format": "",
-            "on-click": "herodot shutdown suspend",
-            "tooltip-format": "Suspend"
-        },
-        "custom/reboot": {
-            "format": "",
-            "on-click": "herodot shutdown reboot",
-            "tooltip-format": "Reboot"
-        },
-        "custom/poweroff": {
+        "custom/shutdown": {
             "format": "",
-            "on-click": "herodot shutdown poweroff",
-            "tooltip-format": "Power Off"
+            "on-click": "herodot shutdown dialog",
+            "tooltip-format": "Shutdown"
         }
     },
     {

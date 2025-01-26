@@ -61,7 +61,8 @@ dialog() {
         --extra-button "Reboot" \
         --extra-button "Suspend" \
         --extra-button "Logout" \
-        --extra-button "Lock" )
+        --extra-button "Lock" \
+        --timeout="10" )
 
     case $choice in
         "Lock")  
