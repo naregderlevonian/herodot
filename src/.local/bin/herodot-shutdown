@@ -59,10 +59,11 @@ dialog() {
         --ok-label "" \
         --extra-button "" \
         --extra-button "" \
+        --extra-button "" \
         --extra-button "" \
         --extra-button "" \
         --extra-button "" \
-        --timeout="10" )
+        --timeout="16" )
 
     case $choice in
         "")  
@@ -71,8 +72,11 @@ dialog() {
         "")  
             hyprctl dispatch exit
             ;;
-        "")  
+        "")  
             loginctl suspend
+            ;;
+        "")  
+            loginctl hibernate
             ;;
         "")  
             loginctl reboot
