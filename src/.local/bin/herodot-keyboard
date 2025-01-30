@@ -3,7 +3,8 @@
 usage() {
     cat << EOF
 Usage:  herodot keyboard get brightness
-        herodot keyboard set birghtness toggle
+        herodot keyboard set brightness low|medium|high|off
+        herodot keyboard set brightness toggle
 EOF
 }
 
@@ -19,6 +20,18 @@ apply() {
 
 off() {
     apply "0"
+}
+
+low() {
+    apply "1"
+}
+
+medium() {
+    apply "2"
+}
+
+on() {
+    apply "3"
 }
 
 toggle() {
@@ -41,6 +54,18 @@ case "$1" in
         case "$2" in
             "brightness")
                 case "$3" in
+                    "low")
+                        low
+                        ;;
+                    "medium")
+                        medium
+                        ;;
+                    "on")
+                        on
+                        ;;
+                    "off")
+                        off
+                        ;;
                     "toggle")
                         toggle
                         ;;

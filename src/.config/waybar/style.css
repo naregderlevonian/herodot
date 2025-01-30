@@ -86,6 +86,24 @@ tooltip {
     animation-direction: alternate;
 }
 
+#custom-prime.none {
+    color: @text_color;
+    opacity: 0.24;
+}
+
+#custom-prime.nvidia {
+    color: @text_color;
+}
+
+#custom-prime.none-warning {
+    color: @warning_color;
+    opacity: 0.24;
+}
+
+#custom-prime.nvidia-warning {
+    color: @warning_color;
+}
+
 #custom-waynot {
     color: @text_color;
     animation-name: blink;

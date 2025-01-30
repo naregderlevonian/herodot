@@ -2,30 +2,29 @@
 
 usage() {
     cat << EOF
-Usage:  herodot blur get
-        herodot blur set back|next
-        herodot blur set restore
+Usage:  herodot prime get
+        herodot prime set back|next
+        herodot prime set restore
 EOF
 }
 
-CONFIG_PATH="$HOME/.config/hypr/hyprland/layout"
-CONFIG_FILE="$CONFIG_PATH/blur.conf"
+CONFIG_PATH="$HOME/.config/hypr/hyprland/common"
+CONFIG_FILE="$CONFIG_PATH/prime.conf"
 
 MODES=(
 "none"
-"light"
-"glass"
+"nvidia"
 )
 
 get_mode() {
-    echo "$(herodot settings read "environment.blur")"
+    echo "$(herodot settings read "environment.prime")"
 }
 
 set_mode() {
     local current="$(get_mode)"
     ln -sf "$(readlink $CONFIG_FILE | sed "s/$current/$1/g")" "$CONFIG_FILE"   
-    herodot settings assign "environment.blur" "$1"
-    hyprctl reload
+    herodot settings assign "environment.prime" "$1"
+    waynot send "Graphics mode" "switched to $1. Please, restart WM."
 }
 
 navigate() {

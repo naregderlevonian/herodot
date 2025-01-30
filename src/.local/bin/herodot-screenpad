@@ -8,8 +8,6 @@ Usage:  herodot screenpad get state
 EOF
 }
 
-MONITORS_CONFIG="$HOME/.config/hypr/hyprland/common/monitors.conf"
-
 DISABLED_CONFIG_LINE=$(herodot settings read "screenpad.disabledSetup")
 ENABLED_CONFIG_LINE=$(herodot settings read "screenpad.enabledSetup")
 
@@ -31,13 +29,11 @@ resume() {
 
 off() {
     apply "$DISABLED_CONFIG_LINE" "false"
-    sed -i "s/$(herodot settings read "screenpad.enabledSetup")/$(herodot settings read "screenpad.disabledSetup")/" "$MONITORS_CONFIG"
     brightnessctl --device="$SCREENPAD" set "0"
 }
 
 on() {
     apply "$ENABLED_CONFIG_LINE" "true"
-    sed -i "s/$(herodot settings read "screenpad.disabledSetup")/$(herodot settings read "screenpad.enabledSetup")/" "$MONITORS_CONFIG"
     brightnessctl --device="$SCREENPAD" set "$(herodot brightness get level)"
 }
 

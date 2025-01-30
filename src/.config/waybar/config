@@ -14,7 +14,6 @@
             "custom/battery",
             "clock",
             "custom/weather",
-            "custom/moon",
             "custom/keymap",
             "custom/dice",
             "custom/picker",
@@ -29,6 +28,7 @@
             "memory",
             "cpu",
             "temperature",
+            "custom/prime",
             "custom/keyboard",
             "custom/idle",
             "custom/fan",
@@ -66,12 +66,6 @@
             "format": "{}",
             "interval": 360,
             "on-click": "gnome-weather",
-            "tooltip": false
-        },
-        "custom/moon": {
-            "exec": "herodot waybar get moon",
-            "format": "{}",
-            "interval": 360,
             "tooltip": false
         },
         "custom/keymap": {
@@ -153,6 +147,20 @@
             "format": "",
             "interval": 1,
             "tootip-format": "CPU {}C°"
+        },
+        "custom/prime": {
+            "exec": "herodot waybar get prime",
+            "format": "{icon}",
+            "format-icons": {
+                "none": "",
+                "none-warning": "",
+                "nvidia": "",
+                "nvidia-warning": ""
+            },
+            "interval": 1,
+            "on-click": "herodot prime set next",
+            "return-type": "json",
+            "tooltip": false
         },
         "custom/keyboard": {
             "exec": "herodot waybar get keyboard",

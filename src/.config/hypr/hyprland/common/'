@@ -2,7 +2,7 @@
 
 usage() {
     cat << EOF
-Usage:  herodot waybar get weather|dice|idle|fan|keyboard|performance|microphone|speaker|bluetooth|wifi
+Usage:  herodot waybar get weather|moon|dice|idle|fan|keyboard|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
         herodot waybar run picker|ashot
 EOF
@@ -59,9 +59,18 @@ get_prime() {
     jsonify "$mode" "$mode" "$mode" "$mode"
 }
 
+get_info() {
+    local place="echo $(curl -s http://ip-api.com/json | jq -r '.city' | tr -d " ")"
+    local info="$(curl "wttr.in/$place?format=%$1")"
+}
+
 get_weather() {
-    local output=$(curl 'wttr.in/Moscow?format=%t+%m')
-    echo "${output:0:7}"
+    get_info "t"
+}
+
+get_moon() {
+    get_info "m"
+
 }
 
 get_keymap() {
@@ -474,6 +483,9 @@ case "$1" in
                 ;;
             "weather")
                 get_weather
+                ;;
+            "moon")
+                get_moon
                 ;;
             "keymap")
                 get_keymap

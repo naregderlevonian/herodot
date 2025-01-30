@@ -76,6 +76,9 @@ case "$1" in
     "performance")
         herodot-performance "$2" "$3" "$4"
         ;;
+    "prime")
+        herodot-prime "$2" "$3" 
+        ;;
     "resume")
         herodot-resume
         ;;
