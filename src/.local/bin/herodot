@@ -17,7 +17,6 @@ Available:              audio
                         movewindow
                         paper
                         performance
-                        resume
                         scheme
                         screenpad
                         shader
@@ -78,9 +77,6 @@ case "$1" in
         ;;
     "prime")
         herodot-prime "$2" "$3" 
-        ;;
-    "resume")
-        herodot-resume
         ;;
     "scheme")
         herodot-scheme "$2" "$3" "$4"

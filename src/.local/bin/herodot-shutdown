@@ -17,7 +17,9 @@ is_process_running() {
 
 try() {
     local command="$1"
-    local message="$2"
+    local title="$2"
+    local message="$3:w
+    "
 
     is_process_running "$PROCESS" && return
 
@@ -34,19 +36,23 @@ try_lock() {
 }
 
 try_exit() {
-    try "killall -u $(whoami)" "Are you sure you want to exit?"
+    try "killall -u $(whoami)" "Exit" "Are you sure you want to exit?"
 }
 
 try_suspend() {
-    try "loginctl suspend && hyprlock" "Are you sure you want to sleep?" 
+    try "loginctl suspend && hyprlock" "Suspend" "Are you sure you want to sleep?" 
+}
+
+try_hibernate() {
+    try "loginctl hibernate && hyprlock" "Hibernate" "Are you sure you want to hibernate?" 
 }
 
 try_reboot() {
-    try "loginctl reboot" "Are you sure you want to restart system?" 
+    try "loginctl reboot" "Reboot" "Are you sure you want to restart system?" 
 }
 
 try_poweroff() {
-    try "loginctl poweroff" "Are you sure you want to shutdown?" 
+    try "loginctl poweroff" "Power Off" "Are you sure you want to shutdown?" 
 }
 
 dialog() {

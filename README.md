@@ -52,7 +52,7 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Shift, XF86MonBrightnessUp         | Increase screen brightness to 100%                           |
 | Shift, XF86MonBrightnessDown       | Increase screen brightness to 0%                             |
 | Super Alt, B                       | Toggles the current blur mode                                |
-| Super, Escape                      | Show or hide the Waybar panel                                |
+| Menu                               | Show or hide the Waybar panel                                |
 | Super, Grave                       | Show or hide the application launcher                        |
 | XF86AudioMicMute                   | Toggle the microphone on/off                                 |
 | Super< XF86AudioRaiseVolume        | Increase microphone volume by 5%                             |
@@ -66,7 +66,6 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Super, Mouse Right                 | Initiate window resizing with drag                           |
 | Super, Mouse Wheel Down            | Switch to the next workspace                                 |
 | Super, Mouse Wheel Up              | Switch to the previous workspace                             |
-| Super Alt, H                       | Switch the waybar scheme                                     |
 | Super, Left                        | Move focus to the window on the Left                         |
 | Super, Right                       | Move focus to the window on the Right                        |
 | Super, Up                          | Move focus to the window above                               |
@@ -96,8 +95,8 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Super, Q                           | Close the currently active window                            |
 | Super Shift, Q                     | Close all instances of the active window                     |
 | Super Alt, R                       | Enter window resize mode                                     |
-| Menu                               | Show the special workspace                                   |
-| Super, Menu                        | Move the active window to the special workspace              |
+| Escape                             | Show the special workspace                                   |
+| Super, Escape                      | Move the active window to the special workspace              |
 | Print                              | Capture a screenshot of the entire screen to clipboard       |
 | Ctrl, Print                        | Capture a screenshot of the current workspace to clipboard   |
 | Shift, Print                       | Capture a screenshot of selected area to clipboard           |

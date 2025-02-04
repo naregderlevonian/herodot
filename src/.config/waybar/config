@@ -53,13 +53,13 @@
             },
             "interval": 1,
             "return-type": "json",
-            "tooltip": false
+            "tooltip": true
         },
         "clock": {
             "format": "{:%d %b %Y %a %T}",
             "interval": 1,
             "on-click": "gnome-clocks",
-            "tooltip": "false"
+            "tooltip": false
         },
         "custom/weather": {
             "exec": "herodot waybar get weather",
