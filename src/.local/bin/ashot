@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source "$HOME/.config/ashot/config"
-
 usage() {
     cat << EOF
 Usage:  ashot all|workspace|client|area [file]
@@ -11,6 +9,15 @@ Usage:  ashot all|workspace|client|area [file]
 EOF
     exit 1
 }
+
+SCREENSHOT_DIR="$HOME/Pictures/Screenshots"
+SCREENSHOT_MASK="$(date +"%s.png")"
+
+SCREENSHOT_FORMAT="png"
+SCREENSHOT_QUALITY=100
+SCREENSHOT_COMPRESSION=6
+SCREENSHOT_SCALE=1
+SCREENSHOT_CURSORS=false
 
 DESTINATION="$SCREENSHOT_DIR/$SCREENSHOT_MASK"
 EXTRA="- | wl-copy"
@@ -50,7 +57,7 @@ construct() {
 
 success() {
     local message="$(echo "of $1 $([ "$2" = "file" ] && echo "to $DESTINATION")")"
-    notify-send "Ashot" "Make screenshot $message"
+    notify-send "Ashot" "make screenshot $message"
     echo "Ashot make screenshot $message "
 }
 

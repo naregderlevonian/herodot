@@ -2,9 +2,9 @@
 
 usage() {
     cat << EOF
-Usage:  herodot waybar get weather|dice|idle|fan|keyboard|performance|microphone|speaker|bluetooth|wifi
+Usage:  herodot waybar get weather|dice|cast|idle|fan|keyboard|performance|microphone|speaker|bluetooth|wifi
         herodot waybar set state off|on|toggle 
-        herodot waybar run picker|ashot
+        herodot waybar run picker|ashot|gucast
 EOF
 }
 
@@ -124,6 +124,20 @@ get_keyboard() {
 
     alt="$class"
     tooltip="$text"
+
+    jsonify "$class" "$alt" "$text" "$tooltip"
+}
+
+get_cast() {
+    local class
+    local text
+    local tooltip
+
+    is_process_running "wf-recorder" && class="recording" || class="disabled"
+
+    text="$class"
+    alt="$class"
+    tooltip="${class^}"
 
     jsonify "$class" "$alt" "$text" "$tooltip"
 }
@@ -451,6 +465,9 @@ run_ashot() {
     ashot area && waynot send "Screenshot" "has been copied to the clipboard" || exit 1
 }
 
+run_gucast() {
+    is_process_running "wf-recorder" && killall "wf-recorder" || gucast area
+}
 
 off() {
     dunstctl set-paused false
@@ -480,6 +497,9 @@ case "$1" in
                 ;;
             "dice")
                 get_dice
+                ;;
+            "cast")
+                get_cast
                 ;;
             "prime")
                 get_prime
@@ -543,6 +563,9 @@ case "$1" in
                 ;;
             "ashot")
                 run_ashot
+                ;;
+            "gucast")
+                run_gucast
                 ;;
             *)
                 usage

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+run() {
+    for count in "3" "2" "1" ; do
+        waynot send "Gucast" "run after "$count" seconds"
+        sleep 1
+    done
+
+    gucast "$1"
+}
+
+case "$(zenity --info \
+    --icon="/usr/share/icons/empty.png" \
+    --title "Screencast" \
+    --text="" \
+    --ok-label "Cancel" \
+    --extra-button "Workspace" \
+    --extra-button "Client" \
+    --extra-button "Area")" in
+    "Workspace")
+        run "workspace"
+        ;;
+    "Client")
+        run "client"
+        ;;
+    "Area")
+        run "area"
+        ;;
+    *)
+        exit
+        ;;
+esac
+
+

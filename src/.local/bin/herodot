@@ -48,6 +48,9 @@ case "$1" in
     "brightness")
         herodot-brightness "$2" "$3" "$4" "$5" "$6"
         ;;
+    "cast")
+        herodot-cast "$2"
+        ;;
     "dice")
         herodot-dice "$2" "$3"
         ;;
@@ -89,6 +92,9 @@ case "$1" in
         ;;
     "shader")
         herodot-shader "$2" "$3" "$4" "$5"
+        ;;
+    "shot")
+        herodot-shot "$2"
         ;;
     "shutdown")
         herodot-shutdown "$2"

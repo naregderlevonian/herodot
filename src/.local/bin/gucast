@@ -1,0 +1,79 @@
+#!/bin/sh
+
+usage() {
+    cat << EOF
+Usage:  gucast workspace|client|area
+
+        gucast custom {options}
+        gucast custom -h
+EOF
+    exit 1
+}
+
+SCREENCAST_DIR="$HOME/Videos/Screencasts"
+SCREENCAST_MASK="$(date +"%s.mkv")"
+DESTINATION="$SCREENCAST_DIR/$SCREENCAST_MASK"
+
+SLURP_BACKGROUND_COLOR="#08080894"
+SLURP_SELECTION_COLOR="#00000000"
+
+get_area() {
+    slurp \
+        -b "$SLURP_BACKGROUND_COLOR" \
+        -s "$SLURP_SELECTION_COLOR" \
+        -w 0 \
+        || exit 1
+}
+
+get_workspace() {
+    hyprctl activeworkspace -j | jq -r '.monitor' | tr -d ' ' \
+        || exit 1
+}
+
+get_client() {
+    hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' \
+        || exit 1
+}
+
+construct() {
+    local arguments="$1"
+
+    echo "wf-recorder $arguments -f $DESTINATION"
+}
+
+success() {
+    local message="$(echo "of $1 to $DESTINATION")"
+    notify-send "Gucast" "make screencast $message"
+    echo "Gucast make screencast $message "
+}
+
+
+error() {
+    notify-send "Gucast" "Couldn't"
+    echo "Gucast couldn't!"
+    exit 1
+}
+
+case "$1" in
+    "workspace")
+        ARGUMENTS="-o \"$(get_workspace)\"" || error
+        ;;
+    "client")
+        ARGUMENTS="-g \"$(get_client)\"" || error
+        ;;
+    "area")
+        ARGUMENTS="-g \"$(get_area)\"" || error
+        ;;
+    "custom") 
+        shift
+        echo "Run wf-recorder $@"
+        wf-recorder "$@"
+        exit 0
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+eval $(construct "$ARGUMENTS") && success "$1" "$2" || error
+

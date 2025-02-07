@@ -1,0 +1,38 @@
+#!/bin/sh
+
+run() {
+    for count in "3" "2" "1" ; do
+        waynot send "Ashot" "run after "$count" seconds"
+        sleep 1
+    done
+
+    ashot "$1" file
+}
+
+case "$(zenity --info \
+    --icon="/usr/share/icons/empty.png" \
+    --title "Screenshot" \
+    --text="" \
+    --ok-label "Cancel" \
+    --extra-button "All" \
+    --extra-button "Workspace" \
+    --extra-button "Client" \
+    --extra-button "Area")" in
+    "All")
+        run "all"
+        ;;
+    "Workspace")
+        run "workspace"
+        ;;
+    "Client")
+        run "client"
+        ;;
+    "Area")
+        run "area"
+        ;;
+    *)
+        exit
+        ;;
+esac
+
+

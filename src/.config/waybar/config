@@ -18,6 +18,7 @@
             "custom/dice",
             "custom/picker",
             "custom/ashot",
+            "custom/gucast",
             "custom/sunset",
             "custom/waynot"
         ],
@@ -103,8 +104,22 @@
             "on-click-right": "eyedropper"
         },
         "custom/ashot": {
-            "format": "",
-            "on-click": "herodot waybar run ashot"
+            "format": "",
+            "on-click": "herodot waybar run ashot",
+            "on-click-right": "herodot shot"
+        },
+        "custom/gucast": {
+            "exec": "herodot waybar get cast",
+            "format": "{icon}",
+            "format-icons": {
+                "recording": "",
+                "disabled": ""
+            },
+            "interval": 1,
+            "on-click": "herodot waybar run gucast",
+            "on-click-right": "herodot cast",
+            "return-type": "json",
+            "tooltip": true
         },
         "custom/waynot": {
             "exec": "waynot post",

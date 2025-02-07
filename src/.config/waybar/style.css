@@ -130,6 +130,19 @@ tooltip {
     color: @error_color;
 }
 
+#custom-gucast.disabled {
+    color: @text_color;
+}
+
+#custom-gucast.recording {
+    color: @error_color;
+    animation-name: blink;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 #custom-sunset.off {
     color: @text_color;
     opacity: 0.24;
