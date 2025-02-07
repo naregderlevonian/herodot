@@ -107,11 +107,12 @@ Feel free to explore, customize, and adapt these configurations to meet your uni
 | Super Alt, Print                   | Capture the active window and save it as a file              |
 | Super, XF86MonBrightnessDown       | Disable the shader effect                                    |
 | Super, XF86MonBrightnessUp         | Enable the shader effect                                     |
-| Super Alt, Escape                  | Display a shutdown dialog                                    |
+| Super Ctrl Alt, Return             | Display a shutdown dialog                                    |
 | Super Alt, Return                  | Lock the screen                                              |
 | Super Alt, Backspace               | Exit the Hyprland session                                    |
 | Super Alt, Delete                  | Reboot the system                                            |
-| Super, XF86PowerOff                | Reboot the system                                            |
+| Super ALT, XF86PowerOff            | Hibernate the system                                         |
+| Super, XF86PowerOff                | Suspend the system                                           |
 | XF86PowerOff                       | Power off the computer                                       |
 | XF86AudioRaiseVolume               | Increase speaker volume by 5%                                |
 | XF86AudioLowerVolume               | Decrease speaker volume by 5%                                |

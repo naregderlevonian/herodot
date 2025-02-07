@@ -18,14 +18,13 @@ is_process_running() {
 try() {
     local command="$1"
     local title="$2"
-    local message="$3:w
-    "
+    local message="$3"
 
     is_process_running "$PROCESS" && return
 
     if zenity --question \
         --icon="/usr/share/icons/empty.png" \
-        --title="Shutdown" \
+        --title="$title" \
         --text="$message"; then
         eval "$command"
     fi
